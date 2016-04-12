@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 
 var UserSchema = mongoose.Schema({
     
-    id:   {type: String },
     name: {type: String, required:true},
     pass: {type: String, required:true},
     email: {type: String, required:true},

@@ -6,7 +6,6 @@ var User = require('./../../models/user');
 router.post('/user', function(req, res, next) {
     var user = new User(
         {
-            id:   req.body.id,
             name: req.body.name,
             pass: req.body.pass,
             email: req.body.email,

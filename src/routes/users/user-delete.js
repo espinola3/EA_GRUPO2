@@ -7,15 +7,15 @@ var router  = express.Router();
 
 var User = require('./../../models/user');
 
-router.delete('/user/delete/:id', function(req, res, next) {
+router.delete('/user/delete/:name', function(req, res, next) {
 
     var user = new User(
         {
-            id:   req.params.id
+            name:   req.params.name
         }
     );
 
-    User.find({id:user.id},(function (err, user) {
+    User.find({name:user.name},(function (err, user) {
         if (err) return console.error(err);
 
     })).remove().exec();
