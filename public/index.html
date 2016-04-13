@@ -2,43 +2,73 @@
 
 <html ng-app="MainApp">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ejemplo MEAN</title>
+    <title>Viajapp</title>
     <!-- Cargamos bootstrap -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/custom.css">
+
     <!-- Cargamos angular -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
     <!-- Cargamos el javascript de angular -->
     <script src="core.js"></script>
 
+    <nav class="navbar navbar-default" navbar-fixed-top role="navigation">
+        <div class="container-fluid">
+            <!--header section -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Viajapp</a>
+            </div>
+            <!-- menu section -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
 </head>
-<body ng-controller="mainController">
+<body background="fondo.png" ng-controller="mainController">
 <div class="container">
 
     <div class="jumbotron text-center" ng-prueba>
-        <h1>Nº de Registros: <span class="label label-success">{{ personas.length }}</span></h1>
+        <h1>Sign up </h1>
     </div>
 
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-1">
-            <table class="table table-striped">
-                <tr class="info">
-                    <td>Name</td>
-                    <td>Email</td>
-                    <td>City</td>
-                </tr>
-                <tr ng-repeat="persona in personas" ng-click="selectPerson(persona)">
-                    <td>{{ persona.name }}</td>
-                    <td>{{ persona.email }}</td>
-                    <td>{{ persona.city }}</td>
-                    <td><a href="#" ng-click="borrarPersona(persona.name)">Eliminar</a></td>
-                </tr>
-            </table>
-        </div>
+        <!-- <div class="col-sm-6 col-sm-offset-1">
+              <table class="table table-striped">
+                 **<tr class="info">
+                     <td>Name</td>
+                     <td>Email</td>
+                     <td>City</td>
+                 </tr>
+                 <tr ng-repeat="persona in personas" ng-click="selectPerson(persona)">
+                     <td>{{ persona.name }}</td>
+                     <td>{{ persona.email }}</td>
+                     <td>{{ persona.city }}</td>
+                     <td><a href="#" ng-click="borrarPersona(persona.name)">Eliminar</a></td>
+                 </tr>
+             </table>
+         </div>-->
         <div class="col-sm-4 col-sm-offset-1 text-center">
             <form name="myForm">
                 <div class="form-group">
+
                     <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newPersona.name" >
                     <br>
                     <input type="email" class="form-control input-lg text-center" placeholder="Email" ng-model="newPersona.email" >
@@ -46,6 +76,7 @@
                     <input type="password" class="form-control input-lg text-center" placeholder="Pass" ng-model="newPersona.pass" >
                     <br>
                     <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newPersona.city" >
+
                 </div>
 
                 <!-- Acciones que podemos realizar en el formulario -->

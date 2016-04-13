@@ -41,9 +41,9 @@ function mainController($scope, $http) {
     };
 
     // Función que borra un objeto persona conocido su id
-    $scope.borrarPersona = function(id) {
-        console.log("borrar persona " + id);
-        $http.delete('/user/delete/' + id)
+    $scope.borrarPersona = function(name) {
+        console.log("borrar persona " + name);
+        $http.delete('/user/delete/' + name)
             .success(function(data) {
                 $scope.newPersona = {};
                 $scope.personas = data;
