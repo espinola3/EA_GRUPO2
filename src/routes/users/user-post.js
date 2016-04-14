@@ -14,7 +14,9 @@ router.post('/user', function(req, res, next) {
     );
 
     user.save(function (err, user) {
+        
         if (err) return console.error(err);
+        
     });
 
     User.find({}).exec().then(function (users) {

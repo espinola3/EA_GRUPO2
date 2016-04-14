@@ -16,6 +16,7 @@ router.delete('/user/delete/:name', function(req, res, next) {
     );
 
     User.find({name:user.name},(function (err, user) {
+        
         if (err) return console.error(err);
 
     })).remove().exec();

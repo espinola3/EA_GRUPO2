@@ -8,6 +8,7 @@ var Route = require('./../../models/route');
 
 router.get('/routes', function(req, res, next) {
     Route.find({}).exec().then(function (routes) {
+        
         res.json(routes).end();
     });
 });
