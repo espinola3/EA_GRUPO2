@@ -15,6 +15,16 @@
     <!-- Cargamos el javascript de angular -->
     <script src="core.js"></script>
 
+    <script type="text/ng-template" id="ng-confirm-template">
+        <div class="modal-body">
+            <p>{{message}}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-link pull-left" ng-click="no()">No</button>
+            <button class="btn btn-primary pull-right" ng-click="yes()">Yes</button>
+        </div>
+    </script>
+
     <nav class="navbar navbar-default" navbar-fixed-top role="navigation">
         <div class="container-fluid">
             <!--header section -->
@@ -71,16 +81,18 @@
 
                     <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newPersona.name" >
                     <br>
-                    <input type="email" class="form-control input-lg text-center" placeholder="Email" ng-model="newPersona.email" >
+                    <input type="email" class="form-control input-lg text-center" id="inputEmail" placeholder="Email" ng-model="newPersona.email" >
                     <br>
-                    <input type="password" class="form-control input-lg text-center" placeholder="Pass" ng-model="newPersona.pass" >
+                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Pass"  name = "pass1" id = "pass1" ng-model="newPersona.pass" >
+                    <br>
+                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Repeat Pass" name = "pass2" id = "pass2" ng-keyup="verificar(newPersona.pass2);" ng-model="newPersona.pass2">
+                    <span id="mensaje" !verificar(newPersona.pass2)== true><!-- mensaje de verificación--> </span><br />
                     <br>
                     <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newPersona.city" >
-
                 </div>
 
                 <!-- Acciones que podemos realizar en el formulario -->
-                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarPersona()" ng-disabled="myForm.$invalid || !newPersona.pass|| !newPersona.email|| !newPersona.city || !newPersona.name || selected">Registrar</button>
+                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarPersona()" ng-disabled="!newPersona.pass|| !newPersona.city || !newPersona.name || selected">Registrar</button>
                 <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled=" !newPersona.pass|| !newPersona.email|| !newPersona.city || !newPersona.name || selected">Modificar</button>
                 <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona.id)" ng-disabled="!newPersona.name ||selected">Borrar</button>
             </form>

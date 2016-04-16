@@ -42,6 +42,9 @@ function mainController($scope, $http) {
 
     // Función que borra un objeto persona conocido su id
     $scope.borrarPersona = function(name) {
+        if (confirm ("you want to delete de route? "))
+
+        {
         console.log("borrar persona " + name);
         $http.delete('/user/delete/' + name)
             .success(function(data) {
@@ -51,7 +54,7 @@ function mainController($scope, $http) {
             })
             .error(function(data) {
                 console.log('Error: ' + data);
-            });
+            });}
     };
 
     // Función para coger el objeto seleccionado en la tabla
@@ -60,4 +63,15 @@ function mainController($scope, $http) {
         $scope.selected = true;
         console.log($scope.newPersona, $scope.selected);
     };
+
+    $scope.verificar = function verificar(v){
+        var p1 = document.getElementById('pass1');
+        if( p1.value != v){
+            document.getElementById('mensaje').innerHTML = "no coincide";
+
+        }else{
+            document.getElementById('mensaje').innerHTML = "ok";
+            return true;
+        }
+    }
 }
