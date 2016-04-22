@@ -6,10 +6,15 @@ angular.module('MainApp', [])
     .controller('MainController', ['$scope','$http', function($scope, $http) {
     $scope.newPersona = {};
     $scope.personas = {};
+
     $scope.newRuta  = {};
     $scope.rutas    = {};
-    $scope.selected = false;
 
+    $scope.newTypeRuta  = {};
+    $scope.typerutas    = {};
+
+    $scope.selected = false;
+//-----------------------------------------Usuarios-----------------------------------------
     // Obtenemos todos los datos de la base de datos
     $http.get('/users').success(function(data) {
         console.log(data);
@@ -69,6 +74,7 @@ angular.module('MainApp', [])
         console.log($scope.newPersona, $scope.selected);
     };
 
+//-----------------------------Rutas-----------------------------------------
 
     // Obtenemos todos los datos de la base de datos de todas las rutas
     $http.get('/routes').success(function (data) {
@@ -77,6 +83,18 @@ angular.module('MainApp', [])
         .error(function (data) {
             console.log('Error: ' + data);
         });
+
+
+        // Obtenemos todos los datos de la base de datos de todos los tipos de rutas
+    $http.get('/typeroutes').success(function (data) {
+            $scope.typerutas = data;
+        console.log(data);
+        })
+        .error(function (data) {
+            console.log('Error: ' + data);
+        });
+
+
 
     // Función para registrar una Ruta
     $scope.registrarRuta = function () {
@@ -105,7 +123,48 @@ angular.module('MainApp', [])
             });
     };
 
-    // Función que borra una Ruta conocido su el ID
+// Función para inserta rutas en typos
+    $scope.InsertarRuta = function () {
+        
+        $http.post('/route', $scope.newRuta)
+            .success(function (data) {
+                $scope.newRuta = {}; // Borramos los datos del formulario
+                $scope.rutas   = data;
+                
+
+                $http.put('/typeroute/update', $scope.newTypeRuta)
+                    .success(function (data) {
+                        $scope.newTypeRuta  = {}; // Borramos los datos del formulario
+                        $scope.typerutas    = data;
+                        $scope.selected = false;
+                    })
+                    .error(function (data) {
+                        console.log('Error: ' + data);
+                    });
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+
+
+    };
+
+
+     // Función para editar los datos de una Ruta
+    $scope.modificarRuta = function (newTypeRuta) {
+        $http.put('/typeroute/update', $scope.newTypeRuta)
+            .success(function (data) {
+                $scope.newTypeRuta  = {}; // Borramos los datos del formulario
+                $scope.typerutas    = data;
+                $scope.selected = false;
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+    };
+
+
+        // Función que borra una Ruta conocido su el ID
     $scope.borrarRuta = function (name, res) {
         if (confirm ("¿Seguro que quieres eliminar? "))
 
