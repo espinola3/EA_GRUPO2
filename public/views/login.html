@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="/custom.css">
 
     <!-- Cargamos angular -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
     <!-- Cargamos el javascript de angular -->
-    <script src="core.js"></script>
+    <script src="../core.js"></script>
 
     <script type="text/ng-template" id="ng-confirm-template">
         <div class="modal-body">
@@ -46,13 +48,38 @@
                     <li><a href="/index.html">Register</a></li>
                     <li><a href="/views/contact.html">Contact</a></li>
                 </ul>
-            </div>
-        </div>
-    </nav>
+                <LINK REL=StyleSheet TITLE="Menú desplegable" HREF="barra.css" TYPE="text/css" MEDIA=screen>
+
+<body>
+<div id="header">
+    <ul class="nav">
+        <li><a href="">Perfil</a></li>
+        <li><a href="">Rutas</a>
+            <ul>
+                <li><a href="rutas.html">Lista Rutas</a></li>
+                <li><a href="nuevaruta.html">Nuevas Rutas</a></li>
+                <li><a href="">Ciudades</a>
+                    <ul>
+                        <li><a href="ciuadad.html">Busqueda Ciudad</a></li>
+                        <li><a href="mapa.html">Busqueda Mapa</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="">Mis premios</a></li>
+    </ul>
+</div>
+</body>
+</html>
+</div>
+</div>
+</nav>
+
+
 
 
 </head>
-<body background="../images/fondo.png" ng-controller="mainController">
+<body background="../images/fondo.png" ng-controller="MainController">
 <div class="container">
 
     <div class="jumbotron text-center" ng-prueba>
