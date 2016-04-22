@@ -94,6 +94,10 @@
                 <br>
                 <input type="text" class="form-control input-lg text-center" placeholder="Type" ng-model="newRuta.type" >
                 <br>
+                <input type="text" class="form-control input-lg text-center" placeholder="Type" ng-model="newTypeRuta.type" >
+              <br>
+                <input type="text" class="form-control input-lg text-center" placeholder="ID" ng-model="newTypeRuta.lista" >
+                <br>
                 <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newRuta.city" >
                 <br>
                 <input type="text" class="form-control input-lg text-center" placeholder="Time" ng-model="newRuta.time" >
@@ -103,8 +107,8 @@
 
             <!-- Acciones que podemos realizar en el formulario -->
             <button type="submit" class="btn btn-success btn-lg" ng-click="registrarRuta()" ng-disabled="myForm.$invalid || !newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time || !newRuta.interest || selected">Registrar</button>
-            <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarRuta(newRuta)" ng-disabled="!newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time  || !newRuta.interest  || selected">Modificar</button>
-            <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarRuta(newRuta.name)" ng-disabled="!newRuta.name ||selected">Borrar</button>
+            <button type="submit" class="btn btn-warning btn-lg" ng-click="InsertarRuta(newTypeRuta)" ng-disabled="!newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time  || !newRuta.interest  || selected">Modificar</button>
+           <!-- <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarRuta(newRuta.name)" ng-disabled="!newRuta.name ||selected">Borrar</button>-->
         </form>
     </div>
 

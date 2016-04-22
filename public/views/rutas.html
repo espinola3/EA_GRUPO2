@@ -87,7 +87,7 @@
     </div>
 
 
-            <div ng-repeat="rutetype in rutas" class="animate-repeat-category">
+            <div ng-repeat="rutetype in typerutas" class="animate-repeat-category">
                 <button class="btn btn-primary btn-block btn-sm" ng-click="toggleCategory(rutetype)">
                     {{ rutetype.type }}
                     <span class="expand-indicator" ng-show="rutetype.expanded">&mdash;</span>
@@ -97,20 +97,24 @@
                 <!--  Item group inside each category -->
                 <div class="list-items animate-show-item" ng-show="rutetype.expanded">
                     <ul>
-                        <div ng-repeat="rutedetail in rutas" class="animate-repeat-item">
-                            <div class="list-items animate-show-detalles" ng-show="rutedetail.expanded">
+                        <div ng-repeat="rutadetail in rutetype.lista" class="animate-repeat-item">
+                            <button class="btn btn-primary btn-block btn-sm" ng-click="toggleCategory(rutadetail)">
+                                {{ rutadetail.name }}
+                                <span class="expand-indicator" ng-show="rutadetail.expanded">&mdash;</span>
+                                <span class="expand-indicator" ng-show="!rutadetail.expanded">+</span>
+                            </button>
+                            <div class="list-items animate-show-detalles" ng-show="rutadetail.expanded">
                                 <ul>
-                                    <li>Name: {{rutedetail.name}}</li>
-                                    <li>City: {{rutedetail.city}}</li>
-                                    <li>Time: {{rutedetail.time}}</li>
-                                    <li>Interest: {{rutedetail.interest}}</li>
+                                    <li>City: {{rutadetail.city}}</li>
+                                    <li>Time: {{rutadetail.time}}</li>
+                                    <li>Interest: {{rutadetail.interest}}</li>
                                 </ul>
                             </div>
                         </div>
-                    </ul>
-                    <div class="no-items"><small ng-show="rutetype.expanded && rutetype.length==0">No rutes with this type!</small></div>
 
+                    </ul>
                 </div>
+                <div class="no-items"><small ng-show="rutetype.expanded && rutetype.lista.length==0">No routes of this type!</small></div>
 
             </div>
 </div>
