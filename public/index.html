@@ -89,8 +89,7 @@
                     <input type="password" class="form-control input-lg text-center" value="" placeholder="Repeat Pass" name = "pass2" id = "pass2" ng-keyup="verificar(newPersona.pass2);" ng-model="newPersona.pass2">
                     <span id="mensaje" !verificar(newPersona.pass2)== true><!-- mensaje de verificación--> </span><br />
                     <br>
-                    {{5+5}}
-                    <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newPersona.city" >
+                     <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newPersona.city" >
                 </div>
                 <!-- Acciones que podemos realizar en el formulario -->
                 <button type="submit" class="btn btn-success btn-lg" ng-click="registrarPersona()" ng-disabled="!newPersona.pass|| !newPersona.city || !newPersona.name || selected">Registrar</button>
