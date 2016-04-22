@@ -1,8 +1,9 @@
-angular.module('MainApp', [])
-var Persona = require('./modelo/user');
-var Rutas = require('./modelo/route');
 
-function mainController($scope, $http) {
+//var Persona = require('./modelo/user');
+//var Rutas = require('./modelo/route');
+
+angular.module('MainApp', [])
+    .controller('MainController', ['$scope','$http', function($scope, $http) {
     $scope.newPersona = {};
     $scope.personas = {};
     $scope.newRuta  = {};
@@ -119,6 +120,8 @@ function mainController($scope, $http) {
                     console.log('Error: ' + data);
                 });}
     };
+        $scope.toggleCategory = function(subjects) {
+            subjects.expanded = !subjects.expanded;
+        };
 
-
-}
+    }]);

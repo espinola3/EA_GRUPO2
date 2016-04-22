@@ -11,9 +11,11 @@
     <link rel="stylesheet" href="/custom.css">
 
     <!-- Cargamos angular -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
     <!-- Cargamos el javascript de angular -->
-    <script src="core.js"></script>
+    <script src="../core.js"></script>
 
 
 
@@ -51,70 +53,15 @@
                     <li><a href="/index.html">Register</a></li>
                     <li><a href="/views/contact.html">Contact</a></li>
                 </ul>
-                <html>
-                <head>
-                    <title>Menu Desplegable</title>
-                    <style type="text/css">
+                <LINK REL=StyleSheet TITLE="Menú desplegable" HREF="barra.css" TYPE="text/css" MEDIA=screen>
 
-                        * {
-                            margin:0px;
-                            padding:0px;
-                        }
-
-                        #header {
-                            margin:auto;
-                            width:500px;
-                            font-family:Arial, Helvetica, sans-serif;
-                        }
-
-                        ul, ol {
-                            list-style:none;
-                        }
-
-                        .nav > li {
-                            float:left;
-                        }
-
-                        .nav li a {
-                            background-color:#000;
-                            color:#fff;
-                            text-decoration:none;
-                            padding:10px 12px;
-                            display:block;
-                        }
-
-                        .nav li a:hover {
-                            background-color:#434343;
-                        }
-
-                        .nav li ul {
-                            display:none;
-                            position:absolute;
-                            min-width:140px;
-                        }
-
-                        .nav li:hover > ul {
-                            display:block;
-                        }
-
-                        .nav li ul li {
-                            position:relative;
-                        }
-
-                        .nav li ul li ul {
-                            right:-140px;
-                            top:0px;
-                        }
-
-                    </style>
-                </head>
 <body>
 <div id="header">
     <ul class="nav">
         <li><a href="">Perfil</a></li>
         <li><a href="">Rutas</a>
             <ul>
-                <li><a href="rutas.html">Lsita Rutas</a></li>
+                <li><a href="rutas.html">Lista Rutas</a></li>
                 <li><a href="nuevaruta.html">Nuevas Rutas</a></li>
                 <li><a href="">Ciudades</a>
                     <ul>
@@ -131,13 +78,11 @@
 </html>
 </div>
 </div>
-
 </nav>
 
 
-
 </head>
-<body background="../images/fondo.png" ng-controller="mainController">
+<body background="../images/fondo.png" ng-controller="MainController">
 <div class="container">
 
     <div class="jumbotron text-center" ng-prueba>
