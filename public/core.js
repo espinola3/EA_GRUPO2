@@ -12,7 +12,8 @@ angular.module('MainApp', [])
 
     $scope.newTypeRuta  = {};
     $scope.typerutas    = {};
-
+        
+    $scope.passerror = "";
     $scope.selected = false;
 //-----------------------------------------Usuarios-----------------------------------------
     // Obtenemos todos los datos de la base de datos
@@ -26,17 +27,21 @@ angular.module('MainApp', [])
 
     // Función para registrar a una persona
     $scope.registrarPersona = function() {
-        $http.post('/user', $scope.newPersona)
-            .success(function(data) {
-                if (data != false)
-                {
-                    $scope.newPersona = {}; // Borramos los datos del formulario
-                    $scope.personas = data;
-                }
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
+        if ($scope.passerror == "La contraseña y la comprobación coinciden") {
+            $http.post('/user', $scope.newPersona)
+                .success(function (data) {
+                    if (data != false) {
+                        $scope.newPersona = {}; // Borramos los datos del formulario
+                        $scope.personas = data;
+                        $scope.passerror = ""
+                    }
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+        }
+        else 
+            alert ("Que no coinciden cansino !!!")
     };
 
 
@@ -69,6 +74,21 @@ angular.module('MainApp', [])
                 console.log('Error: ' + data);
             });}
     };
+        
+        $scope.verificar = function(pass, pass2)
+        {
+            if (pass != pass2)
+                $scope.passerror = "La contraseña y la comprobación no coinciden"
+                
+            else {
+                if ((pass == false) && (pass2 == false))
+                {
+                    $scope.passerror = ""
+                }
+                else
+                    $scope.passerror = "La contraseña y la comprobación coinciden"
+            }
+        };
 
     // Función para coger el objeto seleccionado en la tabla
     $scope.selectPerson = function(persona) {
