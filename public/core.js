@@ -52,7 +52,7 @@ angular.module('MainApp', [])
 
     // Función que borra un objeto persona conocido su id
     $scope.borrarPersona = function(name) {
-        if (confirm ("you want to delete de route? "))
+        if (confirm ("Do you want to delete the user? "))
 
         {
         console.log("borrar persona " + name);
