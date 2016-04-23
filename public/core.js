@@ -28,8 +28,11 @@ angular.module('MainApp', [])
     $scope.registrarPersona = function() {
         $http.post('/user', $scope.newPersona)
             .success(function(data) {
-                $scope.newPersona = {}; // Borramos los datos del formulario
-                $scope.personas = data;
+                if (data != false)
+                {
+                    $scope.newPersona = {}; // Borramos los datos del formulario
+                    $scope.personas = data;
+                }
             })
             .error(function(data) {
                 console.log('Error: ' + data);
