@@ -97,7 +97,7 @@
                 <!-- Acciones que podemos realizar en el formulario -->
                 <button type="submit" class="btn btn-success btn-lg" ng-click="registrarPersona()" ng-disabled="!newPersona.pass|| !newPersona.city || !newPersona.name || selected">Registrar</button>
                 <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled=" !newPersona.pass|| !newPersona.email|| !newPersona.city || !newPersona.name || selected">Modificar</button>
-                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona.id)" ng-disabled="!newPersona.name ||selected">Borrar</button>
+                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona.name)" ng-disabled="!newPersona.name ||selected">Borrar</button>
             </form>
         </div>
     </div>
