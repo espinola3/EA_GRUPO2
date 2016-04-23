@@ -87,10 +87,10 @@
                     <br>
                     <input type="email" class="form-control input-lg text-center" id="inputEmail" placeholder="Email" ng-model="newPersona.email" >
                     <br>
-                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Pass"  name = "pass1" id = "pass1" ng-model="newPersona.pass" >
+                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Pass"  name = "pass1" id = "pass1" ng-keyup="verificar(newPersona.pass, newPersona.pass2);" ng-model="newPersona.pass" >
                     <br>
-                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Repeat Pass" name = "pass2" id = "pass2" ng-keyup="verificar(newPersona.pass2);" ng-model="newPersona.pass2">
-                    <span id="mensaje" !verificar(newPersona.pass2)== true><!-- mensaje de verificación--> </span><br />
+                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Repeat Pass" name = "pass2" id = "pass2" ng-keyup="verificar(newPersona.pass, newPersona.pass2);" ng-model="newPersona.pass2">
+                    <span> {{passerror}}<!-- mensaje de verificación--> </span><br />
                     <br>
                     <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newPersona.city" >
                 </div>
