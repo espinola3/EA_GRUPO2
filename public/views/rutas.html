@@ -86,6 +86,42 @@
         <h1>Nº de Rutas: <span class="label label-success">{{ rutas.length }}</span></h1>
     </div>
 
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-1">
+            <table class="table table-striped">
+                <tr class="info">
+                    <td>Name</td>
+                    <td>Type</td>
+                    <td>City</td>
+                    <td>Time</td>
+                    <td>Interest</td>
+                </tr>
+
+                <script type="text/ng-template" id="ng-confirm-template">
+                    <div class="modal-body">
+                        <p>{{message}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-link pull-left" ng-click="no()">No</button>
+                        <button class="btn btn-primary pull-right" ng-click="yes()">Yes</button>
+                    </div>
+                </script>
+
+                <tr ng-repeat="ruta in rutas" ng-click="selectRuta(ruta)">
+                    <td>{{ ruta.name }}</td>
+                    <td>{{ ruta.type }}</td>
+                    <td>{{ ruta.city }}</td>
+                    <td>{{ ruta.time }}</td>
+                    <td>{{ ruta.interest }}</td>
+                    <td><a href="#" ng-click="borrarRuta(ruta.name)" >Eliminar</a></td>
+
+
+                </tr>
+            </table>
+        </div>
+
+
+
 
             <div ng-repeat="rutetype in typerutas" class="animate-repeat-category">
                 <button class="btn btn-primary btn-block btn-sm" ng-click="toggleCategory(rutetype)">
