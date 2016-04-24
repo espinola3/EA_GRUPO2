@@ -4,13 +4,14 @@
 var express = require('express');
 var router  = express.Router();
 
+var Route = require('./../../models/route');
 var TypeRoute = require('./../../models/typeroute');
 
 router.put('/typeroute/update', function(req, res, next) {
     var typeroute = new TypeRoute(
         {
             type: req.body.type,
-            lista: req.body.lista
+            lista: req.body.name
         }
     );
 
@@ -21,7 +22,6 @@ router.put('/typeroute/update', function(req, res, next) {
     //res.json(user.toObject());
 
     TypeRoute.find({}).exec().then(function (typeroute) {
-
         res.json(typeroute).end();
     });
 });
