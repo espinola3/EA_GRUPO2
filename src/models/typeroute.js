@@ -9,7 +9,7 @@ var Route= mongoose.model('Route');
 
 var TypeRouteSchema = mongoose.Schema({
     type: {type: String, required:true, index: { unique: true }},
-    lista: [{type: mongoose.Schema.Types.ObjectId, ref: 'Route' }]
+    lista: [{type: String, ref: 'Route'}]
     
 });
 

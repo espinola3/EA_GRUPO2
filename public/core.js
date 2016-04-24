@@ -151,25 +151,22 @@ angular.module('MainApp', [])
         
         $http.post('/route', $scope.newRuta)
             .success(function (data) {
-                $scope.newRuta = {}; // Borramos los datos del formulario
-                $scope.rutas   = data;
-                
-
-                $http.put('/typeroute/update', $scope.newTypeRuta)
-                    .success(function (data) {
-                        $scope.newTypeRuta  = {}; // Borramos los datos del formulario
-                        $scope.typerutas    = data;
-                        $scope.selected = false;
-                    })
-                    .error(function (data) {
-                        console.log('Error: ' + data);
-                    });
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-
-
+                $scope.rutas = data;
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });  
+        
+        $http.put('/typeroute/update', $scope.newRuta)
+            .success(function (data) {
+                //alert("oye que estamos aquí")
+                $scope.newTypeRuta  = {}; // Borramos los datos del formulario
+                $scope.typerutas = data;
+                $scope.selected = false;
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
     };
 
 
