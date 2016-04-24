@@ -163,6 +163,7 @@ angular.module('MainApp', [])
                 $scope.newTypeRuta  = {}; // Borramos los datos del formulario
                 $scope.typerutas = data;
                 $scope.selected = false;
+                $scope.newRuta = {};
                 })
                 .error(function (data) {
                     console.log('Error: ' + data);
@@ -197,7 +198,17 @@ angular.module('MainApp', [])
                 })
                 .error(function (data) {
                     console.log('Error: ' + data);
-                });}
+                });
+        
+               $http.delete('/typeroute/delete/' + name)
+               .success(function(data){$scope.newRuta  = {};
+                   $scope.Typerutas    = data; 
+                   $scope.selected = false;
+               })
+               .error(function (data) {
+                   console.log('Error: ' + data);
+               });
+        }
     };
         $scope.toggleCategory = function(subjects) {
             subjects.expanded = !subjects.expanded;
