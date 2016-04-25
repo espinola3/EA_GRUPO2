@@ -14,6 +14,16 @@ var user_post = require('./src/routes/users/user-post');
 var user_update = require('./src/routes/users/user-update');
 var user_delete = require('./src/routes/users/user-delete');
 
+var route_post = require('./src/routes/routes/route-post');
+var routes_get = require('./src/routes/routes/routes-get');
+var route_delete = require('./src/routes/routes/route-delete');
+var route_update = require('./src/routes/routes/route-update');
+
+var typeroute_post = require('./src/routes/routes/typeroute-post');
+var typeroutes_get = require('./src/routes/routes/typeroute-get');
+var typeroute_update = require('./src/routes/routes/typeroute-update');
+var typeroute_delete = require('./src/routes/routes/typeroute-delete');
+
 var app = express();
 
 mongoose.connect('mongodb://localhost/viajapp');
@@ -31,6 +41,17 @@ app.use('/users', users_get);
 app.use('/', user_post);
 app.use('/', user_update);
 app.use('/', user_delete);
+
+app.use('/', route_post);
+app.use('/', routes_get);
+app.use('/', route_delete);
+app.use('/', route_update);
+
+app.use('/', typeroute_post);
+app.use('/', typeroutes_get);
+app.use('/', typeroute_update);
+app.use('/', typeroute_delete);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

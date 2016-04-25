@@ -6,7 +6,6 @@ var User = require('./../../models/user');
 router.post('/user', function(req, res, next) {
     var user = new User(
         {
-            id:   req.body.id,
             name: req.body.name,
             pass: req.body.pass,
             email: req.body.email,
@@ -14,9 +13,23 @@ router.post('/user', function(req, res, next) {
         }
     );
 
-    user.save(function (err, user) {
-        if (err) return console.error(err);
+    User.find({name: user.name}).exec().then(function (users) {
+        if (users == false)
+            user.save(function (err, user) {
+
+                if (err) {
+                    console.log(err)
+                }
+
+            });
+        else{
+            console.log("ya existe");
+            res.status(400).res('Ya existe');
+        }
     });
+
+
+
 
     User.find({}).exec().then(function (users) {
         res.json(users).end();
