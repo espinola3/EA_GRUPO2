@@ -17,7 +17,7 @@ router.put('/route/update', function(req, res, next) {
         }
     );
 
-    Route.findOneAndUpdate({name: route.name},{type: route.type, city: route.city, time: route.time, interest: route.interest} ,function (err, route) {
+    Route.findOneAndUpdate({name: route.name},{$push:{type: route.type, city: route.city, time: route.time, interest: route.interest}} ,function (err, route) {
         if (err) return console.error(err);
     });
 
