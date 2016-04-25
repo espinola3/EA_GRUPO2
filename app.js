@@ -65,7 +65,7 @@ app.use(function(err, req, res, next) {
 
 
 //app.listen(5885,'147.83.7.156');
-
+console.log('Escuchando puerto por el puerto 5885');
 //app.get('/', function(req, res) {
   //res.sendFile(path.join(__dirname, 'angular', 'index.html'));
   //res.sendFile('/home/carol/Code/EA/proyecto/angular/index.html');
