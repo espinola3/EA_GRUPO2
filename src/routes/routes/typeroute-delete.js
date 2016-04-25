@@ -6,22 +6,24 @@ var router  = express.Router();
 
 var TypeRoute = require('./../../models/typeroute');
 
-router.delete('/typeroute/delete/:name', function(req, res, next) {
+router.delete('/typeroute/delete/:type', function(req, res, next) {
 
-    var typeroute = new TypeRoute(
+    var route = new Route(
         {
-            lista:   req.params.name
+            type:   req.params.type
         }
     );
-    
 
-    TypeRoute.update({}, {$pull: {lista: typeroute.lista}}, {multi:true}, function (err, route) {
+    TypeRoute.find({type:route.type},(function (err, typeroute) {
+
         if (err) return console.error(err);
-    });
 
-    TypeRoute.find({}).exec().then(function (typeroutes) {
-        res.json(typeroutes).end();
+    })).remove().exec();
+
+    TypeRoute.find({}).exec().then(function (typerouters) {
+        res.json(typerouters).end();
     });
 });
+
 
 module.exports = router;

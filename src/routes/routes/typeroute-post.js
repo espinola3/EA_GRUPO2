@@ -10,8 +10,7 @@ router.post('/typeroute', function (req, res, next) {
 
     var typeroute = new TypeRoute(
         {
-            type: req.body.type,
-            lista: req.body.lista
+            type: req.body.type
         }
     );
 

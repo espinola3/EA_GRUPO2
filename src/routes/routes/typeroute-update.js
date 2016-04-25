@@ -15,7 +15,7 @@ router.put('/typeroute/update', function(req, res, next) {
         }
     );
 
-    TypeRoute.findOneAndUpdate({type: typeroute.type},{$push:{lista: typeroute.lista}} ,{upsert: true},function (err, typeroute) {
+    TypeRoute.findOneAndUpdate({type: typeroute.type},{$push:{type: typeroute.type}} ,{upsert: true},function (err, typeroute) {
         if (err) return console.error(err);
     });
 
