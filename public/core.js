@@ -115,7 +115,18 @@ angular.module('MainApp', [])
                 console.log('Error: ' + data);
             });
 
-    }
+    };
+        
+    $scope.Mostrarporciudad = function (ciudad) {
+            $http.get('/routesbycity/'+ ciudad).success(function (data) {
+                    $scope.rutas = data;
+                console.log(data);
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+
+        };
 
         // Obtenemos todos los datos de la base de datos de todos los tipos de rutas
     $http.get('/typeroutes').success(function (data) {
