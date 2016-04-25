@@ -13,18 +13,24 @@ router.post('/user', function(req, res, next) {
         }
     );
 
-    user.save(function (err, user) {
-        
-        if (err) {
-            console.log(err)
-        }
-        
-    });
-
     User.find({name: user.name}).exec().then(function (users) {
         if (users == false)
-            res.send()
+            user.save(function (err, user) {
+
+                if (err) {
+                    console.log(err)
+                }
+
+            });
+        else{
+            console.log("ya existe");
+            res.status(400).res('Ya existe');
+        }
     });
+
+
+
+
     User.find({}).exec().then(function (users) {
         res.json(users).end();
     });

@@ -5,16 +5,11 @@ var express = require('express');
 var router  = express.Router();
 
 var TypeRoute = require('./../../models/typeroute');
-var Route = require('./../../models/route');
 
-router.get('/typeroutes', function(req, res) {
+router.get('/typeroutes', function(req, res, next) {
+    TypeRoute.find({}).exec().then(function (typeroutes) {
 
-    TypeRoute.find({}, function(err, typeroutes) {
-        Route.populate(typeroutes, {path: "lista"}, function (err, typeroutes) {
-            res.status(200).send(typeroutes);
-        });
-
-
+        res.json(typeroutes).end();
     });
 });
 
