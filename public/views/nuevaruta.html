@@ -106,7 +106,10 @@
          <!--   <button type="submit" class="btn btn-warning btn-lg" ng-click="InsertarRuta()" ng-disabled="!newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time  || !newRuta.interest  || selected">Modificar</button>-->
            <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarRuta(newRuta.name)" ng-disabled="!newRuta.name ||selected">Borrar</button>
         </form>
-    </div>
 
+    </div>
+    <div ng-repeat="rutetype in typerutas" ng-click ="(newRuta.type = rutetype.type)" class="animate-repeat-item">
+        {{rutetype.type}}
+    </div>
 </div>
 </body>>
