@@ -15,7 +15,8 @@
     <script src="../bower_components/angular-route/angular-route.js"></script>
     <script src="../bower_components/angular-animate/angular-animate.js"></script>
     <!-- Cargamos el javascript de angular -->
-    <script src="../core.js"></script>
+    <script src="../controller.js"></script>
+    <script src="../services.js"></script>
 
     <script type="text/ng-template" id="ng-confirm-template">
         <div class="modal-body">
@@ -85,7 +86,30 @@
     <div class="jumbotron text-center" ng-prueba>
         <h1>Login</h1>
     </div>
+    <div class="container">
 
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
+            <form class="form" ng-submit="login()">
+                <div class="form-group">
+                    <label>Nick</label>
+                    <input type="text" class="form-control" name="username" ng-model="loginForm.username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" ng-model="loginForm.password" required>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-default" ng-disabled="disabled">Login</button>
+                </div>
+
+            <p>Need an account? <a href="/views/register.html">Signup</a></p>
+            <p>Or go <a href="/">home</a>.</p>
+
+        </div>
+
+    </div>
 
 </div>
 </body>

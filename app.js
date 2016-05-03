@@ -1,3 +1,10 @@
+// dependencies
+var expressSession = require('express-session');
+var hash = require('bcrypt-nodejs');
+var passport = require('passport');
+var localStrategy = require('passport-local' ).Strategy;
+
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,7 +15,8 @@ var mongoose = require('mongoose');
 var router  = express.Router();
 var path = require('path');
 
-var routes    = require('./src/routes/index');
+var User   = require('./src/models/user.js');
+var index   = require('./src/routes/index.js');
 var users_get = require('./src/routes/users/users-get');
 var user_post = require('./src/routes/users/user-post');
 var user_update = require('./src/routes/users/user-update');
@@ -28,15 +36,28 @@ var app = express();
 
 mongoose.connect('mongodb://localhost/viajapp');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// define middleware
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/', routes);
+// configure passport
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// routes
+//app.use('/', User);
+app.use('/user/', index);
 app.use('/users', users_get);
 app.use('/', user_post);
 app.use('/', user_update);
@@ -52,18 +73,24 @@ app.use('/', typeroutes_get);
 app.use('/', typeroute_update);
 app.use('/', typeroute_delete);
 
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-// catch 404 and forward to error handler
+// error hndlers
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
+app.use(function(err, req, res) {
+  res.status(err.status || 500);
+  res.end(JSON.stringify({
+    message: err.message,
+    error: {}
+  }));
+});
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -84,6 +111,17 @@ app.use(function(err, req, res, next) {
   });
 });
 
+app.listen(5885, '127.0.0.1');
+
+
+module.exports = app;
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+
+
 
 //app.listen(5885,'147.83.7.156');
 
@@ -94,6 +132,4 @@ app.use(function(err, req, res, next) {
 //});
 
 
-app.listen(5885, '127.0.0.1');
 
-module.exports = app;
