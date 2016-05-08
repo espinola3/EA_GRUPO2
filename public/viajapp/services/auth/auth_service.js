@@ -1,8 +1,4 @@
-/**
- * Created by ernest on 2/05/16.
- */
-
-angular.module('MainApp').factory('AuthService',
+angular.module('ServicesModule').factory('AuthService',
     ['$q', '$timeout', '$http',
         function ($q, $timeout, $http) {
 
