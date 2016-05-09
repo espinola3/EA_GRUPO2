@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="AngularGoogleMap" >
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Viajapp</title>
+    <!-- Cargamos bootstrap -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../custom.css">
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Cargamos angular -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLRQuMbzorcGujWn_76SLxzF3IkwoTM38"></script>
+    <script src="../bower_components/lodash/lodash.js"></script>
+    <script src="../bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+
+    <!-- Custom angular module -->
+    <script src="../viajapp/controllers/maps/maps.js"></script>
+    <!-- Cargamos el javascript de angular -->
+    <script src="../viajapp/core.js"></script>
+
+
+    <script type="text/ng-template" id="ng-confirm-template">
+        <div class="modal-body">
+            <p>{{message}}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-link pull-left" ng-click="no()">No</button>
+            <button class="btn btn-primary pull-right" ng-click="yes()">Yes</button>
+        </div>
+    </script>
+
+</head>
+<body ng-controller="MapCtrl">
+<h1>GOOGLE MAPS </h1>
+<div class="map_container" style="width:300px; height:300px">
+    <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
+        <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
+        </markers>
+    </google-map>
+</div>
+<div class="controls">
+    <h3>Current location</h3>
+    <p>
+        <button ng-click="addCurrentLocation()">Current location</button>
+    </p>
+    <h3>Address search</h3>
+    <p>
+        <input type="text" placeholder="Direccion. i.e: Plaza Catalunya 1, Madrid" ng-model="address" style="width: 210px"/>
+        <button ng-click="addAddress()">Look up!</button>
+    </p>
+
+</div>
+
+</body>
+</html>
