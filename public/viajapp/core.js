@@ -24,11 +24,35 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             access     : {restricted: false}
         })
         .when('/about', {
-            templateUrl: '/about.html',
+            templateUrl: 'views/about.html',
             access     : {restricted: false}
         })
-        .when('/two', {
-            template: '<h1>This is page two!</h1>',
+        .when('/rutas', {
+            templateUrl: 'views/rutas.html',
+            access     : {restricted: false}
+        })
+        .when('/perfil1', {
+            templateUrl: 'views/perfil1.html',
+            access  : {restricted: false}
+        })
+        .when('/nuevaruta', {
+            templateUrl: 'views/nuevaruta.html',
+            access  : {restricted: false}
+        })
+        .when('/searchmapa', {
+            templateUrl: 'views/searchmapa.html',
+            access  : {restricted: false}
+        })
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            access  : {restricted: false}
+        })
+        .when('/contact', {
+            templateUrl: 'views/contact.html',
+            access  : {restricted: false}
+        })
+        .when('/ciudad', {
+            templateUrl: 'views/ciuadad.html',
             access  : {restricted: false}
         })
         .otherwise({
