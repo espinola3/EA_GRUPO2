@@ -66,7 +66,7 @@ app.factory('MarkerCreatorService', function () {
 app.controller('MapCtrl', ['MarkerCreatorService', '$scope', function (MarkerCreatorService, $scope) {
 
         MarkerCreatorService.createByCoords(40.454018, -3.509205, function (marker) {
-            marker.options.labelContent = 'Localice';
+            marker.options.labelContent = 'Localizacion';
             $scope.autentiaMarker = marker;
         });
         
