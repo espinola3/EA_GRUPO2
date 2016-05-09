@@ -3,7 +3,7 @@ var app = angular.module('AngularGoogleMap', ['google-maps']);
 app.factory('MarkerCreatorService', function () {
 
     var markerId = 0;
-
+//Te crea una latitud y una longitud
     function create(latitude, longitude) {
         var marker = {
             options: {
@@ -24,11 +24,13 @@ app.factory('MarkerCreatorService', function () {
         }
     }
 
+    // crea una localización mediante Latitud y longitud
+
     function createByCoords(latitude, longitude, successCallback) {
         var marker = create(latitude, longitude);
         invokeSuccessCallback(successCallback, marker);
     }
-
+    // crea una localización mediante dirección
     function createByAddress(address, successCallback) {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address' : address}, function (results, status) {
@@ -43,7 +45,7 @@ app.factory('MarkerCreatorService', function () {
             }
         });
     }
-
+    // crea una localización mediante el  boton de buscar localización actual
     function createByCurrentLocation(successCallback) {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -86,7 +88,7 @@ app.controller('MapCtrl', ['MarkerCreatorService', '$scope', function (MarkerCre
         };
 
         $scope.map.markers.push($scope.autentiaMarker);
-
+// añadir localización actual
         $scope.addCurrentLocation = function () {
             MarkerCreatorService.createByCurrentLocation(function (marker) {
                 marker.options.labelContent = 'Esta es su ubicacion';
@@ -94,7 +96,7 @@ app.controller('MapCtrl', ['MarkerCreatorService', '$scope', function (MarkerCre
                 refresh(marker);
             });
         };
-        
+    // añadir dirección actual
         $scope.addAddress = function() {
             var address = $scope.address;
             if (address !== '') {
