@@ -1,4 +1,4 @@
-var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule']);
+var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule' ]);
 
 MainApp.config(['$routeProvider', function ($routeProvider) {
 
@@ -39,8 +39,9 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'views/nuevaruta.html',
             access  : {restricted: false}
         })
-        .when('/searchmapa', {
-            templateUrl: 'views/searchmapa.html',
+        .when('/mapa', {
+            templateUrl: 'views/mapa.html',
+            controller : 'MapCtrl',
             access  : {restricted: false}
         })
         .when('/contact', {

@@ -3,6 +3,7 @@ angular.module('ControllersModule')
         'MainController',
         ['$scope', '$http', '$location',
             function ($scope, $http, $location) {
+
                 $scope.registerForm = {};
                 $scope.personas     = {};
 
@@ -110,6 +111,7 @@ angular.module('ControllersModule')
 
 
                 $scope.Mostrarportipo = function (tipo) {
+
                     $http.get('/routesbytype/' + tipo).success(function (data) {
                             $scope.rutas = data;
                         })
@@ -132,6 +134,7 @@ angular.module('ControllersModule')
 
                 // Obtenemos todos los datos de la base de datos de todos los tipos de rutas
                 $http.get('/typeroutes').success(function (data) {
+                        console.log("dfdfdf");
                         $scope.typerutas = data;
                         console.log(data);
                     })

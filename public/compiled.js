@@ -1,4 +1,4 @@
-var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule']);
+var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule' ]);
 
 MainApp.config(['$routeProvider', function ($routeProvider) {
 
@@ -39,8 +39,9 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'views/nuevaruta.html',
             access  : {restricted: false}
         })
-        .when('/searchmapa', {
-            templateUrl: 'views/searchmapa.html',
+        .when('/mapa', {
+            templateUrl: 'views/mapa.html',
+            controller : 'MapCtrl',
             access  : {restricted: false}
         })
         .when('/contact', {
@@ -150,6 +151,7 @@ angular.module('ControllersModule')
         'MainController',
         ['$scope', '$http', '$location',
             function ($scope, $http, $location) {
+
                 $scope.registerForm = {};
                 $scope.personas     = {};
 
@@ -257,6 +259,7 @@ angular.module('ControllersModule')
 
 
                 $scope.Mostrarportipo = function (tipo) {
+
                     $http.get('/routesbytype/' + tipo).success(function (data) {
                             $scope.rutas = data;
                         })
@@ -279,6 +282,7 @@ angular.module('ControllersModule')
 
                 // Obtenemos todos los datos de la base de datos de todos los tipos de rutas
                 $http.get('/typeroutes').success(function (data) {
+                        console.log("dfdfdf");
                         $scope.typerutas = data;
                         console.log(data);
                     })
@@ -363,6 +367,59 @@ angular.module('ControllersModule')
                 }
 
             }]);
+angular.module('ControllersModule')
+    .controller(
+        'MapCtrl',
+        ['MarkerCreatorService', '$scope', function (MarkerCreatorService, $scope) {
+    console.log("AMPS - entra");
+    MarkerCreatorService.createByCoords(40.454018, -3.509205, function (marker) {
+        marker.options.labelContent = 'Localizacion';
+        $scope.autentiaMarker = marker;
+    });
+
+    $scope.address = '';
+
+    $scope.map = {
+        center: {
+            latitude: $scope.autentiaMarker.latitude,
+            longitude: $scope.autentiaMarker.longitude
+        },
+        zoom: 12,
+        markers: [],
+        control: {},
+        options: {
+            scrollwheel: false
+        }
+    };
+
+    $scope.map.markers.push($scope.autentiaMarker);
+// añadir localización actual
+    $scope.addCurrentLocation = function () {
+        MarkerCreatorService.createByCurrentLocation(function (marker) {
+            marker.options.labelContent = 'Esta es su ubicacion';
+            $scope.map.markers.push(marker);
+            refresh(marker);
+        });
+    };
+    // añadir dirección actual
+    $scope.addAddress = function() {
+        var address = $scope.address;
+        if (address !== '') {
+            MarkerCreatorService.createByAddress(address, function(marker) {
+                $scope.map.markers.push(marker);
+                refresh(marker);
+            });
+        }
+    };
+
+    function refresh(marker) {
+        $scope.map.control.refresh({latitude: marker.latitude,
+            longitude: marker.longitude});
+    }
+
+}]);
+
+
 angular.module('ServicesModule').factory('AuthService',
     ['$q', '$timeout', '$http',
         function ($q, $timeout, $http) {
@@ -482,3 +539,71 @@ angular.module('ServicesModule').factory('AuthService',
             }
 
         }]);
+
+/**
+ * Created by Carolina on 10/05/2016.
+ */
+angular.module('ServicesModule').factory('MarkerCreatorService', function () {
+
+    var markerId = 0;
+//Te crea una latitud y una longitud
+    function create(latitude, longitude) {
+        var marker = {
+            options: {
+                animation: 1,
+                labelAnchor: "28 -5",
+                labelClass: 'markerlabel'
+            },
+            latitude: latitude,
+            longitude: longitude,
+            id: ++markerId
+        };
+        return marker;
+    }
+
+    function invokeSuccessCallback(successCallback, marker) {
+        if (typeof successCallback === 'function') {
+            successCallback(marker);
+        }
+    }
+
+    // crea una localización mediante Latitud y longitud
+
+    function createByCoords(latitude, longitude, successCallback) {
+        var marker = create(latitude, longitude);
+        invokeSuccessCallback(successCallback, marker);
+    }
+    // crea una localización mediante dirección
+    function createByAddress(address, successCallback) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'address' : address}, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                var firstAddress = results[0];
+                var latitude = firstAddress.geometry.location.lat();
+                var longitude = firstAddress.geometry.location.lng();
+                var marker = create(latitude, longitude);
+                invokeSuccessCallback(successCallback, marker);
+            } else {
+                alert("Unknown address: " + address);
+            }
+        });
+    }
+    // crea una localización mediante el  boton de buscar localización actual
+    function createByCurrentLocation(successCallback) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var marker = create(position.coords.latitude, position.coords.longitude);
+                invokeSuccessCallback(successCallback, marker);
+            });
+        } else {
+            alert('Unable to locate current position');
+        }
+    }
+
+    return {
+        createByCoords: createByCoords,
+        createByAddress: createByAddress,
+        createByCurrentLocation: createByCurrentLocation
+    };
+
+});
