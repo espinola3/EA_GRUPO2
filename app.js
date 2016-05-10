@@ -125,11 +125,7 @@ module.exports = app;
 
 //app.listen(5885,'147.83.7.156');
 
-//app.get('/', function(req, res) {
-  //res.sendFile(path.join(__dirname, 'angular', 'index.html'));
-  //res.sendFile('/home/carol/Code/EA/proyecto/angular/index.html');
-  //res.sendFile('index.html', {root: path.join(__dirname, 'angular')})
-//});
+
 
 
 

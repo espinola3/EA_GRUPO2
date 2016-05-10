@@ -10,7 +10,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             access     : {restricted: true}
         })
         .when('/login', {
-            templateUrl: '/login.html',
+            templateUrl: 'views/login.html',
             controller : 'loginController',
             access     : {restricted: false}
         })
@@ -43,10 +43,6 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'views/searchmapa.html',
             access  : {restricted: false}
         })
-        .when('/login', {
-            templateUrl: 'views/login.html',
-            access  : {restricted: false}
-        })
         .when('/contact', {
             templateUrl: 'views/contact.html',
             access  : {restricted: false}
@@ -67,9 +63,10 @@ angular.module('ServicesModule', []);
 angular.module('ControllersModule')
     .controller(
         'loginController',
-        ['$scope', '$location', 'AuthService',
+        [
+            '$scope', '$location', 'AuthService',
             function ($scope, $location, AuthService) {
-
+                console.log("LOGIN CONTROLLER - entra");
                 $scope.login = function () {
 
                     // initial values
@@ -80,7 +77,8 @@ angular.module('ControllersModule')
                     AuthService.login($scope.loginForm.username, $scope.loginForm.password)
                         // handle success
                         .then(function () {
-                            $location.path('/home.html');
+
+                            $location.url('/home');
                             $scope.disabled  = false;
                             $scope.loginForm = {};
                         })
@@ -365,125 +363,6 @@ angular.module('ControllersModule')
                 }
 
             }]);
-/**
- * Created by carol on 9/05/16.
- */
-var app = angular.module('AngularGoogleMap', ['google-maps']);
-
-app.factory('MarkerCreatorService', function () {
-
-    var markerId = 0;
-
-    function create(latitude, longitude) {
-        var marker = {
-            options: {
-                animation: 1,
-                labelAnchor: "28 -5",
-                labelClass: 'markerlabel'
-            },
-            latitude: latitude,
-            longitude: longitude,
-            id: ++markerId
-        };
-        return marker;
-    }
-
-    function invokeSuccessCallback(successCallback, marker) {
-        if (typeof successCallback === 'function') {
-            successCallback(marker);
-        }
-    }
-
-    function createByCoords(latitude, longitude, successCallback) {
-        var marker = create(latitude, longitude);
-        invokeSuccessCallback(successCallback, marker);
-    }
-
-    function createByAddress(address, successCallback) {
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({'address' : address}, function (results, status) {
-            if (status === google.maps.GeocoderStatus.OK) {
-                var firstAddress = results[0];
-                var latitude = firstAddress.geometry.location.lat();
-                var longitude = firstAddress.geometry.location.lng();
-                var marker = create(latitude, longitude);
-                invokeSuccessCallback(successCallback, marker);
-            } else {
-                alert("Unknown address: " + address);
-            }
-        });
-    }
-
-    function createByCurrentLocation(successCallback) {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var marker = create(position.coords.latitude, position.coords.longitude);
-                invokeSuccessCallback(successCallback, marker);
-            });
-        } else {
-            alert('Unable to locate current position');
-        }
-    }
-
-    return {
-        createByCoords: createByCoords,
-        createByAddress: createByAddress,
-        createByCurrentLocation: createByCurrentLocation
-    };
-
-});
-
-app.controller('MapCtrl', ['MarkerCreatorService', '$scope', function (MarkerCreatorService, $scope) {
-
-    MarkerCreatorService.createByCoords(40.454018, -3.509205, function (marker) {
-        marker.options.labelContent = 'Localice';
-        $scope.autentiaMarker = marker;
-    });
-
-    $scope.address = '';
-
-    $scope.map = {
-        center: {
-            latitude: $scope.autentiaMarker.latitude,
-            longitude: $scope.autentiaMarker.longitude
-        },
-        zoom: 12,
-        markers: [],
-        control: {},
-        options: {
-            scrollwheel: false
-        }
-    };
-
-    $scope.map.markers.push($scope.autentiaMarker);
-
-    $scope.addCurrentLocation = function () {
-        MarkerCreatorService.createByCurrentLocation(function (marker) {
-            marker.options.labelContent = 'Esta es su ubicacion';
-            $scope.map.markers.push(marker);
-            refresh(marker);
-        });
-    };
-
-    $scope.addAddress = function() {
-        var address = $scope.address;
-        if (address !== '') {
-            MarkerCreatorService.createByAddress(address, function(marker) {
-                $scope.map.markers.push(marker);
-                refresh(marker);
-            });
-        }
-    };
-
-    function refresh(marker) {
-        $scope.map.control.refresh({latitude: marker.latitude,
-            longitude: marker.longitude});
-    }
-
-}]);
-
-
-
 angular.module('ServicesModule').factory('AuthService',
     ['$q', '$timeout', '$http',
         function ($q, $timeout, $http) {
@@ -524,14 +403,14 @@ angular.module('ServicesModule').factory('AuthService',
                     });
             }
 
-            function login(email, password) {
+            function login(username, password) {
 
                 // create a new instance of deferred
                 var deferred = $q.defer();
 
                 // send a post request to the server
                 $http.post('/user/login',
-                    {email: email, password: password})
+                    {username: username, password: password})
                     // handle success
                     .success(function (data, status) {
                         if(status === 200 && data.status){
