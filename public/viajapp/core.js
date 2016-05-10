@@ -7,6 +7,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/home.html',
+            controller : 'userInfo',
             access     : {restricted: true}
         })
         .when('/login', {
@@ -25,7 +26,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/about', {
             templateUrl: 'views/about.html',
-            access     : {restricted: false}
+            access     : {restricted: true}
         })
         .when('/rutas', {
             templateUrl: 'views/rutas.html',

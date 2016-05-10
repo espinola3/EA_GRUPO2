@@ -4,7 +4,6 @@ var hash = require('bcrypt-nodejs');
 var passport = require('passport');
 var localStrategy = require('passport-local' ).Strategy;
 
-
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -13,7 +12,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var router  = express.Router();
-var path = require('path');
 
 var User   = require('./src/models/user.js');
 var index   = require('./src/routes/index.js');

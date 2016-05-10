@@ -15,7 +15,6 @@ angular.module('ControllersModule')
                     AuthService.login($scope.loginForm.username, $scope.loginForm.password)
                         // handle success
                         .then(function () {
-
                             $location.url('/home');
                             $scope.disabled  = false;
                             $scope.loginForm = {};

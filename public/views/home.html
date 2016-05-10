@@ -36,7 +36,17 @@
     <div class="jumbotron text-center" ng-prueba>
         <h1>ViajApp </h1>
     </div>
+    <div class="col-sm-6 col-sm-offset-3">
 
+        <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
+        <form class="form" ng-controller="userInfo">
+
+
+            <button class="btn btn-primary pull-right" ng-click="getUserStatus()">INFO USER</button>
+
+
+
+    </div>
 </div>
 </body>
 </html>

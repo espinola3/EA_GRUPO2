@@ -7,6 +7,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/home.html',
+            controller : 'userInfo',
             access     : {restricted: true}
         })
         .when('/login', {
@@ -25,7 +26,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/about', {
             templateUrl: 'views/about.html',
-            access     : {restricted: false}
+            access     : {restricted: true}
         })
         .when('/rutas', {
             templateUrl: 'views/rutas.html',
@@ -77,7 +78,6 @@ angular.module('ControllersModule')
                     AuthService.login($scope.loginForm.username, $scope.loginForm.password)
                         // handle success
                         .then(function () {
-
                             $location.url('/home');
                             $scope.disabled  = false;
                             $scope.loginForm = {};
@@ -145,6 +145,24 @@ angular.module('ControllersModule')
                         });
                 };
             }]);
+angular.module('ControllersModule')
+    .controller(
+        'userInfo',
+        ['$scope', '$location', 'AuthService',
+            function ($scope, $location, AuthService) {
+console.log("entro user_info");
+                $scope.getUserStatus = function () {
+
+                    // call logout from service
+                    AuthService.getUserStatus()
+                        .then(function () {
+                            alert("");
+                        });
+
+                };
+
+            }]);
+
 angular.module('ControllersModule')
     .controller(
         'MainController',
@@ -388,12 +406,17 @@ angular.module('ServicesModule').factory('AuthService',
             }
 
             function getUserStatus() {
+                console.log("ENTRA GET USER STATUS");
+
                 return $http.get('/user/status')
                     // handle success
                     .success(function (data) {
                         if(data.status){
+                            console.log("Usuario "+ user);
                             user = true;
                         } else {
+                            console.log("Usuario "+ user);
+
                             user = false;
                         }
                     })
@@ -402,7 +425,6 @@ angular.module('ServicesModule').factory('AuthService',
                         user = false;
                     });
             }
-
             function login(username, password) {
 
                 // create a new instance of deferred
