@@ -19,7 +19,9 @@
     "passport-twitter": "^1.0.4",
     "serve-favicon": "~2.3.0",
     "bcrypt-nodejs": "~0.0.3",
-    "passport-local-mongoose": "~4.0.0"
+    "jsonwebtoken": "^5.0.2",
+    "passport-local-mongoose": "~4.0.0",
+    "method-override": "~2.1.2"
   },
   "devDependencies": {
     "gulp": "^3.9.1",

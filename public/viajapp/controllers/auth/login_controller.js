@@ -1,9 +1,10 @@
 angular.module('ControllersModule')
     .controller(
         'loginController',
-        ['$scope', '$location', 'AuthService',
+        [
+            '$scope', '$location', 'AuthService',
             function ($scope, $location, AuthService) {
-
+                console.log("LOGIN CONTROLLER - entra");
                 $scope.login = function () {
 
                     // initial values
@@ -14,7 +15,8 @@ angular.module('ControllersModule')
                     AuthService.login($scope.loginForm.username, $scope.loginForm.password)
                         // handle success
                         .then(function () {
-                            $location.path('/home.html');
+
+                            $location.url('/home');
                             $scope.disabled  = false;
                             $scope.loginForm = {};
                         })

@@ -38,14 +38,14 @@ angular.module('ServicesModule').factory('AuthService',
                     });
             }
 
-            function login(email, password) {
+            function login(username, password) {
 
                 // create a new instance of deferred
                 var deferred = $q.defer();
 
                 // send a post request to the server
                 $http.post('/user/login',
-                    {email: email, password: password})
+                    {username: username, password: password})
                     // handle success
                     .success(function (data, status) {
                         if(status === 200 && data.status){

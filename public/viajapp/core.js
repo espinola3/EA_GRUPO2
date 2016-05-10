@@ -10,7 +10,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             access     : {restricted: true}
         })
         .when('/login', {
-            templateUrl: '/login.html',
+            templateUrl: 'views/login.html',
             controller : 'loginController',
             access     : {restricted: false}
         })
@@ -41,10 +41,6 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/searchmapa', {
             templateUrl: 'views/searchmapa.html',
-            access  : {restricted: false}
-        })
-        .when('/login', {
-            templateUrl: 'views/login.html',
             access  : {restricted: false}
         })
         .when('/contact', {
