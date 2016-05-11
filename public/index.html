@@ -39,19 +39,19 @@
         <!-- menu section -->
         <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="authController">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/perfil1">Perfil</a></li>
-                <li><a href="">Rutas</a>
+                <li><a ng-if='isLoggedIn()'  href="#/perfil1">Perfil</a></li>
+                <li><a ng-if='isLoggedIn()'  href="">Rutas</a>
                     <ul>
-                        <li><a href="#/rutas">Lista Rutas</a></li>
-                        <li><a href="#/nuevaruta">Nuevas Rutas</a></li>
-                        <li><a href="">Ciudades</a>
+                        <li><a ng-if='isLoggedIn()' href="#/rutas">Lista Rutas</a></li>
+                        <li><a ng-if='isLoggedIn()' href="#/nuevaruta">Nuevas Rutas</a></li>
+                        <li><a ng-if='isLoggedIn()' href="">Ciudades</a>
                             <ul>
-                                <li><a href="#/ciudad">Busqueda Ciudad</a></li>
-                                <li><a href="#/searchmapa">Busqueda Mapa</a></li>
+                                <li><a ng-if='isLoggedIn()' href="#/ciudad">Busqueda Ciudad</a></li>
+                                <li><a ng-if='isLoggedIn()' href="#/searchmapa">Busqueda Mapa</a></li>
                             </ul>
                         </li>
                     </ul>
-                <li><a href="">Mis premios</a></li>
+                <li><a ng-if='isLoggedIn()' href="">Mis premios</a></li>
                 </li>
                 <li><a href="#/home">Home</a></li>
                 <li><a href="#/about">About</a></li>
