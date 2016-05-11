@@ -37,7 +37,7 @@
             <a class="navbar-brand" href="#">Viajapp</a>
         </div>
         <!-- menu section -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="logoutController">
+        <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="authController">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/perfil1">Perfil</a></li>
                 <li><a href="">Rutas</a>
@@ -55,9 +55,10 @@
                 </li>
                 <li><a href="#/home">Home</a></li>
                 <li><a href="#/about">About</a></li>
-                <li><a href="#/login">Login</a></li>
                 <li><a href="#/register">Register</a></li>
-                <li><a ng-click='logout()' class="btn btn-default">Logout</a></li>
+
+                <li><a ng-if='isLoggedIn()' ng-click='logout()' class="btn btn-default">Logout</a></li>
+                <li><a ng-if='!isLoggedIn()' href="#/login" class="btn btn-default">Login</a></li>
 
             </ul>
         </div>

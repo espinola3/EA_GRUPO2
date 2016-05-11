@@ -3,7 +3,7 @@ angular.module('ServicesModule').factory('AuthService',
         function ($q, $timeout, $http) {
 
             // create user variable
-            var user = null;
+            var user = false;
 
             // return available functions for use in the controllers
             return ({
@@ -14,12 +14,9 @@ angular.module('ServicesModule').factory('AuthService',
                 register: register
             });
 
-            function isLoggedIn() {
-                if(user) {
-                    return true;
-                } else {
-                    return false;
-                }
+            function isLoggedIn()
+            {
+                return user;
             }
 
             function getUserStatus() {

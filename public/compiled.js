@@ -63,6 +63,29 @@ angular.module('ControllersModule', ['ServicesModule']);
 angular.module('ServicesModule', []);
 angular.module('ControllersModule')
     .controller(
+        'authController',
+        ['$scope', '$location', 'AuthService',
+            function ($scope, $location, AuthService) {
+
+                $scope.logout = function () {
+
+                    // call logout from service
+                    AuthService.logout()
+                        .then(function () {
+                            $location.path('/login');
+                        });
+
+                };
+                
+                $scope.isLoggedIn =function () {
+                    return AuthService.isLoggedIn();                   
+                    
+                }
+
+            }]);
+
+angular.module('ControllersModule')
+    .controller(
         'loginController',
         [
             '$scope', '$location', 'AuthService',
@@ -150,7 +173,7 @@ angular.module('ControllersModule')
         'userInfo',
         ['$scope', '$location', 'AuthService',
             function ($scope, $location, AuthService) {
-console.log("entro user_info");
+                console.log("entro user_info");
                 $scope.getUserStatus = function () {
 
                     // call logout from service
@@ -386,7 +409,7 @@ angular.module('ServicesModule').factory('AuthService',
         function ($q, $timeout, $http) {
 
             // create user variable
-            var user = null;
+            var user = false;
 
             // return available functions for use in the controllers
             return ({
@@ -397,12 +420,9 @@ angular.module('ServicesModule').factory('AuthService',
                 register: register
             });
 
-            function isLoggedIn() {
-                if(user) {
-                    return true;
-                } else {
-                    return false;
-                }
+            function isLoggedIn()
+            {
+                return user;
             }
 
             function getUserStatus() {
