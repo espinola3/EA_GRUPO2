@@ -7,59 +7,95 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/home.html',
-            access     : {restricted: true}
+            controller : 'userInfo',
+            restricted     : false
         })
         .when('/login', {
             templateUrl: 'views/login.html',
             controller : 'loginController',
-            access     : {restricted: false}
+            restricted     : false
         })
         .when('/logout', {
             controller: 'logoutController',
-            access    : {restricted: true}
+            restricted     : true
         })
         .when('/register', {
             templateUrl: 'views/register.html',
             controller : 'registerController',
-            access     : {restricted: false}
+            restricted     : false
         })
         .when('/about', {
             templateUrl: 'views/about.html',
-            access     : {restricted: false}
+            restricted     : false
         })
         .when('/rutas', {
             templateUrl: 'views/rutas.html',
-            access     : {restricted: false}
+            restricted     : true
         })
         .when('/perfil1', {
             templateUrl: 'views/perfil1.html',
-            access  : {restricted: false}
+            restricted     : true
         })
         .when('/nuevaruta', {
             templateUrl: 'views/nuevaruta.html',
-            access  : {restricted: false}
+            restricted     : true
         })
         .when('/searchmapa', {
             templateUrl: 'views/searchmapa.html',
-            access  : {restricted: false}
+            restricted     : true
         })
         .when('/contact', {
             templateUrl: 'views/contact.html',
-            access  : {restricted: false}
+            restricted     : false
         })
         .when('/ciudad', {
             templateUrl: 'views/ciuadad.html',
-            access  : {restricted: false}
+            restricted     : true
         })
         .otherwise({
             redirectTo: '/'
         })
 }]);
 
+MainApp.run(["$location", "$rootScope", "$route", "AuthService", function($location, $rootScope, $route, AuthService) {
+
+    $rootScope.$on('$locationChangeStart', function(evt, next, current) {
+
+       var nextPath = $location.path(), nextRoute = $route.routes[nextPath];
+
+        if (nextRoute && (nextRoute.restricted && !AuthService.isLoggedIn())) {
+
+            $location.path("/");
+        }
+    });
+}]);
 angular.module('ControllersModule', ['ServicesModule']);
 
 
 angular.module('ServicesModule', []);
+angular.module('ControllersModule')
+    .controller(
+        'authController',
+        ['$scope', '$location', 'AuthService',
+            function ($scope, $location, AuthService) {
+
+                $scope.logout = function () {
+
+                    // call logout from service
+                    AuthService.logout()
+                        .then(function () {
+                            $location.path('/login');
+                        });
+
+                };
+                
+                $scope.isLoggedIn =function () {
+                    return AuthService.isLoggedIn();                   
+                    
+                }
+
+            }]);
+
 angular.module('ControllersModule')
     .controller(
         'loginController',
@@ -77,7 +113,6 @@ angular.module('ControllersModule')
                     AuthService.login($scope.loginForm.username, $scope.loginForm.password)
                         // handle success
                         .then(function () {
-
                             $location.url('/home');
                             $scope.disabled  = false;
                             $scope.loginForm = {};
@@ -145,6 +180,24 @@ angular.module('ControllersModule')
                         });
                 };
             }]);
+angular.module('ControllersModule')
+    .controller(
+        'userInfo',
+        ['$scope', '$location', 'AuthService',
+            function ($scope, $location, AuthService) {
+                console.log("entro user_info");
+                $scope.getUserStatus = function () {
+
+                    // call logout from service
+                    AuthService.getUserStatus()
+                        .then(function () {
+                            alert("");
+                        });
+
+                };
+
+            }]);
+
 angular.module('ControllersModule')
     .controller(
         'MainController',
@@ -368,7 +421,7 @@ angular.module('ServicesModule').factory('AuthService',
         function ($q, $timeout, $http) {
 
             // create user variable
-            var user = null;
+            var user = false;
 
             // return available functions for use in the controllers
             return ({
@@ -379,21 +432,23 @@ angular.module('ServicesModule').factory('AuthService',
                 register: register
             });
 
-            function isLoggedIn() {
-                if(user) {
-                    return true;
-                } else {
-                    return false;
-                }
+            function isLoggedIn()
+            {
+                return user;
             }
 
             function getUserStatus() {
+                console.log("ENTRA GET USER STATUS");
+
                 return $http.get('/user/status')
                     // handle success
                     .success(function (data) {
                         if(data.status){
+                            console.log("Usuario "+ user);
                             user = true;
                         } else {
+                            console.log("Usuario "+ user);
+
                             user = false;
                         }
                     })
@@ -402,7 +457,6 @@ angular.module('ServicesModule').factory('AuthService',
                         user = false;
                     });
             }
-
             function login(username, password) {
 
                 // create a new instance of deferred
