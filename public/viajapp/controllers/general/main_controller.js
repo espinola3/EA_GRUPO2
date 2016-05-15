@@ -15,6 +15,8 @@ angular.module('ControllersModule')
                 $scope.passerror = "";
                 $scope.selected  = false;
 
+                $scope.usrConnected ={username:"",isConnected:''}
+
 
                 console.log("MAIN");
 

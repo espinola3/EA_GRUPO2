@@ -9,9 +9,10 @@ angular.module('ControllersModule')
                     // call logout from service
                     AuthService.getUserStatus()
                         .then(function () {
-                            alert("");
+                            alert(loginForm.username);
                         });
 
                 };
 
             }]);
+
