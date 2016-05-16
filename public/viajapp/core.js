@@ -19,6 +19,11 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             controller: 'logoutController',
             restricted     : true
         })
+        .when('/mapa', {
+            templateUrl: 'views/mapa.html',
+            controller : 'MapCtrl',
+            restricted     : false
+        })
         .when('/register', {
             templateUrl: 'views/register.html',
             controller : 'registerController',
@@ -38,10 +43,6 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/nuevaruta', {
             templateUrl: 'views/nuevaruta.html',
-            restricted     : true
-        })
-        .when('/searchmapa', {
-            templateUrl: 'views/searchmapa.html',
             restricted     : true
         })
         .when('/contact', {
