@@ -4,7 +4,7 @@ angular.module('ServicesModule').factory('AuthService',
 
             // create user variable
             var user = false;
-            var usuario={username:""};
+            var usuario = {username:""};
 
             // return available functions for use in the controllers
             return ({
@@ -12,7 +12,8 @@ angular.module('ServicesModule').factory('AuthService',
                 getUserStatus: getUserStatus,
                 login: login,
                 logout: logout,
-                register: register
+                register: register,
+                getUserInfo :getUserInfo
             });
 
             function isLoggedIn()
@@ -21,8 +22,6 @@ angular.module('ServicesModule').factory('AuthService',
 
             }
             function getUserInfo() {
-                console.log("ENTRA GET USER INFO");
-
                 return usuario.username;
             }
 
@@ -33,11 +32,8 @@ angular.module('ServicesModule').factory('AuthService',
                     // handle success
                     .success(function (data) {
                         if(data.status){
-                            console.log("Usuario "+ user +"Nombre "+ usuario.username );
                             user = true;
                         } else {
-                            console.log("Usuario "+ user);
-
                             user = false;
                         }
                     })

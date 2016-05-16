@@ -37,14 +37,15 @@
 <div class="container">
 
     <div class="jumbotron text-center" ng-prueba ng-controller="userInfo">
-        <h1>Bienvenido {{getUserInfo}}</h1>
+        <h1>Bienvenido {{getUserInfo()}}</h1>
     </div>
     <div class="col-sm-6 col-sm-offset-3">
 
         <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
         <form class="form">
 
-            <button class="btn btn-primary pull-right" ng-click="getUserStatus()">INFO USER</button>
+            <!--<button class="btn btn-primary pull-right" ng-click="getUserStatus() ">INFO status</button>
+            <button class="btn btn-primary pull-right" ng-click="getUserInfo() ">INFO USER</button>-->
 
 
 

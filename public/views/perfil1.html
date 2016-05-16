@@ -28,27 +28,25 @@
     </script>
 
 
-
-
-
-
-</div>
-</nav>
-
-<div class="box box-primary">
-    <div class="box-body">
-        <strong><i class="fa fa-file-text-o margin-r-5"></i> Sobre {{user.name}}</strong><hr>
-        <p><b> Correo</b>: {{user.email}}</p>
-        <p><b>City</b>: {{user.city}}</p><hr>
-
-
     </div>
-    </div>
+    </nav>
+
+
 
 </head>
-<body background="../images/fondo.png" ng-controller="MainController">
+<body background="../images/fondo.png" >
 <div class="container">
+    <div class="box box-primary" ng-controller="userInfo">
+        <div class="box-body">
+            <strong><i class="fa fa-file-text-o margin-r-5"></i> Sobre {{getUserInfo()}}</strong>
+            <hr>
+            <p><b> Correo</b>: {{getUserInfoEmail()}}</p>
+            <p><b>City</b>: {{user.city}}</p>
+            <hr>
 
+
+        </div>
+    </div>
 </div>
 </body>
 </html>
