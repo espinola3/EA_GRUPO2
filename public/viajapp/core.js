@@ -1,4 +1,4 @@
-var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule' ]);
+var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule']);
 
 MainApp.config(['$routeProvider', function ($routeProvider) {
 
@@ -7,52 +7,70 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'views/home.html',
-            access     : {restricted: true}
+            controller : 'userInfo',
+            restricted     : false
         })
         .when('/login', {
             templateUrl: 'views/login.html',
             controller : 'loginController',
-            access     : {restricted: false}
+            restricted     : false
         })
         .when('/logout', {
             controller: 'logoutController',
-            access    : {restricted: true}
-        })
-        .when('/register', {
-            templateUrl: 'views/register.html',
-            controller : 'registerController',
-            access     : {restricted: false}
-        })
-        .when('/about', {
-            templateUrl: 'views/about.html',
-            access     : {restricted: false}
-        })
-        .when('/rutas', {
-            templateUrl: 'views/rutas.html',
-            access     : {restricted: false}
-        })
-        .when('/perfil1', {
-            templateUrl: 'views/perfil1.html',
-            access  : {restricted: false}
-        })
-        .when('/nuevaruta', {
-            templateUrl: 'views/nuevaruta.html',
-            access  : {restricted: false}
+            restricted     : true
         })
         .when('/mapa', {
             templateUrl: 'views/mapa.html',
             controller : 'MapCtrl',
-            access  : {restricted: false}
+            restricted     : false
+        })
+        .when('/register', {
+            templateUrl: 'views/register.html',
+            controller : 'registerController',
+            restricted     : false
+        })
+        .when('/about', {
+            templateUrl: 'views/about.html',
+            restricted     : false
+        })
+        .when('/rutas', {
+            templateUrl: 'views/rutas.html',
+            restricted     : true
+        })
+        .when('/perfil1', {
+            templateUrl: 'views/perfil1.html',
+            restricted     : true
+        })
+        .when('/nuevaruta', {
+            templateUrl: 'views/nuevaruta.html',
+            restricted     : true
+        })
+        .when('/searchmapa', {
+            templateUrl: 'views/searchmapa.html',
+            restricted     : true
         })
         .when('/contact', {
             templateUrl: 'views/contact.html',
-            access  : {restricted: false}
+            restricted     : false
         })
         .when('/ciudad', {
             templateUrl: 'views/ciuadad.html',
-            access  : {restricted: false}
+            restricted     : true
         })
         .otherwise({
             redirectTo: '/'
         })
 }]);
+
+MainApp.run(function($location, $rootScope, $route, AuthService) {
+
+    $rootScope.$on('$locationChangeStart', function(evt, next, current) {
+
+       var nextPath = $location.path(), nextRoute = $route.routes[nextPath];
+
+        if (nextRoute && (nextRoute.restricted && !AuthService.isLoggedIn())) {
+
+            $location.path("/");
+        }
+    });
+});

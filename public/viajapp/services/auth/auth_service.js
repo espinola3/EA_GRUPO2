@@ -3,7 +3,7 @@ angular.module('ServicesModule').factory('AuthService',
         function ($q, $timeout, $http) {
 
             // create user variable
-            var user = null;
+            var user = false;
 
             // return available functions for use in the controllers
             return ({
@@ -14,21 +14,23 @@ angular.module('ServicesModule').factory('AuthService',
                 register: register
             });
 
-            function isLoggedIn() {
-                if(user) {
-                    return true;
-                } else {
-                    return false;
-                }
+            function isLoggedIn()
+            {
+                return user;
             }
 
             function getUserStatus() {
+                console.log("ENTRA GET USER STATUS");
+
                 return $http.get('/user/status')
                     // handle success
                     .success(function (data) {
                         if(data.status){
+                            console.log("Usuario "+ user);
                             user = true;
                         } else {
+                            console.log("Usuario "+ user);
+
                             user = false;
                         }
                     })
@@ -37,7 +39,6 @@ angular.module('ServicesModule').factory('AuthService',
                         user = false;
                     });
             }
-
             function login(username, password) {
 
                 // create a new instance of deferred

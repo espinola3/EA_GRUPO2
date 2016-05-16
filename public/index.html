@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/custom.css">
     <link rel="stylesheet" href="/barra.css">
 
-
     <script type="text/ng-template" id="ng-confirm-template">
         <div class="modal-body">
             <p>{{message}}</p>
@@ -38,27 +37,29 @@
             <a class="navbar-brand" href="#">Viajapp</a>
         </div>
         <!-- menu section -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="authController">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#/perfil1">Perfil</a></li>
-                <li><a href="">Rutas</a>
+                <li><a ng-if='isLoggedIn()'  href="#/perfil1">Perfil</a></li>
+                <li><a ng-if='isLoggedIn()'  href="">Rutas</a>
                     <ul>
-                        <li><a href="#/rutas">Lista Rutas</a></li>
-                        <li><a href="#/nuevaruta">Nuevas Rutas</a></li>
-                        <li><a href="">Ciudades</a>
+                        <li><a ng-if='isLoggedIn()' href="#/rutas">Lista Rutas</a></li>
+                        <li><a ng-if='isLoggedIn()' href="#/nuevaruta">Nuevas Rutas</a></li>
+                        <li><a ng-if='isLoggedIn()' href="">Ciudades</a>
                             <ul>
-                                <li><a href="#/ciudad">Busqueda Ciudad</a></li>
-                                <li><a href="#/mapa">Busqueda Mapa</a></li>
+                                <li><a ng-if='isLoggedIn()' href="#/ciudad">Busqueda Ciudad</a></li>
+                                <li><a ng-if='isLoggedIn()' href="#/searchmapa">Busqueda Mapa</a></li>
                             </ul>
                         </li>
                     </ul>
-                <li><a href="">Mis premios</a></li>
+                <li><a ng-if='isLoggedIn()' href="">Mis premios</a></li>
                 </li>
                 <li><a href="#/home">Home</a></li>
                 <li><a href="#/about">About</a></li>
-                <li><a href="#/login">Login</a></li>
                 <li><a href="#/register">Register</a></li>
-                <li><a href="#/contact.html">Contact</a></li>
+
+                <li><a ng-if='isLoggedIn()' ng-click='logout()' class="btn btn-default">Logout</a></li>
+                <li><a ng-if='!isLoggedIn()' href="#/login" class="btn btn-default">Login</a></li>
+
             </ul>
         </div>
     </div>
@@ -73,7 +74,6 @@
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/google-maps/lib/Google.js"></script>
 <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
-
 
 <script src="./compiled.js"></script>
 
