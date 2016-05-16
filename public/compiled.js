@@ -61,13 +61,16 @@ MainApp.run(["$location", "$rootScope", "$route", "AuthService", function($locat
 
     $rootScope.$on('$locationChangeStart', function(evt, next, current) {
 
-       var nextPath = $location.path(), nextRoute = $route.routes[nextPath];
+        AuthService.getUserStatus()
+            .then(function(){
+                if (next.access.restricted && !AuthService.isLoggedIn()){
+                    $location.path('/login');
+                    $route.reload();
 
-        if (nextRoute && (nextRoute.restricted && !AuthService.isLoggedIn())) {
 
-            $location.path("/");
         }
     });
+});
 }]);
 angular.module('ControllersModule', ['ServicesModule']);
 
