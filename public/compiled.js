@@ -1,4 +1,4 @@
-var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule' ]);
+var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule']);
 
 MainApp.config(['$routeProvider', function ($routeProvider) {
 
