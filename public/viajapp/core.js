@@ -45,10 +45,6 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'views/nuevaruta.html',
             restricted     : true
         })
-        .when('/searchmapa', {
-            templateUrl: 'views/searchmapa.html',
-            restricted     : true
-        })
         .when('/contact', {
             templateUrl: 'views/contact.html',
             restricted     : false

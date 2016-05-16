@@ -36,3 +36,8 @@
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #FFF;
 }
+
+#map_container {
+    height: 500px;
+
+}

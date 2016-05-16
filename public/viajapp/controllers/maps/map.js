@@ -1,52 +1,47 @@
 angular.module('ControllersModule')
     .controller(
         'MapCtrl',
-        ['MarkerCreatorService', '$scope', function (MarkerCreatorService, $scope) {
-    console.log("AMPS - entra");
-    MarkerCreatorService.createByCoords(40.454018, -3.509205, function (marker) {
-        marker.options.labelContent = 'Localizacion';
-        $scope.autentiaMarker = marker;
-    });
+        ['GoogleMapsService', '$scope', function (GoogleMapsService, $scope) {
 
-    $scope.address = '';
+            $scope.map     = GoogleMapsService.init('map_container', 41.3098385,1.9972236);
+            $scope.address = '';
 
-    $scope.map = {
-        center: {
-            latitude: $scope.autentiaMarker.latitude,
-            longitude: $scope.autentiaMarker.longitude
-        },
-        zoom: 12,
-        markers: [],
-        control: {},
-        options: {
-            scrollwheel: false
-        }
-    };
+            $scope.addCurrentLocation = function () {
+                GoogleMapsService.createByCurrentLocation(function (markerData) {
+                    markerData.options.labelContent = 'Esta es su ubicacion';
+                    var marker =new google.maps.Marker(markerData);
+                    marker.setMap($scope.map);
+                    //$scope.map.markers.push(marker);
+                    console.log("map", $scope.map);
+                    refresh(markerData);
+                });
+            };
+            // añadir dirección actual
+            $scope.addAddress         = function () {
+                var address = $scope.address;
+                if (address !== '') {
+                    GoogleMapsService.createByAddress(address, function (markerData) {
+                        markerData.options.labelContent = 'Esta es su ubicacion';
+                        var marker =new google.maps.Marker(markerData);
+                        marker.setMap($scope.map);
+                        //$scope.map.markers.push(marker);  
+                        console.log("map", $scope.map);
+                        refresh(markerData);
+                    });
+                }
+            };
 
-    $scope.map.markers.push($scope.autentiaMarker);
-// añadir localización actual
-    $scope.addCurrentLocation = function () {
-        MarkerCreatorService.createByCurrentLocation(function (marker) {
-            marker.options.labelContent = 'Esta es su ubicacion';
-            $scope.map.markers.push(marker);
-            refresh(marker);
-        });
-    };
-    // añadir dirección actual
-    $scope.addAddress = function() {
-        var address = $scope.address;
-        if (address !== '') {
-            MarkerCreatorService.createByAddress(address, function(marker) {
-                $scope.map.markers.push(marker);
-                refresh(marker);
-            });
-        }
-    };
+            console.log('asd', $scope);
 
-    function refresh(marker) {
-        $scope.map.control.refresh({latitude: marker.latitude,
-            longitude: marker.longitude});
-    }
+            function refresh(marker) {
+                console.log(marker);
+                $scope.map.setCenter({
+                    lat : marker.position.lat,
+                    lng: marker.position.lng
+                });
 
-}]);
+
+            }
+
+        }]);
 

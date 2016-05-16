@@ -1,10 +1,19 @@
-/**
- * Created by Carolina on 10/05/2016.
- */
-angular.module('ServicesModule').factory('MarkerCreatorService', function () {
+angular.module('ServicesModule').factory('GoogleMapsService', function () {
 
     var markerId = 0;
-//Te crea una latitud y una longitud
+
+    function init(container, latitude,longitude) {
+        return new google.maps.Map(document.getElementById(container), {
+            center: {lat: latitude, lng: longitude},
+            zoom: 15,
+            markers: [],
+            control: {},
+            options: {
+                scrollwheel: false
+            }
+        });
+    }
+
     function create(latitude, longitude) {
         var marker = {
             options: {
@@ -12,9 +21,7 @@ angular.module('ServicesModule').factory('MarkerCreatorService', function () {
                 labelAnchor: "28 -5",
                 labelClass: 'markerlabel'
             },
-            latitude: latitude,
-            longitude: longitude,
-            id: ++markerId
+            position: {lat:latitude, lng:longitude}
         };
         return marker;
     }
@@ -58,10 +65,22 @@ angular.module('ServicesModule').factory('MarkerCreatorService', function () {
         }
     }
 
+    function currentCoords(onSuccess){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                onSuccess(position.coords);
+            });
+        } else {
+            onSuccess({longitude:0, latitude:0});
+        }
+    }
+
     return {
         createByCoords: createByCoords,
         createByAddress: createByAddress,
-        createByCurrentLocation: createByCurrentLocation
+        createByCurrentLocation: createByCurrentLocation,
+        init: init,
+        currentsCoords: currentCoords
     };
 
 });
