@@ -4,6 +4,13 @@ angular.module('ControllersModule')
         ['$scope', '$location', 'AuthService',
             function ($scope, $location, AuthService) {
                 console.log("entro user_info");
+
+                $scope.getUserInfo = function () {
+                    return AuthService.getUserInfo();
+
+                }
+
+
                 $scope.getUserStatus = function () {
 
                     // call logout from service

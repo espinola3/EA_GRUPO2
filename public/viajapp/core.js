@@ -62,14 +62,11 @@ MainApp.run(function($location, $rootScope, $route, AuthService) {
 
     $rootScope.$on('$locationChangeStart', function(evt, next, current) {
 
-        AuthService.getUserStatus()
-            .then(function(){
-                if (next.access.restricted && !AuthService.isLoggedIn()){
-                    $location.path('/login');
-                    $route.reload();
+        var nextPath = $location.path(), nextRoute = $route.routes[nextPath];
 
+        if (nextRoute && (nextRoute.restricted && !AuthService.isLoggedIn())) {
 
+            $location.path("/");
         }
     });
-});
 });
