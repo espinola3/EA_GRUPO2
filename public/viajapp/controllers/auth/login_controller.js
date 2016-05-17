@@ -16,6 +16,7 @@ angular.module('ControllersModule')
                         // handle success
                         .then(function () {
                             $location.url('/home');
+                            
                             $scope.disabled  = false;
                             $scope.loginForm = {};
                         })
