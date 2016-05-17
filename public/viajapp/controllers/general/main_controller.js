@@ -7,6 +7,8 @@ angular.module('ControllersModule')
                 $scope.registerForm = {};
                 $scope.personas     = {};
 
+                $scope.persona   = {};
+
                 $scope.newRuta = {};
                 $scope.rutas   = {};
 
@@ -30,6 +32,8 @@ angular.module('ControllersModule')
                     .error(function (data) {
                         console.log('Error: ' + data);
                     });
+
+
 
                 // Función para registrar a una persona
                 $scope.registrarPersona = function () {
@@ -64,6 +68,19 @@ angular.module('ControllersModule')
                         });
                 };
 
+                $scope.showDetail  = function (name)                    
+                {
+
+                    $http.get('/users/userdetail/' + name).success(function (data) {
+                            $scope.persona = data;
+                            console.log("DETALLES", data);
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+
+                }
+
                 // Función que borra un objeto persona conocido su id
                 $scope.borrarPersona = function (name) {
                     if (confirm("Do you want to delete the user? ")) {
@@ -79,6 +96,8 @@ angular.module('ControllersModule')
                             });
                     }
                 };
+
+                
 
                 $scope.verificar = function (pass, pass2) {
                     if (pass != pass2)
@@ -136,9 +155,8 @@ angular.module('ControllersModule')
 
                 // Obtenemos todos los datos de la base de datos de todos los tipos de rutas
                 $http.get('/typeroutes').success(function (data) {
-                        console.log("dfdfdf");
+                       
                         $scope.typerutas = data;
-                        console.log(data);
                     })
                     .error(function (data) {
                         console.log('Error: ' + data);

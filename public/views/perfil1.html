@@ -1,50 +1,17 @@
-<!doctype html>
 
-<html ng-app="MainApp">
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Viajapp</title>
-    <!-- Cargamos bootstrap -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/custom.css">
-
-    <!-- Cargamos angular -->
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-route/angular-route.js"></script>
-    <script src="../bower_components/angular-animate/angular-animate.js"></script>
-    <!-- Cargamos el javascript de angular -->
-    <script src="../core.js"></script>
-
-    <script type="text/ng-template" id="ng-confirm-template">
-        <div class="modal-body">
-            <p>{{message}}</p>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-link pull-left" ng-click="no()">No</button>
-            <button class="btn btn-primary pull-right" ng-click="yes()">Yes</button>
-        </div>
-    </script>
-
-
-    </div>
-    </nav>
-
-
-
-</head>
-<body background="../images/fondo.png" >
+<body background="../images/fondo.png" ng-controller="MainController">
 <div class="container">
-    <div class="box box-primary" ng-controller="userInfo">
+    <div class="box box-primary" ng-controller="userInfo" ng-click="showDetail(getUserInfo())">
         <div class="box-body">
             <strong><i class="fa fa-file-text-o margin-r-5"></i> Sobre {{getUserInfo()}}</strong>
             <hr>
-            <p><b> Correo</b>: {{getUserInfoEmail()}}</p>
-            <p><b>City</b>: {{user.city}}</p>
+            <div ng-repeat="persona in persona" >
+
+            <p><b> Correo</b>: {{persona.email}}</p>
+            <p><b>City</b>: {{persona.city}}</p>
             <hr>
 
-
+            </div>
         </div>
     </div>
 </div>

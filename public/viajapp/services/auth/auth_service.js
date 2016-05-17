@@ -23,12 +23,10 @@ angular.module('ServicesModule').factory('AuthService',
 
             }
             function getUserInfo() {
-                console.log("HOLA", usuario);
                 return usuario.username;
             }
 
             function getUserStatus() {
-                console.log("ENTRA GET USER STATUS");
 
                 return $http.get('/user/status')
                     // handle success
@@ -44,6 +42,9 @@ angular.module('ServicesModule').factory('AuthService',
                         user = false;
                     });
             }
+
+            
+
             function login(username, password) {
 
                 // create a new instance of deferred
