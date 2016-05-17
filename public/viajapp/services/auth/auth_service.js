@@ -5,6 +5,7 @@ angular.module('ServicesModule').factory('AuthService',
             // create user variable
             var user = false;
             var usuario = {username:""};
+            
 
             // return available functions for use in the controllers
             return ({
@@ -22,6 +23,7 @@ angular.module('ServicesModule').factory('AuthService',
 
             }
             function getUserInfo() {
+                console.log("HOLA", usuario);
                 return usuario.username;
             }
 

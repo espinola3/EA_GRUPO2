@@ -8,64 +8,63 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         .when('/', {
             templateUrl: 'views/home.html',
             controller : 'userInfo',
-            restricted     : false
+            restricted : false
         })
         .when('/login', {
             templateUrl: 'views/login.html',
             controller : 'loginController',
-            restricted     : false
+            restricted : false
         })
         .when('/logout', {
             controller: 'logoutController',
-            restricted     : true
+            restricted: true
         })
         .when('/mapa', {
             templateUrl: 'views/mapa.html',
             controller : 'MapCtrl',
-            restricted     : false
+            restricted : false
         })
         .when('/register', {
             templateUrl: 'views/register.html',
             controller : 'registerController',
-            restricted     : false
+            restricted : false
         })
         .when('/about', {
             templateUrl: 'views/about.html',
-            restricted     : false
+            restricted : false
         })
         .when('/rutas', {
             templateUrl: 'views/rutas.html',
-            restricted     : true
+            restricted : true
         })
         .when('/perfil1', {
             templateUrl: 'views/perfil1.html',
-            restricted     : true
+            restricted : true
         })
         .when('/nuevaruta', {
             templateUrl: 'views/nuevaruta.html',
-            restricted     : true
+            restricted : true
         })
         .when('/contact', {
             templateUrl: 'views/contact.html',
-            restricted     : false
+            restricted : false
         })
         .when('/ciudad', {
             templateUrl: 'views/ciuadad.html',
-            restricted     : true
+            restricted : true
         })
         .otherwise({
             redirectTo: '/'
         })
 }]);
 
-MainApp.run(function($location, $rootScope, $route, AuthService) {
+MainApp.run(function ($location, $rootScope, $route, AuthService) {
 
-    $rootScope.$on('$locationChangeStart', function(evt, next, current) {
+    $rootScope.$on('$locationChangeStart', function (evt, next, current) {
 
         var nextPath = $location.path(), nextRoute = $route.routes[nextPath];
 
         if (nextRoute && (nextRoute.restricted && !AuthService.isLoggedIn())) {
-
             $location.path("/");
         }
     });
