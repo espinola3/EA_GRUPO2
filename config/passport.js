@@ -39,7 +39,7 @@ module.exports = function(passport) {
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
-        function(req, email, password, done) {
+        function(req, username, password, done) {
 
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
@@ -50,7 +50,7 @@ module.exports = function(passport) {
 
                 // check to see if theres already a user with that email
                 if (user) {
-                    return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
                 } else {
 
                     // if there is no user with that email
@@ -58,7 +58,7 @@ module.exports = function(passport) {
                     var newUser            = new User();
 
                     // set the user's local credentials
-                    newUser.local.username    = email;
+                    newUser.local.username    = username;
                     newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
 
                     // save the user
@@ -85,7 +85,7 @@ module.exports = function(passport) {
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
-        function(req, email, password, done) { // callback with email and password from our form
+        function(req, username, password, done) { // callback with email and password from our form
 
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
