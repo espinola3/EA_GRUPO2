@@ -34,7 +34,7 @@
 
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Viajapp</a>
+            <a class="navbar-brand" href="#/home">Viajapp</a>
         </div>
         <!-- menu section -->
         <div class="collapse navbar-collapse navbar-ex1-collapse" ng-controller="authController">
@@ -53,9 +53,8 @@
                     </ul>
                 <li><a ng-if='isLoggedIn()' href="">Mis premios</a></li>
                 </li>
-                <li><a href="#/home">Home</a></li>
                 <li><a href="#/about">About</a></li>
-                <li><a href="#/register">Register</a></li>
+                <li><a ng-if='!isLoggedIn()' href="#/register">Register</a></li>
 
                 <li><a ng-if='isLoggedIn()' ng-click='logout()' class="btn btn-default">Logout</a></li>
                 <li><a ng-if='!isLoggedIn()' href="#/login" class="btn btn-default">Login</a></li>

@@ -13,10 +13,11 @@ angular.module('ControllersModule')
                         });
 
                 };
-                
-                $scope.isLoggedIn =function () {
-                    return AuthService.isLoggedIn();                   
-                    
+
+                $scope.isLoggedIn = function () {
+                    return AuthService.isLoggedIn();
+
                 }
 
+                
             }]);
