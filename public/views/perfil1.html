@@ -1,7 +1,7 @@
 
 <body background="../images/fondo.png" ng-controller="MainController">
 <div class="container">
-    <div class="box box-primary" ng-controller="userInfo" ng-click="showDetail(getUserInfo())">
+    <div class="box box-primary" ng-controller="userInfo" data-ng-init="showDetail(getUserInfo())">
         <div class="box-body">
             <strong><i class="fa fa-file-text-o margin-r-5"></i> Sobre {{getUserInfo()}}</strong>
             <hr>
