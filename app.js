@@ -1,8 +1,9 @@
 // dependencies
-var expressSession = require('express-session');
+var express = require('express-session');
 var hash = require('bcrypt-nodejs');
 var passport = require('passport');
 var localStrategy = require('passport-local' ).Strategy;
+
 
 var express = require('express');
 var path = require('path');
@@ -31,6 +32,8 @@ var typeroute_update = require('./src/routes/routes/typeroute-update');
 var typeroute_delete = require('./src/routes/routes/typeroute-delete');
 
 var app = express();
+
+
 
 mongoose.connect('mongodb://localhost/viajapp');
 

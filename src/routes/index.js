@@ -71,5 +71,37 @@ router.get('/status', function(req, res) {
     });
 });
 
+router.get ('/', function (req, res, next) {
+    res.render('index', {title: 'OAuth example: facebook'});
+});
+
+router.get('/profile', isAuth, function(req,res,next)
+{
+    res.render('profile', {title:'Your profile page', user:req.user});
+});
+
+//route for logging out
+router.get('/logout', function (req, res, next) {
+    req.logout();
+    res.redirect('/');
+});
+
+//route for facebook authentication and login. See the list of permissions
+//(scopes): http://developers.facebook.com/docs/reference/login/
+router.get('/auth/facebook', passport.authenticate('facebook', {
+    scope: ['public_profile', 'email'] }));
+//handle the callback after facebook has authenticated the user
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/profile',
+    failureRedirect: '/'
+}));
+/* route middleware to check whether user is authenticated */
+function isAuth(req, res, next) {
+// if user is authenticated, go on
+    if (req.isAuthenticated())
+        return next();
+// otherwise, send her back to home
+    res.redirect('/login');
+}
 
 module.exports = router;

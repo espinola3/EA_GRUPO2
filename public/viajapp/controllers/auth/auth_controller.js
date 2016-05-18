@@ -2,7 +2,7 @@ angular.module('ControllersModule')
     .controller(
         'authController',
         ['$scope', '$location', 'AuthService',
-            function ($scope, $location, AuthService) {
+            function ($scope, $location, AuthService, passport) {
 
                 $scope.logout = function () {
 
@@ -18,6 +18,7 @@ angular.module('ControllersModule')
                     return AuthService.isLoggedIn();
 
                 }
+               
 
-                
-            }]);
+}]);
+

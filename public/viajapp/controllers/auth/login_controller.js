@@ -5,6 +5,16 @@ angular.module('ControllersModule')
             '$scope', '$location', 'AuthService',
             function ($scope, $location, AuthService) {
                 console.log("LOGIN CONTROLLER - entra");
+                $scope.loginFacebook = function () {
+                    $http.get('/api/auth/facebook/callback').success(function (data) {
+                            console.log('information data', data);
+                            $rootScope.authenticated = true;
+                            $location.path('/');
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+                };
                 $scope.login = function () {
 
                     // initial values
