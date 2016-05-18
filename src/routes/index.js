@@ -88,13 +88,30 @@ router.get('/logout', function (req, res, next) {
 
 //route for facebook authentication and login. See the list of permissions
 //(scopes): http://developers.facebook.com/docs/reference/login/
+
 router.get('/auth/facebook', passport.authenticate('facebook', {
     scope: ['public_profile', 'email'] }));
+
 //handle the callback after facebook has authenticated the user
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+/*router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/profile',
     failureRedirect: '/'
-}));
+}));*/
+router.get('/auth/facebook/callback', passport.authenticate('facebook', function(err, user){
+        console.log('datos user', user);
+        if (err){
+            res.send(err);
+            return;
+        }
+        req.login(user, function(error){
+            if (error){
+                res.send(error);
+                return;
+            }
+            res.send(null, user);
+        })
+    })
+);
 /* route middleware to check whether user is authenticated */
 function isAuth(req, res, next) {
 // if user is authenticated, go on

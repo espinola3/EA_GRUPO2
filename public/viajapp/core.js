@@ -10,10 +10,6 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             controller : 'userInfo',
             restricted     : false
         })
-        .when('/facebook', {
-            templateUrl: 'views/facebook.html',
-            restricted     : false
-        })
         .when('/login', {
             templateUrl: 'views/login.html',
             controller : 'loginController',
