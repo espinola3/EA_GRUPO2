@@ -20,9 +20,7 @@ angular.module('ControllersModule')
 
                 $scope.usrConnected ={username:"",isConnected:''}
 
-
-                console.log("MAIN");
-
+                
 //-----------------------------------------Usuarios-----------------------------------------
                 // Obtenemos todos los datos de la base de datos
                 $http.get('/users').success(function (data) {
@@ -68,7 +66,7 @@ angular.module('ControllersModule')
                         });
                 };
 
-                $scope.showDetail  = function (name)                    
+                $scope.showDetail  = function (name)
                 {
 
                     $http.get('/users/userdetail/' + name).success(function (data) {
@@ -97,7 +95,7 @@ angular.module('ControllersModule')
                     }
                 };
 
-                
+
 
                 $scope.verificar = function (pass, pass2) {
                     if (pass != pass2)
@@ -155,7 +153,7 @@ angular.module('ControllersModule')
 
                 // Obtenemos todos los datos de la base de datos de todos los tipos de rutas
                 $http.get('/typeroutes').success(function (data) {
-                       
+
                         $scope.typerutas = data;
                     })
                     .error(function (data) {
@@ -215,6 +213,7 @@ angular.module('ControllersModule')
                 };
 
 
+
                 // Función que borra una Ruta conocido su el ID
                 $scope.borrarRuta     = function (name, res) {
                     if (confirm("¿Seguro que quieres eliminar? ")) {
@@ -237,5 +236,6 @@ angular.module('ControllersModule')
                     console.log("SALTA");
                     $location.url("/register");
                 }
+                
 
             }]);

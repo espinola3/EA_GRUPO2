@@ -46,7 +46,9 @@
 
                 <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newRuta.name" required>
                 <br>
-                <input type="text" class="form-control input-lg text-center" placeholder="Type" ng-model="newRuta.type" >
+                <select type="text" class="form-control input-lg text-center" placeholder="Type" ng-options="rutetype.type for rutetype in typerutas" ng-model="newRuta.type" >
+                    <option value="">--Elige opcion--</option>
+                </select>
                 <br>
                 <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newRuta.city" >
                 <br>
@@ -62,8 +64,6 @@
         </form>
 
     </div>
-    <div ng-repeat="rutetype in typerutas" ng-click ="(newRuta.type = rutetype.type)" class="animate-repeat-item">
-        {{rutetype.type}}
-    </div>
+
 </div>
 </body>>

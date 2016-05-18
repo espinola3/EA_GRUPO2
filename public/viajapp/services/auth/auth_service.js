@@ -14,7 +14,8 @@ angular.module('ServicesModule').factory('AuthService',
                 login: login,
                 logout: logout,
                 register: register,
-                getUserInfo :getUserInfo
+                getUserInfo :getUserInfo,
+                loginFacebook :loginFacebook
             });
 
             function isLoggedIn()
@@ -24,6 +25,18 @@ angular.module('ServicesModule').factory('AuthService',
             }
             function getUserInfo() {
                 return usuario.username;
+            }
+            function loginFacebook () {
+
+                 return $http.get('user/auth/facebook/callback').success(function (data) {
+
+                        console.log('information data', data);
+                        $rootScope.authenticated = true;
+                        $location.path('/');
+                    })
+                    .error(function (data) {
+                        console.log('Error: ' + data);
+                    });
             }
 
             function getUserStatus() {

@@ -1,7 +1,7 @@
 // dependencies
-var express = require('express-session');
+//var express = require('express-session');
 var hash = require('bcrypt-nodejs');
-var passport = require('passport');
+//var passport = require('passport');
 var localStrategy = require('passport-local' ).Strategy;
 
 
@@ -33,9 +33,14 @@ var typeroute_delete = require('./src/routes/routes/typeroute-delete');
 
 var app = express();
 
+var session = require('express-session');
+var passport = require('passport');
+
+require('./config/passport')(passport);
 
 
 mongoose.connect('mongodb://localhost/viajapp');
+
 
 // define middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -43,13 +48,22 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('express-session')({
+/*app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false
-}));
+}));app.use(session({ secret: 'zasentodalaboca', resave: true, saveUninitialized: true }));*/
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 // configure passport
 passport.use(new localStrategy(User.authenticate()));
@@ -111,6 +125,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 app.listen(5885, '127.0.0.1');
 
