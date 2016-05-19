@@ -16,6 +16,10 @@
     <script src="../bower_components/angular-animate/angular-animate.js"></script>
     <!-- Cargamos el javascript de angular -->
 
+    <script src="https://apis.google.com/js/platform.js" async defer>
+        {lang: 'ca'}
+    </script>
+
 
     <script type="text/ng-template" id="ng-confirm-template">
         <div class="modal-body">
@@ -57,6 +61,12 @@
                 <p>Or go <a href="/">home</a>.</p>
                 <a href="/user/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
 
+                <div class="fb-login-button" ng-click="loginFacebook()" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
+                <!-- Place this tag in your head or just before your close body tag. -->
+
+
+                <!-- Place this tag where you want the +1 button to render. -->
+                <div class="g-plusone" data-size="tall" data-annotation="inline" data-width="450"></div>
 
         </div>
     </div>
