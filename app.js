@@ -1,39 +1,39 @@
 // dependencies
 //var express = require('express-session');
-var hash = require('bcrypt-nodejs');
+var hash          = require('bcrypt-nodejs');
 //var passport = require('passport');
-var localStrategy = require('passport-local' ).Strategy;
+var localStrategy = require('passport-local').Strategy;
 
 
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
+var express      = require('express');
+var path         = require('path');
+var favicon      = require('serve-favicon');
+var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var router  = express.Router();
+var bodyParser   = require('body-parser');
+var mongoose     = require('mongoose');
+var router       = express.Router();
 
-var User   = require('./src/models/user.js');
-var index   = require('./src/routes/index.js');
-var users_get = require('./src/routes/users/users-get');
-var user_post = require('./src/routes/users/user-post');
+var User        = require('./src/models/user.js');
+var index       = require('./src/routes/index.js');
+var users_get   = require('./src/routes/users/users-get');
+var user_post   = require('./src/routes/users/user-post');
 var user_update = require('./src/routes/users/user-update');
 var user_delete = require('./src/routes/users/user-delete');
 
-var route_post = require('./src/routes/routes/route-post');
-var routes_get = require('./src/routes/routes/routes-get');
+var route_post   = require('./src/routes/routes/route-post');
+var routes_get   = require('./src/routes/routes/routes-get');
 var route_delete = require('./src/routes/routes/route-delete');
 var route_update = require('./src/routes/routes/route-update');
 
-var typeroute_post = require('./src/routes/routes/typeroute-post');
-var typeroutes_get = require('./src/routes/routes/typeroute-get');
+var typeroute_post   = require('./src/routes/routes/typeroute-post');
+var typeroutes_get   = require('./src/routes/routes/typeroute-get');
 var typeroute_update = require('./src/routes/routes/typeroute-update');
 var typeroute_delete = require('./src/routes/routes/typeroute-delete');
 
 var app = express();
 
-var session = require('express-session');
+var session  = require('express-session');
 var passport = require('passport');
 
 require('./config/passport')(passport);
@@ -46,23 +46,23 @@ mongoose.connect('mongodb://localhost/viajapp');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 /*app.use(require('express-session')({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
-}));app.use(session({ secret: 'zasentodalaboca', resave: true, saveUninitialized: true }));*/
+ secret: 'keyboard cat',
+ resave: false,
+ saveUninitialized: false
+ }));app.use(session({ secret: 'zasentodalaboca', resave: true, saveUninitialized: true }));*/
 
-app.use(session({ secret: 'zasentodalaboca', resave: true, saveUninitialized: true }));
+app.use(session({secret: 'zasentodalaboca', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
 
@@ -89,44 +89,43 @@ app.use('/', typeroutes_get);
 app.use('/', typeroute_update);
 app.use('/', typeroute_delete);
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // error hndlers
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err    = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-app.use(function(err, req, res) {
-  res.status(err.status || 500);
-  res.end(JSON.stringify({
-    message: err.message,
-    error: {}
-  }));
+app.use(function (err, req, res) {
+    res.status(err.status || 500);
+    res.end(JSON.stringify({
+        message: err.message,
+        error  : {}
+    }));
 });
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.json({
-      message: err.message,
-      error: err
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.json({
+            message: err.message,
+            error  : err
+        });
     });
-  });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+app.use(function (err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error  : {}
+    });
 });
-
 
 
 app.listen(5885, '127.0.0.1');
@@ -138,7 +137,6 @@ module.exports = app;
 
 // development error handler
 // will print stacktrace
-
 
 
 //app.listen(5885,'147.83.7.156');

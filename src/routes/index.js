@@ -103,25 +103,11 @@ router.get('/auth/facebook', passport.authenticate('facebook', {
 
 //handle the callback after facebook has authenticated the user
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {
-    
-    successRedirect: '#/home',
+
+    successRedirect: '/',
     failureRedirect: '/'
 }));
-/*router.get('/auth/facebook/callback', passport.authenticate('facebook', function(err, user){
-        console.log('datos user', user);
-        if (err){
-            res.send(err);
-            return;
-        }
-        req.login(user, function(error){
-            if (error){
-                res.send(error);
-                return;
-            }
-            res.send(null, user);
-        })
-    })
-);*/
+
 
 
 /* route middleware to check whether user is authenticated */

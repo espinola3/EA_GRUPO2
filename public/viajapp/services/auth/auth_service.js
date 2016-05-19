@@ -136,22 +136,6 @@ angular.module('ServicesModule').factory('AuthService',
                 return deferred.promise;
 
             }
-            $http.get('/', function(req, res) {
-                res.render('index.ejs'); // load the index.ejs file
-            });
-
-            // route for login form
-            // route for processing the login form
-            // route for signup form
-            // route for processing the signup form
-
-            // route for showing the profile page
-            $http.get('/profile', isLoggedIn, function(req, res) {
-                res.render('profile.ejs', {
-                    user : req.user // get the user out of session and pass to template
-                });
-            });
-
             // =====================================
             // FACEBOOK ROUTES =====================
             // =====================================
