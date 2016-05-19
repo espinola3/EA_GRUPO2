@@ -132,7 +132,6 @@ module.exports = function(passport) {
 };
 
 function myFacebookStrategy (token, refreshToken,profile, done){
-
     // asynchronous
     process.nextTick(function() {
 //Save profile info into newUser object

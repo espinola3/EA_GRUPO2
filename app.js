@@ -54,6 +54,7 @@ app.use(cookieParser());
   saveUninitialized: false
 }));app.use(session({ secret: 'zasentodalaboca', resave: true, saveUninitialized: true }));*/
 
+app.use(session({ secret: 'zasentodalaboca', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
