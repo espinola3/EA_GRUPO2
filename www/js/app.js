@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic'])
+var app = angular.module('starter', ['ionic','ngRoute'])
 
 app.controller('MainController', ['$scope','$http', function($scope, $http) {
     $scope.newPersona = {};
@@ -21,7 +21,9 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
     $scope.passerror = "";
     $scope.selected = false;
 	
-	dir = "10.183.44.132";
+	dir = "192.168.1.12";
+		
+	
 //-----------------------------------------Usuarios-----------------------------------------
     // Obtenemos todos los datos de la base de datos
     $http.get('http://'+ dir +':3000/users').success(function(data) {
@@ -229,20 +231,57 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
         };
 
     }]);
-	
+
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
   .state('home', {
-    url: '/views/home',
-    templateUrl: '../views/home'
+    url: '/home',
+    templateUrl: 'views/home.html',
+	controller: 'MainController'
   })
   .state('about', {
-    url: '/views/about',
-    templateUrl: '../views/about'
+    url: '/about',
+    templateUrl: 'views/about.html',
+	controller: 'MainController'
   })
-  
-  //$urlRouterProvider.otherwise("/1");
-})
+  .state('login', {
+    url: '/login',
+    templateUrl: 'views/login.html',
+	controller: 'MainController'
+  })
+  .state('mapa', {
+    url: '/mapa',
+    templateUrl: 'views/mapa.html',
+	controller: 'MainController'
+  })
+  .state('register', {
+    url: '/register',
+    templateUrl: 'index.html',
+	controller: 'MainController'
+  })
+  .state('rutas', {
+    url: '/rutas',
+    templateUrl: 'views/rutas.html',
+	controller: 'MainController'
+  })
+  .state('nuevaruta', {
+    url: '/nuevaruta',
+    templateUrl: 'views/nuevaruta.html',
+	controller: 'MainController'
+  })
+  .state('contact', {
+    url: '/contact',
+    templateUrl: 'views/contact.html',
+	controller: 'MainController'
+  })
+  .state('ciudad', {
+    url: '/ciudad',
+    templateUrl: 'views/ciuadad.html',
+	controller: 'MainController'
+  })
+ 
+  //$urlRouterProvider.otherwise("register");
+});
   
 
 app.run(function($ionicPlatform) {
