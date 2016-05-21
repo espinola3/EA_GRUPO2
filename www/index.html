@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="starter" ng-controller = 'MainController'>
+  <ion-pane>
+    <ion-nav-bar class="bar-positive nav-title-slide-ios7" align-title="center">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+          <a class="button" href="views/rutas.html">
+            Listar
+          </a>
+		  <a class="button" href="views/nuevaruta.html">
+            Crear
+          </a>
+		  <a class="button" href="views/ciuadad.html">
+            Ciudad
+          </a>
+        </ion-nav-buttons>        
+        <ion-nav-buttons side="right">
+          <a class="button" href="views/home.html">
+            Home
+          </a>
+		  <a class="button" href="views/about.html">
+            About
+          </a>
+		  <a class="button" href="views/login.html">
+            Login
+          </a>
+		  <a class="button" href="index.html">
+            Register
+          </a>
+		  <a class="button" href="views/contact.html">
+            Contact
+          </a>
+        </ion-nav-buttons>        
+      
+    </ion-nav-bar>
+
+    <ion-nav-view class="slide-left-right"></ion-nav-view>
+	
+	<ion-view title="Page 1" hide-back-button="true">
+	
+	<!--<nav class="navbar navbar-default" navbar-fixed-top role="navigation">
+        <div class="container-fluid">
+            
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/views/home.html">Home</a></li>
+                    <li><a href="/views/about.html">About</a></li>
+                    <li><a href="/views/login.html">Login</a></li>
+                    <li><a href="/index.html">Register</a></li>
+                    <li><a href="/views/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>-->
+	
+	<ion-content>
+	
+	<ion-header-bar class="bar-stable">
+        <h1 class="title">Viajapp</h1>
+      </ion-header-bar>
+	
+    <div class="jumbotron text-center" ng-prueba>
+        <h1>Sign up</h1>
+    </div>
+	
+	
+	<div class="container">
+	<div>
+              <table class="table table-striped">
+                   <tr class="info">
+                     <td>Name</td>
+                     <td>Email</td>
+                     <td>City</td>
+                 </tr>
+                 <tr ng-repeat="persona in personas">
+                     <td>{{ persona.name }}</td>
+                     <td>{{ persona.email }}</td>
+                     <td>{{ persona.city }}</td>
+                 </tr>
+             </table>
+         </div>
+        <div>
+            <form name="myForm" >
+                <div class="form-group">
+
+                    <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newPersona.name" >
+                    <br>
+                    <input type="email" class="form-control input-lg text-center" id="inputEmail" placeholder="Email" ng-model="newPersona.email" >
+                    <br>
+                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Pass"  name = "pass1" id = "pass1" ng-keyup="verificar(newPersona.pass, newPersona.pass2);" ng-model="newPersona.pass" >
+                    <br>
+                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Repeat Pass" name = "pass2" id = "pass2" ng-keyup="verificar(newPersona.pass, newPersona.pass2);" ng-model="newPersona.pass2">
+                    <span> {{passerror}}<!-- mensaje de verificación--> </span><br />
+                    <br>
+                    <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newPersona.city" >
+                </div>
+                <!-- Acciones que podemos realizar en el formulario -->
+                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarPersona()" ng-disabled="!newPersona.pass|| !newPersona.city || !newPersona.name || selected">Registrar</button>
+                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled=" !newPersona.pass|| !newPersona.email|| !newPersona.city || !newPersona.name || selected">Modificar</button>
+                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona.name)" ng-disabled="!newPersona.name ||selected">Borrar</button>
+            </form>
+        </div>
+    </div>
+    <!--
+	  <ion-nav-bar class="bar-positive" align-title="center"></ion-nav-bar>
+    
+      <ion-nav-view>
+      <ion-nav-buttons side="primary">
+        <button class="button">
+          I'm a button on the primary of the navbar!
+        </button>
+      </ion-nav-buttons>
+      </ion-nav-view>
+	-->
+    </ion-content>
+	</ion-view>
+    </ion-pane>
+	
+  </body>
+</html>
