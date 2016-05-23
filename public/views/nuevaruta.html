@@ -46,7 +46,7 @@
 
                 <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newRuta.name" required>
                 <br>
-                <select type="text" class="form-control input-lg text-center" placeholder="Type" ng-options="rutetype.type for rutetype in typerutas" ng-model="newRuta.type" >
+                <select type="text" class="form-control input-lg text-center" placeholder="Type" ng-options="rutetype.type as newRuta.type for rutetype in typerutas" ng-model="newRuta.type" >
                     <option value="">--Elige opcion--</option>
                 </select>
                 <br>
