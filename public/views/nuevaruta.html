@@ -14,8 +14,10 @@
                        required>
                 <br>
                 <select type="text" class="form-control input-lg text-center" placeholder="Type"
-                        ng-options="rutetype.type for rutetype in typerutas" ng-model="newRuta.type">
+                        ng-model="newRuta.type">
                     <option value="">--Elige opcion--</option>
+                    <option ng-repeat="rutetype in typerutas" value="{{rutetype.type}}">{{rutetype.type}}</option>
+
                 </select>
                 <br>
                 <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newRuta.city">
@@ -40,4 +42,4 @@
     </div>
     <div id="map_container"></div>
 </div>
-</body>>
+</body>
