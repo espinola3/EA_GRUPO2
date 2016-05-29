@@ -90,7 +90,7 @@ router.get('/logout', function (req, res, next) {
 //(scopes): http://developers.facebook.com/docs/reference/login/
 
 router.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['public_profile', 'email'] },console.log("esto funcaaaaaaaaaaaaaaaa")));
+    scope: ['public_profile', 'email'] }));
 
 
 
