@@ -1,6 +1,6 @@
 angular.module('ServicesModule').factory('AuthService',
-    ['$q', '$timeout', '$http',
-        function ($q, $timeout, $http) {
+    ['$q', '$timeout', '$http', '$cookies',
+        function ($q, $timeout, $http , $cookies) {
 
             // create user variable
             var user = false;
@@ -20,12 +20,14 @@ angular.module('ServicesModule').factory('AuthService',
 
             function isLoggedIn()
             {
-                return user;
+                return $cookies.get('logged');
 
             }
+
             function getUserInfo() {
-                return usuario.username;
+                return $cookies.getObject('user').username;
             }
+
             function loginFacebook () {
 
                  return $http.get('user/auth/facebook/callback').success(function (data) {
@@ -60,44 +62,40 @@ angular.module('ServicesModule').factory('AuthService',
 
             function login(username, password) {
 
-                // create a new instance of deferred
                 var deferred = $q.defer();
 
-                // send a post request to the server
                 $http.post('/user/login',
                     {username: username, password: password})
-                    // handle success
                     .success(function (data, status) {
                         if(status === 200 && data.status){
-                            usuario={username:username}
+                            //usuario={username:username};
                             user = true;
+                            $cookies.put('logged', true);
+                            $cookies.putObject('user', {'username':username});
                             deferred.resolve();
                         } else {
                             user = false;
                             deferred.reject();
                         }
                     })
-                    // handle error
                     .error(function (data) {
                         user = false;
                         deferred.reject();
                     });
 
-                // return promise object
                 return deferred.promise;
 
             }
 
             function logout() {
 
-                // create a new instance of deferred
                 var deferred = $q.defer();
 
                 // send a get request to the server
                 $http.get('/user/logout')
-                    // handle success
                     .success(function (data) {
                         user = false;
+                        $cookies.remove('logged');
                         deferred.resolve();
                     })
                     // handle error
