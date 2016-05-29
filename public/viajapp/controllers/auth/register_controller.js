@@ -12,7 +12,7 @@ angular.module('ControllersModule')
                     $scope.disabled = true;
 
                     // call register from service
-                    AuthService.register($scope.registerForm.username, $scope.registerForm.password, $scope.registerForm.city, $scope.registerForm.email)
+                    AuthService.register($scope.registerForm.username, $scope.registerForm.password, $scope.registerForm.city, $scope.registerForm.email,$scope.registerForm.pic)
                         // handle success
                         .then(function () {
                             console.log("URL", $location.url());
