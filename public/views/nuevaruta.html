@@ -10,26 +10,34 @@
         <form name="myForm">
             <div class="form-group">
 
-                <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newRuta.name" required>
+                <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newRuta.name"
+                       required>
                 <br>
-                <select type="text" class="form-control input-lg text-center" placeholder="Type" ng-options="rutetype.type as newRuta.type for rutetype in typerutas" ng-model="newRuta.type" >
+                <select type="text" class="form-control input-lg text-center" placeholder="Type"
+                        ng-options="rutetype.type for rutetype in typerutas" ng-model="newRuta.type">
                     <option value="">--Elige opcion--</option>
                 </select>
                 <br>
-                <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newRuta.city" >
+                <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newRuta.city">
                 <br>
-                <input type="text" class="form-control input-lg text-center" placeholder="Time" ng-model="newRuta.time" >
+                <input type="text" class="form-control input-lg text-center" placeholder="Time" ng-model="newRuta.time">
                 <br>
-                <input type="text" class="form-control input-lg text-center" placeholder="Interests" ng-model="newRuta.interest" >
+                <input type="text" class="form-control input-lg text-center" placeholder="Interests"
+                       ng-model="newRuta.interest">
             </div>
 
             <!-- Acciones que podemos realizar en el formulario -->
-            <button type="submit" class="btn btn-success btn-lg" ng-click="registrarRuta()" ng-disabled="myForm.$invalid || !newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time || !newRuta.interest || selected">Registrar</button>
-         <!--   <button type="submit" class="btn btn-warning btn-lg" ng-click="InsertarRuta()" ng-disabled="!newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time  || !newRuta.interest  || selected">Modificar</button>-->
-           <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarRuta(newRuta.name)" ng-disabled="!newRuta.name ||selected">Borrar</button>
+            <button type="submit" class="btn btn-success btn-lg" ng-click="registrarRuta()"
+                    ng-disabled="myForm.$invalid || !newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time || !newRuta.interest || selected">
+                Registrar
+            </button>
+            <!--   <button type="submit" class="btn btn-warning btn-lg" ng-click="InsertarRuta()" ng-disabled="!newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time  || !newRuta.interest  || selected">Modificar</button>-->
+            <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarRuta(newRuta.name)"
+                    ng-disabled="!newRuta.name ||selected">Borrar
+            </button>
         </form>
 
     </div>
-
+    <div id="map_container"></div>
 </div>
 </body>>

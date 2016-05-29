@@ -1,1 +1,1 @@
-angular.module('ServicesModule', []);
+angular.module('ServicesModule', ['ngCookies']);

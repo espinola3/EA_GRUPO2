@@ -43,6 +43,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/nuevaruta', {
             templateUrl: 'views/nuevaruta.html',
+            controller : 'MapCtrl',
             restricted     : true
         })
         .when('/contact', {
