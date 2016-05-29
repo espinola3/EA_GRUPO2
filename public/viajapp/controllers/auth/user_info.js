@@ -6,7 +6,7 @@ angular.module('ControllersModule')
                 console.log("entro user_info");
 
                 $scope.getUserInfo = function () {
-                    return AuthService.getUserInfo();
+                    return AuthService.isLoggedIn() ? AuthService.getUserInfo() : '';
 
                 }
 

@@ -24,7 +24,7 @@ router.post('/user', function(req, res, next) {
             });
         else{
             console.log("ya existe");
-            res.status(400).res('Ya existe');
+            res.status(409).res('Ya existe');
         }
     });
 

@@ -101,6 +101,7 @@ angular.module('ServicesModule').factory('AuthService',
                     .success(function (data) {
                         user = false;
                         $cookies.remove('logged');
+                        $cookies.remove('user');
                         deferred.resolve();
                     })
                     // handle error
