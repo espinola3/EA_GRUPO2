@@ -131,7 +131,7 @@ module.exports = function(passport) {
 
 };
 
-function myFacebookStrategy (token, refreshToken ,profile, done){
+function myFacebookStrategy (token, refreshToken,profile, done){
     // asynchronous
     process.nextTick(function() {
 //Save profile info into newUser object
@@ -142,9 +142,15 @@ function myFacebookStrategy (token, refreshToken ,profile, done){
         newUser.pic = profile.photos[0].value; //url of the profile picture
         newUser.provider = profile.provider;
 //Save the token for later actions with facebook (real actions
+//will require using facebook API or Node SDK (authorized by this token)
 
 //will require using facebook API or Node SDK (authorized by this token)
         newUser.token = token;
+        
+        console.log(newUser);
+
+        User.register(new User({ username: newUser.username , pic : newUser.pic , email : newUser.email }));
+
 //Assume the user is authenticated
 //newUser is made accessible through     the session (req.user)
 //jump back to passport.authenticate()

@@ -1,7 +1,6 @@
 // dependencies
-//var express = require('express-session');
+//var express = require('express-se
 var hash          = require('bcrypt-nodejs');
-//var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 
 
