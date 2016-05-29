@@ -8,10 +8,13 @@ var User = new Schema({
     username: {type: String, required:true},
     password: {type: String},
     email: {type: String},
-    city: {type: String}
+    city: {type: String},
+    pic: {type: String}
 });
 
 User.plugin(passportLocalMongoose);
 
+module.exports=mongoose.model('users',User);
 
-module.exports = mongoose.model('users', User);
+
+

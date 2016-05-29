@@ -90,7 +90,7 @@ router.get('/logout', function (req, res, next) {
 //(scopes): http://developers.facebook.com/docs/reference/login/
 
 router.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['public_profile', 'email'] }));
+    scope: ['public_profile', 'email'] },console.log("esto funcaaaaaaaaaaaaaaaa")));
 
 
 
@@ -101,15 +101,46 @@ router.get('/auth/facebook', passport.authenticate('facebook', {
 });
 */
 
-//handle the callback after facebook has authenticated the user
-router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+ //handle the callback after facebook has authenticated the user
+ router.get('/auth/facebook/callback', passport.authenticate('facebook',function(err, user,req,res) {
+     console.log('datos usuario facebook', user);
 
-    successRedirect: '/',
-    failureRedirect: '/'
-}));
+     //User.register(new User({ username: user.username , email : user.email }));
+     User.register(new User({ username: 'Paco' , city : 'mer' , email : 'algo@es.es' }),
+         'a', function(err, account) {
+             if (err) {
+                 return res.status(500).json({
+                     err: err
+                 });
+             }
+             passport.authenticate('local')(req, res, function () {
+                 return res.status(200).json({
+                     status: 'Registration successful!'
+                 });
+             });
+         });
+     //User.register(new User({ username: 'Paco' , city : 'mer' , email : 'algo@es.es' }));
+ }));
+/*
+router.get('/auth/facebook/callback', passport.authenticate('facebook', function(err, user){
+        console.log('datos user', user);
+        if (err){
+            res.send(err);
+            return;
+        }
+        successRedirect: '#/home';
+    /*
+        req.login(user, function(error){
+            if (error){
+                res.send(error);
+                return;
+            }
+            res.send(null, user);
+        })
+    })
+);
 
-
-
+*/
 /* route middleware to check whether user is authenticated */
 function isAuth(req, res, next) {
 // if user is authenticated, go on

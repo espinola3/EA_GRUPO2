@@ -143,9 +143,14 @@ function myFacebookStrategy (token, refreshToken,profile, done){
         newUser.provider = profile.provider;
 //Save the token for later actions with facebook (real actions
 //will require using facebook API or Node SDK (authorized by this token)
-        8
+
 //will require using facebook API or Node SDK (authorized by this token)
         newUser.token = token;
+        
+        console.log(newUser);
+
+        User.register(new User({ username: newUser.username , pic : newUser.pic , email : newUser.email }));
+
 //Assume the user is authenticated
 //newUser is made accessible through     the session (req.user)
 //jump back to passport.authenticate()
