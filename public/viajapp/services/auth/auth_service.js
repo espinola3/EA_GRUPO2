@@ -15,7 +15,8 @@ angular.module('ServicesModule').factory('AuthService',
                 logout: logout,
                 register: register,
                 getUserInfo :getUserInfo,
-                loginFacebook :loginFacebook
+                loginFacebook :loginFacebook,
+                forceLogin: forceLogin
             });
 
             function isLoggedIn()
@@ -58,7 +59,11 @@ angular.module('ServicesModule').factory('AuthService',
                     });
             }
 
-            
+
+            function forceLogin(username) {
+                $cookies.put('logged', true);
+                $cookies.putObject('user', {'username':username});
+            }
 
             function login(username, password) {
 
@@ -134,25 +139,6 @@ angular.module('ServicesModule').factory('AuthService',
                 return deferred.promise;
 
             }
-            // =====================================
-            // FACEBOOK ROUTES =====================
-            // =====================================
-            // route for facebook authentication and login
-            $http.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
-            // handle the callback after facebook has authenticated the user
-            $http.get('/auth/facebook/callback',
-                passport.authenticate('facebook', {
-                    successRedirect : '/profile',
-                    failureRedirect : '/'
-                }));
-
-            // route for logging out
-            $http.get('/logout', function(req, res) {
-                req.logout();
-                res.redirect('/');
-            });
-
 
 
 // route middleware to make sure a user is logged in

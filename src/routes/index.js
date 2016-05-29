@@ -102,25 +102,11 @@ router.get('/auth/facebook', passport.authenticate('facebook', {
 */
 
  //handle the callback after facebook has authenticated the user
- router.get('/auth/facebook/callback', passport.authenticate('facebook',function(err, user,req,res) {
-     console.log('datos usuario facebook', user);
-
-     //User.register(new User({ username: user.username , email : user.email }));
-     User.register(new User({ username: 'Paco' , city : 'mer' , email : 'algo@es.es' }),
-         'a', function(err, account) {
-             if (err) {
-                 return res.status(500).json({
-                     err: err
-                 });
-             }
-             passport.authenticate('local')(req, res, function () {
-                 return res.status(200).json({
-                     status: 'Registration successful!'
-                 });
-             });
-         });
-     //User.register(new User({ username: 'Paco' , city : 'mer' , email : 'algo@es.es' }));
- }));
+ router.get('/auth/facebook/callback',
+     passport.authenticate('facebook', {failureRedirect: '/login'}),
+     function (req, res, next) {
+         res.redirect('/#/login-fb?fb_user=' + req.user.username);
+ });
 /*
 router.get('/auth/facebook/callback', passport.authenticate('facebook', function(err, user){
         console.log('datos user', user);

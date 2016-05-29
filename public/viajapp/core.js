@@ -15,6 +15,11 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             controller : 'loginController',
             restricted     : false
         })
+        .when('/login-fb', {
+            templateUrl: 'views/login.html',
+            controller : 'facebookLoginController',
+            restricted     : false
+        })
         .when('/logout', {
             controller: 'logoutController',
             restricted     : true

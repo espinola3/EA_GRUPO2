@@ -4,16 +4,6 @@ angular.module('ControllersModule')
         [
             '$scope', '$location', 'AuthService',
             function ($scope, $location, AuthService) {
-                
-                
-                $scope.loginFacebook = function () {
-                    console.log("LOGIN FACEBOOK- entra");
-                    AuthService.loginFacebook()
-                        .then(function () {
-
-                        });
-
-                };
 
 
                 $scope.login = function () {
@@ -36,4 +26,12 @@ angular.module('ControllersModule')
 
                 };
 
+            }])
+    .controller(
+        'facebookLoginController',
+        [
+            '$scope', '$location', 'AuthService', '$routeParams',
+            function ($scope, $location, AuthService, $routeParams) {
+                AuthService.forceLogin($routeParams.fb_user);
+                $location.url('/home');
             }]);

@@ -131,7 +131,7 @@ module.exports = function(passport) {
 
 };
 
-function myFacebookStrategy (token, refreshToken,profile, done){
+function myFacebookStrategy (token, refreshToken, profile, done){
     // asynchronous
     process.nextTick(function() {
 //Save profile info into newUser object
@@ -146,15 +146,20 @@ function myFacebookStrategy (token, refreshToken,profile, done){
 
 //will require using facebook API or Node SDK (authorized by this token)
         newUser.token = token;
-        
-        console.log(newUser);
 
-        User.register(new User({ username: newUser.username , pic : newUser.pic , email : newUser.email }));
+        User.findOrCreate({ username: newUser.username , city : "roquefort" , email : newUser.email , pic: newUser.pic},
+            "pass", function(err, account) {
+                if (err) {
+                    console.log('error registrando user',err);
+                }
 
+                return done(err, account);
+            });
+       
 //Assume the user is authenticated
 //newUser is made accessible through     the session (req.user)
 //jump back to passport.authenticate()
-        return done(null, newUser);
+       // return done(null, newUser);
     });
 }
 
