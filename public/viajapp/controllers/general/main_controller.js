@@ -151,6 +151,22 @@ angular.module('ControllersModule')
 
                 };
 
+             //   $scope.MostrarMapa =  NgMap.getMap().then(function (map) {
+              //      $http.get('/routes/Mostrarporciudad').success(function (data) {
+                //        var interest = data;
+                 //       a.interests = interest;
+                      //});
+                   // vm.showCustomMarker = function (event, nombre) {
+                     //   console.log(nombre);
+                       // map.customMarkers[nombre].setVisible(true);
+                        //map.customMarkers[nombre].setPosition(this.getPosition());
+                   // };
+                    //vm.closeCustomMarker = function (evt) {
+                      //  this.style.display = 'none';
+                    //};
+
+
+
                 // Obtenemos todos los datos de la base de datos de todos los tipos de rutas
                 $http.get('/typeroutes').success(function (data) {
 

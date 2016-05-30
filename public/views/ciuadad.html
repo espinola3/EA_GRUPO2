@@ -49,12 +49,14 @@
                 <td>Name</td>
                 <td>Time</td>
                 <td>Puntos de Interest</td>
+                <td>Ver Mapa</td>
             </tr>
             <tr ng-repeat="ruta in rutas">
                 <td>{{ruta.type }}</td>
                 <td>{{ ruta.name }}</td>
                 <td>{{ ruta.time }}</td>
                 <td>{{ ruta.interest }}</td>
+                <td><button type="submit" ng-click="MostrarMapa(route.id)">Ver Mapa</button></td>
                 <!--<td>{{ persona.name }}</td>-->
                 <!--<td><a href="#" ng-click="borrarPersona(persona.name) && ng-alert('Quieres borrar la perssona?')">Eliminar</a></td>-->
             </tr>
@@ -62,4 +64,23 @@
     </div>
 </div>
 </body>
+
+<div id="map_container">
+</div>
+<div class="controls" >
+    <ng-map zoom="13" center="{{routes.city}}" style="height:600px"
+            on-center-changed="centerCustomMarker()">
+        <marker ng-repeat="interest in a.interests" id="custom-marker-{{routes.id}}" position="{{routes.interest}}"
+                title="{{routes.name}}" on-click="vm.showCustomMarker(event,'custom-marker-'+$index)"></marker>
+
+
+        <custom-marker ng-repeat="interest in interests" id="custom-marker-{{routes.id}}" visible="false"
+                       position="{{routes.interest}}" on-click="vm.closeCustomMarker()">
+            <img>
+            {{routes.interest}}<br/>
+
+            div>
+        </custom-marker>
+    </ng-map>
+</div>
 </html>
