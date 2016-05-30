@@ -48,3 +48,12 @@ background:url("../images/fondo.png");
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #FFF;
 }
+
+#map {
+  width: 50%;
+  height: 50%;
+}
+
+.scroll {
+  height: 100%;
+}

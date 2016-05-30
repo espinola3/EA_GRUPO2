@@ -21,7 +21,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
     $scope.passerror = "";
     $scope.selected = false;
 	
-	dir = "192.168.1.12";
+	dir = "10.183.21.22";
 		
 	
 //-----------------------------------------Usuarios-----------------------------------------
@@ -231,6 +231,39 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
         };
 
     }]);
+	
+	app.controller('MapCtrl', function($scope, $ionicLoading) {
+  
+   
+		
+		console.log('Entra cibasdsadadsadaad');
+		
+        var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+ 
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+ 
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		
+		
+		$scope.map     = "map";
+ /*
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            var myLocation = new google.maps.Marker({
+                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                map: map,
+                title: "My Location"
+            });
+        });
+ */
+        //$scope.map = map;
+   
+ 
+});
 
 app.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -249,11 +282,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'views/login.html',
 	controller: 'MainController'
   })
-  .state('mapa', {
-    url: '/mapa',
-    templateUrl: 'views/mapa.html',
-	controller: 'MainController'
-  })
   .state('register', {
     url: '/register',
     templateUrl: 'index.html',
@@ -268,6 +296,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/nuevaruta',
     templateUrl: 'views/nuevaruta.html',
 	controller: 'MainController'
+  })
+  .state('map', {
+    url: '/mapa',
+    templateUrl: 'views/mapa.html',
+	controller: 'MapCtrl'
   })
   .state('contact', {
     url: '/contact',

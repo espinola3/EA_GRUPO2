@@ -3,30 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
-
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-	
-    <!-- ionic/angularjs js 
-	<script src="bower_components/angular/angular.js"></script> -->
-    <script src="lib/ionic/js/ionic.bundle.js"></script> 
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
-    <!-- your app's js -->
-    <script src="js/app.js"></script>
+    <title></title>    	
   </head>
-  <body ng-app="starter" ng-controller = 'MainController'>
+  <body ng-app="starter">
   <ion-pane>
     <ion-nav-bar class="bar-positive nav-title-slide-ios7" align-title="center">
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
@@ -40,6 +19,9 @@
           </a>
 		  <a class="button" ui-sref="ciudad">
             Ciudad
+          </a>
+		  <a class="button" ui-sref="map">
+            Mapa
           </a>
         </ion-nav-buttons>        
         <ion-nav-buttons side="right">
@@ -66,7 +48,6 @@
 	
 	<ion-view title="Viajapp" hide-back-button="true">
 	
-	
 	<ion-content>
 	
 	
@@ -75,7 +56,7 @@
     </div>
 	
 	
-	<div class="container">
+	<div class="container" ng-controller = 'MainController'>
 	<div>
               <table class="table table-striped">
                    <tr class="info">
@@ -116,6 +97,24 @@
     </ion-content>
 	</ion-view>
     </ion-pane>
+	
+	<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">   
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script> 
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+	
+	<!-- Google Maps -->
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBLRQuMbzorcGujWn_76SLxzF3IkwoTM38"></script> 
+	
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
 	
   </body>
 </html>
