@@ -250,7 +250,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
 		
 		
 		$scope.map     = "map";
- /*
+
         navigator.geolocation.getCurrentPosition(function(pos) {
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
             var myLocation = new google.maps.Marker({
@@ -259,7 +259,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
                 title: "My Location"
             });
         });
- */
+ 
         //$scope.map = map;
    
  
