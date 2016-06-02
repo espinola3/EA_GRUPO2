@@ -97,19 +97,7 @@ angular.module('ControllersModule')
 
 
 
-                $scope.verificar = function (pass, pass2) {
-                    if (pass != pass2)
-                        $scope.passerror = "La contraseña y la comprobación no coinciden"
-
-                    else {
-                        if ((pass == false) && (pass2 == false)) {
-                            $scope.passerror = ""
-                        }
-                        else
-                            $scope.passerror = "La contraseña y la comprobación coinciden"
-                    }
-                };
-
+                
                 // Función para coger el objeto seleccionado en la tabla
                 $scope.selectPerson = function (persona) {
                     $scope.newPersona = persona;

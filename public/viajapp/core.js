@@ -1,4 +1,4 @@
-var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule']);
+var MainApp = angular.module('MainApp', ['ngRoute', 'ServicesModule', 'ControllersModule', 'ngModal']);
 
 MainApp.config(['$routeProvider', function ($routeProvider) {
 
@@ -76,3 +76,5 @@ MainApp.run(function($location, $rootScope, $route, AuthService) {
         }
     });
 });
+
+

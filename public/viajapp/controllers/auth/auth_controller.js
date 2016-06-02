@@ -1,7 +1,7 @@
 angular.module('ControllersModule')
     .controller(
         'authController',
-        ['$scope', '$location', 'AuthService',
+        ['$scope', '$location', 'AuthService', 'modalDialog',
             function ($scope, $location, AuthService, passport) {
 
                 $scope.logout = function () {
@@ -18,7 +18,23 @@ angular.module('ControllersModule')
                     return AuthService.isLoggedIn();
 
                 }
+
+                /*$scope.modalShown  = false;
+                $scope.toggleModal = function () {
+                    $scope.modalShown = !$scope.modalShown;
+                };
                
 
-}]);
+}])
+
+    .controller(
+        'MyCtrl',
+        ['$scope', 'modalDialog',
+            function ($scope) {
+                $scope.modalShown  = false;
+                $scope.toggleModal = function () {
+                    $scope.modalShown = !$scope.modalShown;
+                };*/
+
+            }]);
 
