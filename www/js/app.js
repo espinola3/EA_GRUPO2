@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic','ngRoute'])
 
-app.controller('MainController', ['$scope','$http', function($scope, $http) {
+app.controller('MainController', ['$scope','$http', '$location', '$rootScope', function($scope, $http, $location, $rootScope) {
     $scope.newPersona = {};
     $scope.personas = {};
 
@@ -17,27 +17,67 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
     $scope.newTypeRuta  = {};
     $scope.typerutas    = {};
 	$scope.testy = 5;
-        
+	if ($rootsScope= false)
+	{
+	$rootScope.log = false;
+	}
+	//$scope.logged = sessionStorage.log;
+	$scope.loginForm = {};
     $scope.passerror = "";
     $scope.selected = false;
 	
-	dir = "10.183.21.22";
+	dir = "192.168.1.12:5885";
 		
 	
 //-----------------------------------------Usuarios-----------------------------------------
     // Obtenemos todos los datos de la base de datos
-    $http.get('http://'+ dir +':3000/users').success(function(data) {
+	
+	
+    $http.get('http://'+ dir +'/users').success(function(data) {
         console.log(data);
             $scope.personas = data;
         })
         .error(function(data) {
             console.log('Error: ' + data);
         });
+		
+    $scope.isLoggedIn = function() {
+		
+                //alert(sessionStorage.log + '  ' + $scope.logged);
+                $rootScope.log=true;
+				
+            };	
+			
+    $scope.Log = function() {
+	
+				$rootScope.log=false;
 
+            };	
+	
+	$scope.login = function() {
+	   
+                $http.post('http://'+ dir +'/user/login',
+                    {username: $scope.loginForm.username, password: $scope.loginForm.password})
+                    .success(function (data, status) {
+                        if(status === 200 && data.status){
+                            //usuario={username:username};
+							$rootScope.log = true;
+							$location.url('/register');
+                        } else {
+                            $rootScope.log = false;
+                        }
+                    })
+                    .error(function (data) {
+                        $rootScope.log = false;
+                    });                
+
+            };
+
+	
     // Función para registrar a una persona
     $scope.registrarPersona = function() {
         if ($scope.passerror == "La contraseña y la comprobación coinciden") {
-            $http.post('http://'+ dir + ':3000/user', $scope.newPersona)
+            $http.post('http://'+ dir + '/user', $scope.newPersona)
                 .success(function (data) {
                     if (data != false) {
                         $scope.newPersona = {}; // Borramos los datos del formulario
@@ -56,7 +96,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
 
     // Función para editar los datos de una persona
     $scope.modificarPersona = function(newPersona) {
-        $http.put('http://'+ dir +':3000/user/update', $scope.newPersona)
+        $http.put('http://'+ dir +'/user/update', $scope.newPersona)
             .success(function(data) {
                 $scope.newPersona = {}; // Borramos los datos del formulario
                 $scope.personas = data;
@@ -73,7 +113,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
 
         {
         console.log("borrar persona " + name);
-        $http.delete('http://'+ dir +':3000/user/delete/' + name)
+        $http.delete('http://'+ dir +'/user/delete/' + name)
             .success(function(data) {
                 $scope.newPersona = {};
                 $scope.personas = data;
@@ -119,7 +159,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
 */
 
         $scope.Mostrarportipo = function (tipo) {
-        $http.get('http://' + dir +':3000/routesbytype/'+ tipo).success(function (data) {
+        $http.get('http://' + dir +'/routesbytype/'+ tipo).success(function (data) {
                 $scope.rutas = data;
             })
             .error(function (data) {
@@ -129,7 +169,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
     };
         
     $scope.Mostrarporciudad = function (ciudad) {
-            $http.get('http://'+ dir +':3000/routesbycity/'+ ciudad).success(function (data) {
+            $http.get('http://'+ dir +'/routesbycity/'+ ciudad).success(function (data) {
                     $scope.rutas = data;
                 console.log(data);
                 })
@@ -140,7 +180,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
         };
 
         // Obtenemos todos los datos de la base de datos de todos los tipos de rutas
-    $http.get('http://'+ dir +':3000/typeroutes').success(function (data) {
+    $http.get('http://'+ dir +'/typeroutes').success(function (data) {
             $scope.typerutas = data;
         console.log(data);
         })
@@ -152,14 +192,14 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
 
     // Función para registrar una Ruta
     $scope.registrarRuta = function () {
-        $http.post('http://'+ dir +':3000/route', $scope.newRuta)
+        $http.post('http://'+ dir +'/route', $scope.newRuta)
             .success(function (data) {
                 $scope.rutas   = data;
             })
             .error(function (data) {
                 console.log('Error: ' + data);
             });
-		$http.post('http://'+ dir +':3000/typeroute', $scope.newRuta)
+		$http.post('http://'+ dir +'/typeroute', $scope.newRuta)
             .success(function (data) {
                 $scope.newRuta = {}; // Borramos los datos del formulario
                 $scope.typerutas   = data;
@@ -173,7 +213,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
 
     // Función para editar los datos de una Ruta
     $scope.modificarRuta = function (newRuta) {
-        $http.put('http://'+ dir +':3000/route/update', $scope.newRuta)
+        $http.put('http://'+ dir +'/route/update', $scope.newRuta)
             .success(function (data) {
                 $scope.newRuta  = {}; // Borramos los datos del formulario
                 $scope.rutas    = data;
@@ -215,7 +255,7 @@ app.controller('MainController', ['$scope','$http', function($scope, $http) {
         if (confirm ("¿Seguro que quieres eliminar? "))
 
         {
-              $http.delete('http://'+ dir +':3000/route/delete/' + name)
+              $http.delete('http://'+ dir +'/route/delete/' + name)
                 .success(function (data) {
                     $scope.newRuta  = {};
                     $scope.rutas    = data;
@@ -270,47 +310,56 @@ app.config(function($stateProvider, $urlRouterProvider) {
   .state('home', {
     url: '/home',
     templateUrl: 'views/home.html',
-	controller: 'MainController'
+	controller: 'MainController',
+	restricted     : false
   })
   .state('about', {
     url: '/about',
     templateUrl: 'views/about.html',
-	controller: 'MainController'
+	controller: 'MainController',
+	restricted     : false
   })
   .state('login', {
     url: '/login',
     templateUrl: 'views/login.html',
-	controller: 'MainController'
+	controller: 'MainController',
+	restricted     : false
   })
   .state('register', {
     url: '/register',
     templateUrl: 'index.html',
-	controller: 'MainController'
+	controller: 'MainController',
+	restricted     : false
   })
   .state('rutas', {
     url: '/rutas',
     templateUrl: 'views/rutas.html',
-	controller: 'MainController'
+	controller: 'MainController',
+	restricted     : true
   })
   .state('nuevaruta', {
     url: '/nuevaruta',
     templateUrl: 'views/nuevaruta.html',
-	controller: 'MainController'
+	controller: 'MainController',
+	restricted     : true
   })
   .state('map', {
     url: '/mapa',
     templateUrl: 'views/mapa.html',
-	controller: 'MapCtrl'
+	controller: 'MapCtrl',
+	restricted     : true
   })
   .state('contact', {
     url: '/contact',
     templateUrl: 'views/contact.html',
-	controller: 'MainController'
+	controller: 'MainController',
+	restricted     : false
   })
   .state('ciudad', {
     url: '/ciudad',
     templateUrl: 'views/ciuadad.html',
-	controller: 'MainController'
+	controller: 'MainController',
+	restricted     : true
   })
  
   //$urlRouterProvider.otherwise("register");

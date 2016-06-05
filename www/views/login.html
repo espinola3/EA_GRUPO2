@@ -41,6 +41,34 @@
         <h1>Login</h1>
     </div>
 	
+	 <div class="container">
+
+        <div class="col-sm-6 col-sm-offset-3">
+
+            <form class="form" ng-submit="login()">
+                <div class="form-group">
+                    <label>Nick</label>
+                    <input type="text" class="form-control" name="username" ng-model="loginForm.username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" name="password" ng-model="loginForm.password" required>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-default" ng-disabled="disabled">Login</button>
+                </div>
+
+                <p>Need an account? <a ui-sref="register">Signup</a></p>
+                <p>Or go <a ui-sref="home">home</a>.</p>
+                
+                <!-- Place this tag in your head or just before your close body tag. -->
+
+
+                <!-- Place this tag where you want the +1 button to render. -->
+                <div class="g-plusone" data-size="tall" data-annotation="inline" data-width="450"></div>
+
+        </div>
+    </div>
     </div>
     </ion-content>
     </ion-view>
