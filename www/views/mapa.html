@@ -58,6 +58,11 @@
         </markers> data-tap-disabled="true"
     </google-map> -->
 </div>
+
+<button type="submit" class="btn btn-success btn-lg" ng-click="Locate()">Mi posición</button>
+<input type="text" placeholder="Direccion, coordenadas" ng-model="address.add"/>
+        <button ng-click="addAddress()">Buscar</button>
+<button type="submit" class="btn btn-warning btn-lg" ng-click="refresh()">Refrescar</button>
 </ion-content>
 </ion-view>
 <!--

@@ -273,13 +273,10 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
     }]);
 	
 	app.controller('MapCtrl', function($scope, $ionicLoading) {
-  
-   
-		
-		console.log('Entra cibasdsadadsadaad');
 		
         var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
- 
+        var placenum = 0;
+		
         var mapOptions = {
             center: myLatlng,
             zoom: 16,
@@ -289,8 +286,9 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
         var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		
 		
-		$scope.map     = "map";
-
+		$scope.map = "map";
+        
+		$scope.Locate = function () {
         navigator.geolocation.getCurrentPosition(function(pos) {
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
             var myLocation = new google.maps.Marker({
@@ -299,7 +297,37 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
                 title: "My Location"
             });
         });
+		};
+		
+		$scope.address = {};
+		
+		$scope.addAddress = function () {
+                if ($scope.address.add !== '') {
+                    var geocoder = new google.maps.Geocoder();
+                    geocoder.geocode({'address' : $scope.address.add}, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                    var firstAddress = results[0];
+                    var latitude = firstAddress.geometry.location.lat();
+                    var longitude = firstAddress.geometry.location.lng();
+					map.setCenter(new google.maps.LatLng(latitude, longitude));
+					placenum++;
+					var newLocation = new google.maps.Marker({
+                    position: new google.maps.LatLng(latitude, longitude),
+                    map: map,
+                    title: "New Location " + placenum + ""
+                    });
+                    } else {
+                      alert("Unknown address: " + $scope.address.add);
+                    }
+                    });
+                }
+            };
  
+         $scope.refresh = function () {
+            map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		 };
+		
+		
         //$scope.map = map;
    
  
