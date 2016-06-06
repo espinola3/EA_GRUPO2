@@ -175,6 +175,18 @@ angular.module('ControllersModule')
                         });
                 };
 
+                $scope.modificarRuta2 = function (newRuta) {
+                    $http.put('/route/updateroutes', $scope.newRuta)
+                        .success(function (data) {
+                            $scope.newRuta  = {}; // Borramos los datos del formulario
+                            $scope.rutas    = data;
+                            $scope.selected = false;
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+                };
+
 // Función para inserta rutas en typos
                 $scope.InsertarRuta = function () {
 

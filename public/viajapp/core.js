@@ -57,6 +57,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/ciudad', {
             templateUrl: 'views/ciuadad.html',
+            controller : 'MapCtrl',
             restricted     : true
         })
         .otherwise({
