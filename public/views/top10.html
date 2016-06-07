@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html ng-app="MainApp">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Viajapp</title>
+    <!-- Cargamos bootstrap -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/custom.css">
+
+    <!-- Cargamos angular -->
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.js"></script>
+    <!-- Cargamos el javascript de angular -->
+    <script src="../core.js"></script>
+
+    <script type="text/ng-template" id="ng-confirm-template">
+        <div class="modal-body">
+            <p>{{message}}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-link pull-left" ng-click="no()">No</button>
+            <button class="btn btn-primary pull-right" ng-click="yes()">Yes</button>
+        </div>
+    </script>
+
+
+</head>
+<body background="../images/fondo.png" ng-controller="MainController">
+<div class="container">
+
+    <div class="jumbotron text-center" ng-prueba>
+        <h1> TOP 10 </h1>
+    </div>
+    <h1> Lista de los 10 Usuarios que más rutas han creado </h1>
+
+</div>
+</body>
+</html>
