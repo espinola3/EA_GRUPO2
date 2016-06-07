@@ -29,4 +29,24 @@ router.put('/route/update', function(req, res, next) {
     });
 });
 
+router.put('/route/updateroutes', function(req, res, next) {
+    var route = new Route(
+        {
+            name: req.body.name,
+            interest: req.body.interest
+        }
+    );
+
+    Route.findOneAndUpdate({name: route.name},{$push:{interest: route.interest}} ,function (err, route) {
+        if (err) return console.error(err);
+    });
+
+    //res.json(user.toObject());
+
+    Route.find({}).exec().then(function (routes) {
+
+        res.json(routes).end();
+    });
+});
+
 module.exports = router;
