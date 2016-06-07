@@ -60,6 +60,10 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             controller : 'MapCtrl',
             restricted     : true
         })
+        .when('/top10', {
+            templateUrl: 'views/top10.html',
+            restricted     : true
+        })
         .otherwise({
             redirectTo: '/'
         })
