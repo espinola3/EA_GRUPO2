@@ -10,7 +10,8 @@ var User = new Schema({
     password: {type: String},
     email: {type: String},
     city: {type: String},
-    pic: {type: String}
+    pic: {type: String},
+    numrutas :{type: Number}
 });
 
 User.plugin(passportLocalMongoose);
