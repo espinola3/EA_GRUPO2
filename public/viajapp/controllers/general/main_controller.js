@@ -155,7 +155,7 @@ angular.module('ControllersModule')
                         .success(function (data) {
                             $scope.newRuta = {}; // Borramos los datos del formulario
                             $scope.rutas   = data;
-                            $scope.user.numrutas ++; // Sumamos una unidad cada vez que creemos una ruta
+
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);
