@@ -12,6 +12,7 @@ angular.module('ServicesModule').factory('GoogleMapsService', function () {
                 scrollwheel: false
             }
         });
+        
     }
 
     function create(latitude, longitude) {
