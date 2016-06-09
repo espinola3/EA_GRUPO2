@@ -71,7 +71,24 @@ angular.module('ControllersModule')
 
                     $http.get('/users/userdetail/' + name).success(function (data) {
                             $scope.persona = data;
-                            console.log("DETALLES", data);
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+
+                }
+
+                $scope.showRole  = function (name)
+                {
+
+                    $http.get('/users/userdetail/' + name).success(function (data) {
+                        if (data[0].role == 'admin') {
+                            console.log("DETALLES2", data[0].role);
+                            return true;
+                        }
+                        else
+                        {console.log('EROOOOR');}
+
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);
@@ -109,13 +126,15 @@ angular.module('ControllersModule')
 
 
                 // Obtenemos todos los datos de la base de datos de todas las rutas
-                $http.get('/routes').success(function (data) {
-                        $scope.rutas = data;
-                    })
-                    .error(function (data) {
-                        console.log('Error: ' + data);
-                    });
-
+                $scope.MostrarRutas= function () {
+                    
+                    $http.get('/routes').success(function (data) {
+                            $scope.rutas = data;
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+                };
 
                 $scope.Mostrarportipo = function (tipo) {
 

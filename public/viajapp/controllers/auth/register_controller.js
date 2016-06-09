@@ -29,9 +29,7 @@ angular.module('ControllersModule')
                     AuthService.register($scope.registerForm.username, $scope.registerForm.password, $scope.registerForm.city, $scope.registerForm.email,$scope.registerForm.pic)
                         // handle success
                         .then(function () {
-                            console.log("URL", $location.url());
                             $location.url('/login');
-                            console.log("URL2", $location.url());
 
                             $scope.disabled     = false;
                             $scope.registerForm = {};

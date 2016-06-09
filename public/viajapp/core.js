@@ -40,6 +40,7 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/rutas', {
             templateUrl: 'views/rutas.html',
+            controller : 'MapCtrl',
             restricted     : true
         })
         .when('/perfil1', {
@@ -62,6 +63,10 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
         })
         .when('/top10', {
             templateUrl: 'views/top10.html',
+            restricted     : true
+        })
+        .when('/admin', {
+            templateUrl: 'views/admin.html',
             restricted     : true
         })
         .otherwise({

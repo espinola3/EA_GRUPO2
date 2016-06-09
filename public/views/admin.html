@@ -1,31 +1,28 @@
 <body background="../images/fondo.png" ng-controller="MainController">
-<div class="container">
+<div class="container" data-ng-init="MostrarRutas()">
 
     <div class="jumbotron text-center" ng-prueba>
-        <h1>Busqueda Ciudad </h1>
+        <h1>Gestión de Rutas </h1>
     </div>
-    <input type="text" class="form-control input-lg text-center" placeholder="Buscar" ng-model="newRuta.city" >
-    <br>
-    <button type="submit" class="btn btn-success btn-lg" ng-click="Mostrarporciudad(newRuta.city)">Buscar por ciudad</button>
-    <div class="col-sm-6 col-sm-offset-1">
+
         <table class="table table-striped">
             <tr class="info">
                 <td>Type</td>
                 <td>Name</td>
                 <td>Time</td>
+                <td>Ciudad</td>
                 <td>Puntos de Interest</td>
             </tr>
             <tr ng-repeat="ruta in rutas">
                 <td>{{ruta.type }}</td>
                 <td>{{ ruta.name }}</td>
                 <td>{{ ruta.time }}</td>
-                <td>{{ ruta.interest[1]}}</td>
-                <td><a ng-click="addAddress2(ruta.interest)">Mostrar</a></td>
+                <td>{{ ruta.city }}</td>
+                <td>{{ ruta.interest[0] }}</td>
+                <td><a ng-click="borrarRuta(ruta.name)">Eliminar</a></td>
             </tr>
         </table>
-    </div>
 
-    <div id="map_container">
-    </div>
+
 </div>
 </body>

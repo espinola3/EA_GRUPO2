@@ -14,10 +14,33 @@ angular.module('ControllersModule')
 
                 };
 
+                $scope.logedandrole = function () {
+                    if([(AuthService.isLoggedIn() == true) && (AuthService.getUserRole() == true)])
+                    {
+
+                        return true;
+                    }
+                    else
+                    {
+                        console.log('PPasd', AuthService.isLoggedIn());
+                        console.log('SSSSS', AuthService.getUserRole());
+                        return false;
+                    }
+
+                };
+
+
+
                 $scope.isLoggedIn = function () {
+
                     return AuthService.isLoggedIn();
 
-                }
+                };
+
+                $scope.UserRole = function () {
+                    return AuthService.getUserRole();
+
+                };
 
                 /*$scope.modalShown  = false;
                 $scope.toggleModal = function () {

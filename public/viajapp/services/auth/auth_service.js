@@ -16,7 +16,8 @@ angular.module('ServicesModule').factory('AuthService',
                 register: register,
                 getUserInfo :getUserInfo,
                 loginFacebook :loginFacebook,
-                forceLogin: forceLogin
+                forceLogin: forceLogin,
+                getUserRole: getUserRole
             });
 
             function isLoggedIn()
@@ -27,6 +28,11 @@ angular.module('ServicesModule').factory('AuthService',
 
             function getUserInfo() {
                 return $cookies.getObject('user').username;
+            }
+
+            function getUserRole() {
+
+                return $cookies.get('admin');
             }
 
             function loginFacebook () {
@@ -68,15 +74,18 @@ angular.module('ServicesModule').factory('AuthService',
             function login(username, password) {
 
                 var deferred = $q.defer();
-
                 $http.post('/user/login',
                     {username: username, password: password})
                     .success(function (data, status) {
                         if(status === 200 && data.status){
                             //usuario={username:username};
                             user = true;
+
                             $cookies.put('logged', true);
                             $cookies.putObject('user', {'username':username});
+                            if(username == 'admin'){
+                                $cookies.put('admin', true);
+                            }
                             deferred.resolve();
                         } else {
                             user = false;
@@ -102,6 +111,7 @@ angular.module('ServicesModule').factory('AuthService',
                         user = false;
                         $cookies.remove('logged');
                         $cookies.remove('user');
+                        $cookies.remove('admin');
                         deferred.resolve();
                     })
                     // handle error
