@@ -6,7 +6,7 @@
     </div>
 
 
-    <div class="col-sm-4 col-sm-offset-1 text-center">
+    <div class="col-sm-4 col-sm-offset-1 text-center" ng-controller="userInfo" >
         <form name="myForm">
             <div class="form-group">
 
@@ -29,7 +29,7 @@
             </div>
 
             <!-- Acciones que podemos realizar en el formulario -->
-            <button type="submit" class="btn btn-success btn-lg" ng-click="registrarRuta()"
+            <button type="submit" class="btn btn-success btn-lg" ng-click="registrarRuta(getUserInfo())"
                     ng-disabled="myForm.$invalid || !newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time || !newRuta.interest || selected">
                 Registrar
             </button>
@@ -40,6 +40,10 @@
             <button type="submit" class="btn btn-alert btn-lg" ng-click="modificarRuta2(newRuta.name)"
                     ng-disabled="!newRuta.name ||selected">Interest
             </button>
+            <button type="submit" ng-click="sumarPuntos(getUserInfo())"
+                    >Sumar puntitos
+            </button>
+
         </form>
 
     </div>

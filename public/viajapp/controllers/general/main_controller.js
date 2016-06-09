@@ -96,7 +96,7 @@ angular.module('ControllersModule')
 
                 }
 
-                // Función que borra un objeto persona conocido su id
+                 // Función que borra un objeto persona conocido su id
                 $scope.borrarPersona = function (name) {
                     if (confirm("Do you want to delete the user? ")) {
                         console.log("borrar persona " + name);
@@ -110,6 +110,32 @@ angular.module('ControllersModule')
                                 console.log('Error: ' + data);
                             });
                     }
+                };
+
+                $scope.sumarPuntos = function (name) {
+                    $http.get('/users/userdetail/' + name).success(function (data) {
+                        
+                            puntos = data[0].numrutas;
+                            puntos = puntos + 1;
+                            //$scope.registerForm.name = name;
+                            $scope.registerForm.numrutas = puntos;
+
+                        console.log('detalles',  $scope.registerForm);
+
+                            $http.put('/user/updatepuntos/'+ name, $scope.registerForm)
+                                .success(function (data) {
+                                    console.log('DATA', data);
+                                })
+                                .error(function (data) {
+                                    console.log('Error: ' + data);
+                                });
+
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+                    
+
                 };
 
 
@@ -169,12 +195,13 @@ angular.module('ControllersModule')
 
 
                 // Función para registrar una Ruta
-                $scope.registrarRuta = function () {
+                $scope.registrarRuta = function (name) {
+
                     $http.post('/route', $scope.newRuta)
                         .success(function (data) {
                             $scope.newRuta = {}; // Borramos los datos del formulario
                             $scope.rutas   = data;
-
+                            $scope.sumarPuntos(name);
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);
