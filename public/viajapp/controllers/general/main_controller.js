@@ -174,6 +174,7 @@ angular.module('ControllersModule')
                         .success(function (data) {
                             $scope.newRuta = {}; // Borramos los datos del formulario
                             $scope.rutas   = data;
+
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);

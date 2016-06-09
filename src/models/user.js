@@ -12,6 +12,7 @@ var User = new Schema({
     city: {type: String},
     pic: {type: String, default:'/images/profile.jpg'},
     role: {type: String, default: 'user'}
+    numrutas :{type: Number}
 });
 
 User.plugin(passportLocalMongoose);
