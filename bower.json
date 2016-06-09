@@ -15,6 +15,7 @@
     "angular-animate": "^1.5.6",
     "google-maps": "^3.2.1",
     "angular-google-maps": "^2.3.3",
-    "ng-map": "*"
+    "ng-map": "*",
+    "ng-modal": "*"
   }
 }
