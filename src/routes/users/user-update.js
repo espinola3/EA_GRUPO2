@@ -29,22 +29,27 @@ router.put('/user/update', function(req, res, next) {
     });
 });
 
-router.put('/user/updatepuntos/:name', function(req, res, next) {
+router.put('/user/updatepuntos/:username', function(req, res, next) {
     var user = new User(
         {
-            name: req.body.name,
+            username: req.body.username,
             numrutas: req.body.numrutas
         }
     );
 
-    User.findOneAndUpdate({name: user.name},{numrutas: user.numrutas} ,function (err, user) {
+    User.findOneAndUpdate({username: user.username},{numrutas: user.numrutas} ,function (err, user) {
         if (err) return console.error(err);
+        else {
+            User.find({}).exec().then(function (users) {
+                res.json(users).end();
+            });
+
+        }
     });
 
-    User.find({}).exec().then(function (users) {
-
+    /*User.find({}).exec().then(function (users) {
         res.json(users).end();
-    });
+    });*/
 });
 
 module.exports = router;

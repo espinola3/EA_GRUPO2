@@ -4,7 +4,11 @@
     <div class="jumbotron text-center" ng-prueba>
         <h1>Nº de Rutas: <span class="label label-success">{{ rutas.length }}</span></h1>
     </div>
-    <input type="text" class="form-control input-lg text-center" placeholder="Buscar" ng-model="newRuta.type">
+    <select type="text" class="form-control input-lg text-center" placeholder="Type"
+            ng-model="newRuta.type">
+        <option value="">--Elige opcion--</option>
+        <option ng-repeat="rutetype in typerutas" value="{{rutetype.type}}">{{rutetype.type}}</option>
+    </select>
     <br>
     <button type="submit" class="btn btn-success btn-lg" ng-click="Mostrarportipo(newRuta.type)">Buscar por Tipo
     </button>

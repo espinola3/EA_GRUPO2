@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/userdetail/:username', function(req, res){
 
-    console
+    
     var user = new User(
         {
             username: req.params.username,

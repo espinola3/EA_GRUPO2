@@ -5,6 +5,7 @@ angular.module('ControllersModule')
             function ($scope, $http, $location) {
 
                 $scope.registerForm = {};
+                $scope.registerPuntos = {};
                 $scope.personas     = {};
 
                 $scope.persona   = {};
@@ -112,19 +113,20 @@ angular.module('ControllersModule')
                     }
                 };
 
-                $scope.sumarPuntos = function (name) {
-                    $http.get('/users/userdetail/' + name).success(function (data) {
+                $scope.sumarPuntos = function (username) {
+                    $http.get('/users/userdetail/' + username).success(function (data) {
                         
                             puntos = data[0].numrutas;
                             puntos = puntos + 1;
-                            //$scope.registerForm.name = name;
-                            $scope.registerForm.numrutas = puntos;
+                            $scope.registerPuntos.username = username;
+                            $scope.registerPuntos.numrutas = puntos;
 
-                        console.log('detalles',  $scope.registerForm);
+                        console.log('detalles',  $scope.registerPuntos);
 
-                            $http.put('/user/updatepuntos/'+ name, $scope.registerForm)
+                            $http.put('/user/updatepuntos/'+ username, $scope.registerPuntos)
                                 .success(function (data) {
                                     console.log('DATA', data);
+                                    $scope.selected   = false
                                 })
                                 .error(function (data) {
                                     console.log('Error: ' + data);
