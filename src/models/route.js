@@ -8,7 +8,7 @@ var RouteSchema = mongoose.Schema({
     type: {type: String, required:true},
     city: {type: String, required:true},
     time: {type: String, required:true},
-    interest: {type: Array, required:true}
+    interest: {type: String, required:true}
 });
 
 var Route = mongoose.model('Route', RouteSchema);

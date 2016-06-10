@@ -4,7 +4,7 @@ angular.module('ControllersModule')
         ['GoogleMapsService', '$scope', function (GoogleMapsService, $scope) {
             $scope.map     = GoogleMapsService.init('map_container', 41.3098385, 1.9972236);
             $scope.address = '';
-            var stepDisplay = new google.maps.InfoWindow;
+
 
             $scope.gameMap = function () {
 
@@ -100,66 +100,14 @@ angular.module('ControllersModule')
                 });
             }
 
-            $scope.lineas = function (points) {
-                var directionsDisplay = new google.maps.DirectionsRenderer;
-                var directionsService = new google.maps.DirectionsService;
-                var map               = new google.maps.Map(document.getElementById('map_container'), {
-                    zoom  : 14,
-                    center: {lat: 41.3990883450641, lng: 2.1805070206817323}
+            $scope.drawRoutes = function (points) {
+                var parsedPoints = points.split(';').map(function (coords) {
+                    var parsedCoords = coords.split(',');
+                    return {lat:parseFloat(parsedCoords[0]), lng: parseFloat(parsedCoords[1])}
                 });
-                directionsDisplay.setMap(map);
+                $scope.markers = [];
+                GoogleMapsService.drawRoutes($scope.map, parsedPoints, $scope.markers);
 
-                calculateAndDisplayRoute(points, directionsService, directionsDisplay);
-                document.getElementById('mode').addEventListener('change', function () {
-                    calculateAndDisplayRoute(points, directionsService, directionsDisplay);
-                });
-
-
-
-                function calculateAndDisplayRoute(points, directionsService, directionsDisplay) {
-                    var address = points[0].split(';');
-
-                    for (var i = 0; i < address.length; i++) {
-                        if ((i + 1) < address.length) {
-                            var currentAddress = address[i].split(',');
-                            var nextAddress    = address[i+1].split(',');
-
-                            console.log('CURRENT', parseFloat(currentAddress[0]));
-                            console.log('NEXT', nextAddress);
-
-                            directionsService.route({
-                                origin     : {lat: parseFloat(currentAddress[0]), lng: parseFloat(currentAddress[1])},  // Haight.
-                                destination: {lat: parseFloat(nextAddress[0]), lng: parseFloat(nextAddress[1])},  // Ocean Beach.
-                                // Note that Javascript allows us to access the constant
-                                // using square brackets and a string value as its
-                                // "property."
-                                travelMode : google.maps.TravelMode['WALKING']
-                            }, function (response, status) {
-                                if (status == google.maps.DirectionsStatus.OK) {
-                                    directionsDisplay.setDirections(response);
-                                    showSteps(response, points, stepDisplay, map);
-                                } else {
-                                    window.alert('Directions request failed due to ' + status);
-                                }
-                            });
-                        }
-                    }
-                }
-
-                function showSteps(directionResult, markerArray, stepDisplay, map) {
-                    // For each step, place a marker, and add the text to the marker's infowindow.
-                    // Also attach the marker to an array so we can keep track of it and remove it
-                    // when calculating new routes.
-                    var myRoute = directionResult.routes[0].legs[0];
-                    for (var i = 0; i < myRoute.steps.length; i++) {
-                        var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
-
-                        marker.setMap(map);
-                        marker.setPosition(myRoute.steps[i].start_location);
-                        attachInstructionText(
-                            stepDisplay, marker, myRoute.steps[i].instructions, map);
-                    }
-                }
             }
 
         }]);

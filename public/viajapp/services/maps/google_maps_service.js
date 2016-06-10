@@ -12,7 +12,7 @@ angular.module('ServicesModule').factory('GoogleMapsService', function () {
                 scrollwheel: false
             }
         });
-        
+
     }
 
     function create(latitude, longitude) {
@@ -76,12 +76,39 @@ angular.module('ServicesModule').factory('GoogleMapsService', function () {
         }
     }
 
+    function drawRoutes(map, coords, markers){
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer({map: map});
+
+        var origin= coords.shift();
+        var destination = coords.splice(-1,1)[0];
+        console.log(destination);
+        directionsService.route({
+            origin: origin,
+            destination: destination,
+            waypoints: coords.map(function(coord) {
+                return {location: coord};
+
+            }),
+            travelMode: google.maps.TravelMode.WALKING,
+            avoidTolls: true
+        }, function(response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            } else {
+                alert('Could not display directions due to: ' + status);
+            }
+        });
+
+    }
+
     return {
         createByCoords: createByCoords,
         createByAddress: createByAddress,
         createByCurrentLocation: createByCurrentLocation,
         init: init,
-        currentsCoords: currentCoords
+        currentsCoords: currentCoords,
+        drawRoutes: drawRoutes
     };
 
 });
