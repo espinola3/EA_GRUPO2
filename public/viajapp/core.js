@@ -69,6 +69,11 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             templateUrl: 'views/admin.html',
             restricted     : true
         })
+        .when('/game', {
+            templateUrl: 'views/game.html',
+            controller : 'MapCtrl',
+            restricted     : true
+        })
         .otherwise({
             redirectTo: '/'
         })

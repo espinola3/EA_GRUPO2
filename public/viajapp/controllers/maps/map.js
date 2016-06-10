@@ -5,6 +5,46 @@ angular.module('ControllersModule')
             $scope.map     = GoogleMapsService.init('map_container', 41.3098385, 1.9972236);
             $scope.address = '';
 
+            $scope.gameMap = function(){
+
+
+                var map = new google.maps.Map(document.getElementById('map_container'), {
+                    center: {lat: 41.3990883450641, lng: 2.1805070206817323},
+                    zoom: 15
+                });
+
+                var triangleCoords = [
+                    {lat: 41.40288906367612, lng: 2.1742628380950624},
+                    {lat: 41.404015698438805, lng: 2.173597650259369},
+                    {lat: 41.40358114163036, lng: 2.175421552389496}
+                ];
+
+                var bermudaTriangle = new google.maps.Polygon({paths: triangleCoords});
+
+                google.maps.event.addListener(map, 'click', function(e) {
+                    var resultColor =
+                            google.maps.geometry.poly.containsLocation(e.latLng, bermudaTriangle) ?
+                                'red' :
+                                'green';
+
+                    new google.maps.Marker({
+                        position: e.latLng,
+                        map: map,
+                        icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            fillColor: resultColor,
+                            fillOpacity: .2,
+                            strokeColor: 'white',
+                            strokeWeight: .5,
+                            scale: 10
+                        }
+                    });
+                });
+
+            }
+
+
+
             $scope.addCurrentLocation = function () {
                 GoogleMapsService.createByCurrentLocation(function (markerData) {
                     markerData.options.labelContent = 'Esta es su ubicacion';
