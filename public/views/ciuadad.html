@@ -1,6 +1,8 @@
 <body background="../images/fondo.png" ng-controller="MainController">
 <div class="container">
-
+    <select id="mode">
+        <option value="WALKING">Walking</option>
+    </select>
     <div class="jumbotron text-center" ng-prueba>
         <h1>Busqueda Ciudad </h1>
     </div>
@@ -19,13 +21,14 @@
                 <td>{{ruta.type }}</td>
                 <td>{{ ruta.name }}</td>
                 <td>{{ ruta.time }}</td>
-                <td>{{ ruta.interest[1]}}</td>
-                <td><a ng-click="addAddress2(ruta.interest)">Mostrar</a></td>
+                <td>{{ ruta.interest}}</td>
+                <td><a ng-click="lineas(ruta.interest)">Mostrar</a></td>
             </tr>
         </table>
+        <div id="map_container">
+        </div>
     </div>
 
-    <div id="map_container">
-    </div>
+
 </div>
 </body>

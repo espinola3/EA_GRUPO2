@@ -56,7 +56,7 @@
                 <li><a ng-if='isLoggedIn()' href="#/game" >Game</a></li>
                 <li><a href="#/about">About</a></li>
                 <li><a ng-if='!isLoggedIn()' href="#/register">Register</a></li>
-                <li><a ng-if='logedandrole()' href="#/admin">Admin</a></li>
+                <li><a ng-if='isAdmin()' href="#/admin">Admin</a></li>
                 <li><a ng-if='isLoggedIn()' ng-click='logout()'>Logout</a></li>
                 <li><a ng-if='!isLoggedIn()' href="#/login" >Login</a></li>
 

@@ -1,11 +1,11 @@
-
 <h1>BUSQUEDA MAPA </h1>
-<div id="map_container">
+
+<div id="map_container" data-ng-init="lineas()">
 </div>
-<div class="controls" >
+<div class="controls">
     <h3>Localización Actual</h3>
     <p>
-        <button ng-click="addCurrentLocation()">Localizarme </button>
+        <button ng-click="addCurrentLocation()">Localizarme</button>
     </p>
     <h3>Busqueda Direccion</h3>
     <p>

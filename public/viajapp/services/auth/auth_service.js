@@ -31,8 +31,14 @@ angular.module('ServicesModule').factory('AuthService',
             }
 
             function getUserRole() {
+                if(typeof $cookies.get('role') !== "undefined") {
+                     return $cookies.get('role');
 
-                return $cookies.get('admin');
+
+                }
+
+                return false;
+
             }
 
             function loginFacebook () {
@@ -78,15 +84,12 @@ angular.module('ServicesModule').factory('AuthService',
                     {username: username, password: password})
                     .success(function (data, status) {
                         if(status === 200 && data.status){
-                            //usuario={username:username};
+                            console.log(data.user.role);
                             user = true;
-
                             $cookies.put('logged', true);
-                            $cookies.putObject('user', {'username':username});
-                            if(username == 'admin'){
-                                $cookies.put('admin', true);
-                            }
-                            deferred.resolve();
+                            $cookies.putObject('user', {username:username});
+                            $cookies.put('role', data.user.role);
+                            deferred.resolve();1
                         } else {
                             user = false;
                             deferred.reject();
@@ -111,7 +114,7 @@ angular.module('ServicesModule').factory('AuthService',
                         user = false;
                         $cookies.remove('logged');
                         $cookies.remove('user');
-                        $cookies.remove('admin');
+                        $cookies.remove('role');
                         deferred.resolve();
                     })
                     // handle error
