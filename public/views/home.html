@@ -49,14 +49,13 @@
 
     <center> <iframe width="420" height="315" src="https://www.youtube.com/embed/qPFggll1U-4" frameborder="0" allowfullscreen></iframe> </center>
     <center>
-        <HR SIZE=5 NOSHADE>
 
         <div style="padding: 30px; float: left; width: 45%;">
             <article>
                 <img src="../images/nuevaRuta.png" width="300" height="200">
                 <details>
                     <style>
-                        a   {color:white;}
+                        a   {color:green;}
                     </style>
                     <summary><font face="Arial" color="orange" size=5><b>¿Quieres Crear una Ruta? </b></font></summary>
                     <p>¿Has hecho una ruta en algun viaje y quieres compartirla con más gente para que disfrute de las vistas?</p>
@@ -73,24 +72,20 @@
         <article>
             <img src="../images/buscar.png" width="200" height="200">
             <details>
-                <style>
-                    a   {color:white;}
-                </style>
+
                 <summary><font face="Arial" color="orange" size=5><b>¿Buscas Rutas?</b></font></summary>
                 <p> ¿Tienes pensado hacer un viaje y no sabes que visitar? Aquí puedes buscar las mejores rutas para ese viaje  </p>
                 <a ng-if='isLoggedIn()' href="#/ciudad">Busqueda Ciudad</a>
-                <a ng-if='isLoggedIn()' href="#/mapa">Busqueda Mapa</a>
+                <p><a ng-if='isLoggedIn()' href="#/mapa">Busqueda Mapa</a></p>
             </details>
         </article>
     </div> </center>
-    <HR SIZE=5 NOSHADE>
-    <center><div class="noticia" >
+
+    <center><div style="padding: 30px; float: left; width: 45%;">
         <article>
             <img src="../images/ranking.jpg" width="300" height="200">
             <details>
-                <style>
-                    a   {color:white;}
-                </style>
+
                 <summary><font face="Arial" color="orange" size=5><b>¿Quieres ver el Ranking ?</b></font></summary>
                 <p> Aquí podrás ver quién es el usuario que más rutas a creado. ¡Animo cuantas más rutas compartas más puntos tendrás!  </p>
                 <a ng-if='isLoggedIn()' href="#/top10" >Top 10 </a>
@@ -98,7 +93,20 @@
             </details>
         </article>
     </div> </center>
-    <HR SIZE=5 NOSHADE>
+    <center><div style="padding: 30px; float: left; width: 45%;">
+        <article>
+            <img src="../images/game.png" width="200" height="200">
+            <details>
+
+                <summary><font face="Arial" color="orange" size=5><b>¿Te apetece Jugar?</b></font></summary>
+                <p> ¡Tenemos un juego con dos niveles que te va a encantar!</p>
+                <a ng-if='isLoggedIn()' href="#/game" >Game Level 1</a>
+               <p> <a ng-if='isLoggedIn()' href="#/game1" >Game Level 2</a></p>
+
+            </details>
+        </article>
+    </div> </center>
+
     <div class="col-sm-6 col-sm-offset-3">
 
         <div ng-show="error" class="alert alert-danger">{{errorMessage}}</div>
