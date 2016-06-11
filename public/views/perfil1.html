@@ -3,9 +3,12 @@
 <div class="container">
     <div class="box box-primary" ng-controller="userInfo" data-ng-init="showDetail(getUserInfo())">
         <div class="box-body">
-            <strong><i class="fa fa-file-text-o margin-r-5"></i> Sobre {{getUserInfo()}}</strong>
+            <p align="center"><strong><i class="fa fa-file-text-o margin-r-5"></i> Sobre {{getUserInfo()}}</strong></p>
+
             <hr>
+
             <div ng-repeat="persona in persona" >
+
 
                 <style type="text/css">
                     img {
@@ -18,12 +21,26 @@
                 </style>
 
 
+                <form action="demo_form.asp">
+                    <p align="left">Gender:<select name="gender">
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                          </select></p>
+                    <p align="left">Email: <input type="text" name="email" value={{persona.email}}><br></p>
+                    <p align="left">City: <input type="text" name="city" value={{persona.city}}><br></p>
+                    <p align="left">Address: <input type="text" name="address" value={{persona.address}}><br></p>
+                    <p align="left">City: <input type="text" name="city" value={{persona.city}}><br></p>
+
+                    <input type="submit" value="Submit">
+                </form>
+
+                <p> <img src= {{persona.pic}} marg  in="580"  width="50" height="50"  /></p>
 
                 <p><b> Correo</b>: {{persona.email}}</p>
             <p><b>City</b>: {{persona.city}}</p>
                 <b>Puntos</b>: {{persona.numrutas}}</p>
             <hr>
-                <img src= {{persona.pic}} marg  in="580" sizes="min-width: 36em"   />
+                <img src= {{persona.pic}} marg  in="580"    />
 
             </div>
 
