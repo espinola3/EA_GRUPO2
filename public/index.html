@@ -57,7 +57,12 @@
                         </li>
                     </ul>
                 <li><a ng-if='isLoggedIn()' href="#/top10">Top 10</a></li>
-                <li><a ng-if='isLoggedIn()' href="#/game" >Game</a></li>
+                <li><a ng-if='isLoggedIn()' href="" >Game</a>
+                    <ul>
+                        <li><a ng-if='isLoggedIn()' href="#/game">Level 1</a></li>
+                        <li><a ng-if='isLoggedIn()' href="#/game1">Level 2</a></li>
+                    </ul>
+                </li>
                 <li><a href="#/about">About</a></li>
                 <li><a ng-if='!isLoggedIn()' href="#/register">Register</a></li>
                 <li><a ng-if='isAdmin()' href="#/admin">Admin</a></li>
