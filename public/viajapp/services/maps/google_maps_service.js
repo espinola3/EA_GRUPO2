@@ -101,6 +101,28 @@ angular.module('ServicesModule').factory('GoogleMapsService', function () {
         });
 
     }
+    function drawGames(map, triangle, uno, dos){
+        google.maps.event.addListener(map, 'click', function (e) {
+            var resultColor =
+                    google.maps.geometry.poly.containsLocation(e.latLng, triangle) ?
+                        uno :
+                        dos;
+
+            new google.maps.Marker({
+                position: e.latLng,
+                map     : map,
+                icon    : {
+                    path        : google.maps.SymbolPath.CIRCLE,
+                    fillColor   : resultColor,
+                    fillOpacity : 0.50,
+                    strokeColor : 'black',
+                    strokeWeight: .75,
+                    scale       : 10
+                }
+            });
+        });
+    }
+    
 
     return {
         createByCoords: createByCoords,
@@ -108,7 +130,8 @@ angular.module('ServicesModule').factory('GoogleMapsService', function () {
         createByCurrentLocation: createByCurrentLocation,
         init: init,
         currentsCoords: currentCoords,
-        drawRoutes: drawRoutes
+        drawRoutes: drawRoutes,
+        drawGames: drawGames
     };
 
 });

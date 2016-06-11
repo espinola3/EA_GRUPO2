@@ -30,14 +30,9 @@
     </script>
 
 </head>
-<!-- background="../images/fondo.png"-->
-<body  ng-controller="MainController">
+<body background="../images/fondo.png" ng-controller="MainController">
 
-<style type="text/css">
-    body {
-        background: #cfe7fa;
-    }
-    </style>
+
 
 <div class="container" ng-controller="authController">
 
@@ -51,7 +46,7 @@
     <center>
         <HR SIZE=5 NOSHADE>
 
-        <div style="padding: 30px; float: left; width: 45%;">
+        <div class="noticia">
         <article>
         <img src="../images/nuevaRuta.png" width="300" height="200">
         <details>
@@ -60,16 +55,15 @@
             </style>
         <summary><font face="Arial" color="orange" size=5><b>¿Quieres Crear una Ruta? </b></font></summary>
         <p>¿Has hecho una ruta en algun viaje y quieres compartirla con más gente para que disfrute de las vistas?</p>
-
-            <a ng-if='isLoggedIn()' href="#/nuevaruta" >Crear Rutas</a>
+         <a href="#/nuevaruta" ng-if="!isLoggedIn()"  >Crear Rutas</a>
 
     </details>
    </article>
     </div> </center>
 
+    <HR SIZE=5 NOSHADE>
 
-
-    <center><div style="padding: 30px; float: left; width: 45%;">
+    <center><div class="noticia">
         <article>
             <img src="../images/buscar.png" width="200" height="200">
             <details>
@@ -78,9 +72,9 @@
                 </style>
                 <summary><font face="Arial" color="orange" size=5><b>¿Buscas Rutas?</b></font></summary>
                 <p> ¿Tienes pensado hacer un viaje y no sabes que visitar? Aquí puedes buscar las mejores rutas para ese viaje  </p>
-                <a ng-if='isLoggedIn()' href="#/ciudad">Busqueda Ciudad</a>
-                <a ng-if='isLoggedIn()' href="#/mapa">Busqueda Mapa</a>
-             </details>
+                <a href="#/ciudad" ng-if="!isLoggedIn()">Busqueda Ciudad</a>
+                <a href="#/mapa" ng-if="!isLoggedIn()">Busqueda Mapa</a>
+            </details>
         </article>
     </div> </center>
     <HR SIZE=5 NOSHADE>
@@ -91,10 +85,12 @@
                 <style>
                     a   {color:white;}
                 </style>
-                <summary><font face="Arial" color="orange" size=5><b>¿Quieres ver el Ranking ?</b></font></summary>
+                <summary><font face="Arial" color="orange" size=5><b>¿Quieres ver Ranking ?</b></font></summary>
                 <p> Aquí podrás ver quién es el usuario que más rutas a creado. ¡Animo cuantas más rutas compartas más puntos tendrás!  </p>
-                <a ng-if='isLoggedIn()' href="#/top10" >Top 10 </a>
-
+               <div class="alert alert-warning alert-dismissable">
+                <a href="#/top10" ng-if='!isLoggedIn()' data-dismiss="alert">Top 10 </a>
+                   <strong ng-if='!isLoggedIn()'>¡Alerta!</strong> Tienes que estar registrado para ver los contenidos
+</div>
             </details>
         </article>
     </div> </center>

@@ -24,36 +24,40 @@ angular.module('ControllersModule')
 
                 var map = new google.maps.Map(document.getElementById('map_container'), {
                     center: {lat: 41.3990883450641, lng: 2.1805070206817323},
-                    zoom  : 15
+                    zoom  : 16,
+                    options: {
+                        scrollwheel: false
+                    }
                 });
 
-                var triangleCoords = [
-                    {lat: 41.40288906367612, lng: 2.1742628380950624},
-                    {lat: 41.404015698438805, lng: 2.173597650259369},
-                    {lat: 41.40358114163036, lng: 2.175421552389496}
+                var SagradaFamilia = [
+                    {lat: 41.40358114163176, lng: 2.1732114121612245},
+                    {lat: 41.404385874170146, lng: 2.17432721111142},
+                    {lat: 41.40361333112483, lng: 2.1753571793731385},
+                    {lat: 41.40267982935745, lng: 2.174198465078705}
+                ];
+                var ParcCiutadella = [
+                    {lat: 41.388160541475585, lng: 2.182609872549408},
+                    {lat: 41.3913157844871, lng: 2.186858491628998},
+                    {lat: 41.38722681775338, lng: 2.1924374863799745},
+                    {lat: 41.3844577651107, lng: 2.1872447297271425}
                 ];
 
-                var bermudaTriangle = new google.maps.Polygon({paths: triangleCoords});
+                var Aquarium = [
+                    {lat: 41.37586007122854, lng: 2.1772025391753846},
+                    {lat: 41.38075477788284, lng: 2.1828244492705995},
+                    {lat: 41.37866169182913, lng: 2.1890471741851503},
+                    {lat: 41.370353085935676, lng: 2.1858714387115175}
+                ];
 
-                google.maps.event.addListener(map, 'click', function (e) {
-                    var resultColor =
-                            google.maps.geometry.poly.containsLocation(e.latLng, bermudaTriangle) ?
-                                'red' :
-                                'blue';
 
-                    new google.maps.Marker({
-                        position: e.latLng,
-                        map     : map,
-                        icon    : {
-                            path        : google.maps.SymbolPath.CIRCLE,
-                            fillColor   : resultColor,
-                            fillOpacity : .2,
-                            strokeColor : 'white',
-                            strokeWeight: .5,
-                            scale       : 10
-                        }
-                    });
-                });
+                var sagradaFamili = new google.maps.Polygon({paths: SagradaFamilia});
+                var CiutadellaPark = new google.maps.Polygon({paths: ParcCiutadella});
+                var Aquarium2 = new google.maps.Polygon({paths: Aquarium});
+
+                GoogleMapsService.drawGames(map,sagradaFamili,'red', '#09F6DD');
+                GoogleMapsService.drawGames(map,CiutadellaPark, 'red', '#D6D7D7');
+                GoogleMapsService.drawGames(map,Aquarium2,'red', '#ADAFAF');
 
             };
 
