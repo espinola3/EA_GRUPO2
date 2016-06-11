@@ -6,7 +6,7 @@ angular.module('ControllersModule')
             $scope.address = '';
 
 
-            marker = new google.maps.Marker({
+            /*marker = new google.maps.Marker({
                 position: latlng,
                 map: map
             }); //end marker
@@ -16,7 +16,7 @@ angular.module('ControllersModule')
                 var latitude = marker.latLng.lat();
                 var longitude = latLng.lng();
                 alert(this.position);
-            });
+            });*/
 
 
             $scope.gameMap = function () {
@@ -55,7 +55,7 @@ angular.module('ControllersModule')
                     });
                 });
 
-            }
+            };
 
 
             $scope.addCurrentLocation = function () {
