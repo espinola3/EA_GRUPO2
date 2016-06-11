@@ -147,7 +147,7 @@ function myFacebookStrategy (token, refreshToken, profile, done){
 //will require using facebook API or Node SDK (authorized by this token)
         newUser.token = token;
 
-        User.findOrCreate({ username: newUser.username , city : "roquefort" , email : newUser.email , pic: newUser.pic},
+        User.findOrCreate({ username: newUser.username , city : "" , email : newUser.email , pic: newUser.pic},
             "pass", function(err, account) {
                 if (err) {
                     console.log('error registrando user',err);

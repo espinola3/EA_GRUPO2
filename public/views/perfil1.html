@@ -7,45 +7,41 @@
 </style>
 <div class="container">
     <div class="box box-primary" ng-controller="userInfo" data-ng-init="showDetail(getUserInfo())">
-        <div class="box-body">
-            <p align="center"><strong><i class="fa fa-file-text-o margin-r-5"></i> Sobre {{getUserInfo()}}</strong></p>
-
-            <hr>
-
-            <div ng-repeat="persona in persona" >
+        <div class="box-body"  ng-repeat="persona in persona" >
+            <div class=""  >
+                <H1> <p align="center"><strong><i class="fa fa-file-text-o margin-r-5"  color="red"></i>  SOBRE MI  </strong><img align="right" src= {{persona.pic}}  width="75" height="75"  /></p></H1>
 
 
-                <style type="text/css">
-                    img {
-                        margin-top: -195px;
-                        margin-left: -290px;
-                        left: 50%;
-                        top: 50%;
-                        position: absolute;
-                    }
-                </style>
+            </div><br>
+
+                <hr>
+
+            <br><br>
+
+            <div >
+
+
 
 
                 <form action="demo_form.asp">
-                    <p align="left">Gender:<select name="gender">
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                          </select></p>
-                    <p align="left">Email: <input type="text" name="email" value={{persona.email}}><br></p>
-                    <p align="left">City: <input type="text" name="city" value={{persona.city}}><br></p>
-                    <p align="left">Address: <input type="text" name="address" value={{persona.address}}><br></p>
-                    <p align="left">City: <input type="text" name="city" value={{persona.city}}><br></p>
+                    <b><p align="left">Genero:   <select name="gender">
+                        <option value="1">Hombre</option>
+                        <option value="2">Mujer</option>
+                        <option value="3">Otro</option>
+                          </select></p><br></b>
+                    <b><p align="left">Correo: <input type="text" size="30" name="email" value={{persona.email}}> <br><br> </p></b>
+                    <b><p align="left">Ciudad:    <input type="text" name="city" value={{persona.city}}><br><br></p></b>
+                    <b><p align="left">Dirección:     <input type="text" name="address" value={{persona.address}}><br><br></p></b>
+                    <b><p align="left">Puntos: {{persona.numrutas}}</p><br></b>
+                    <b><p align="left">Sobre mi:</p></b>
+                    <textarea  name="about" rows="10" cols="80" value={{persona.about}}></textarea> <br><br><br>
 
-                    <input type="submit" value="Submit">
+                    <button type="submit" class="btn btn-success btn-lg" ng-click="Mostrarporciudad(newRuta.city)">Guardar</button>
+
                 </form>
 
-                <p> <img src= {{persona.pic}} marg  in="580"  width="50" height="50"  /></p>
 
-                <p><b> Correo</b>: {{persona.email}}</p>
-            <p><b>City</b>: {{persona.city}}</p>
-                <b>Puntos</b>: {{persona.numrutas}}</p>
-            <hr>
-                <img src= {{persona.pic}} marg  in="580"    />
+
 
             </div>
 
