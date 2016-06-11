@@ -18,7 +18,8 @@ ul, ol {
 }
 
 .nav li a {
-    background-color: #1d9ce5;
+    background-color: #2FA4E7;
+    border-color: #1995DC;
     color:#fff;
     text-decoration:none;
     padding:10px 12px;
