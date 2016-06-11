@@ -18,12 +18,15 @@ ul, ol {
 }
 
 .nav li a {
-    background-color: #2FA4E7;
-    border-color: #1995DC;
     color:#fff;
     text-decoration:none;
     padding:10px 12px;
     display:block;
+}
+
+.nav li li {
+    background-color: #2FA4E7;
+    border-color: #1995DC;
 }
 
 .nav li a:hover {
@@ -48,5 +51,15 @@ ul, ol {
     right:-140px;
     top:0px;
 }
+.navbar {
+    min-height: 20px !important;
+}
 
+.navbar-brand {
+    padding: 10px 15px !important;
+}
 
+.navbar-header img {
+    max-width: 40px;
+    max-height: 40px;
+}

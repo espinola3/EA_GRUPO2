@@ -5,18 +5,29 @@ angular.module('ControllersModule')
             $scope.map     = GoogleMapsService.init('map_container', 41.3098385, 1.9972236);
             $scope.address = '';
 
+            var googleMapService = {};
 
-            /*marker = new google.maps.Marker({
-                position: latlng,
-                map: map
-            }); //end marker
+            $scope.savePoints= function () {
+                googleMapService.clickLat  = 0;
+                googleMapService.clickLong = 0;
 
-//Add listener
-            google.maps.event.addListener(marker, "click", function (event) {
-                var latitude = marker.latLng.lat();
-                var longitude = latLng.lng();
-                alert(this.position);
-            });*/
+                google.maps.event.addListener($scope.map, 'click', function(e){
+                    var marker = new google.maps.Marker({
+                        position: e.latLng,
+                        animation: google.maps.Animation.BOUNCE,
+                        map: $scope.map
+
+                    });
+
+                });
+
+                googleMapService.clickLat = marker.getPosition().lat();
+                googleMapService.clickLong = marker.getPosition().lng();
+                $rootScope.$broadcast("clicked");
+
+            };
+
+                     
 
 
             $scope.gameMap = function () {
