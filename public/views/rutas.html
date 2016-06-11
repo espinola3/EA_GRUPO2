@@ -2,7 +2,7 @@
 <div class="container">
 
     <div class="jumbotron text-center" ng-prueba>
-        <h1>Nº de Rutas: <span class="label label-success">{{ rutas.length }}</span></h1>
+        <h1>Buscar Por Tipo </h1>
     </div>
     <select type="text" class="form-control input-lg text-center" placeholder="Type"
             ng-model="newRuta.type">
@@ -10,29 +10,29 @@
         <option ng-repeat="rutetype in typerutas" value="{{rutetype.type}}">{{rutetype.type}}</option>
     </select>
     <br>
-    <button type="submit" class="btn btn-success btn-lg" ng-click="Mostrarportipo(newRuta.type)">Buscar por Tipo
-    </button>
-    <div class="col-sm-6 col-sm-offset-1">
-        <table class="table table-striped">
+    <div class="col-sm-6">
+        <table class="table table-striped" id="route-list">
             <tr class="info">
                 <td>Type</td>
                 <td>Name</td>
                 <td>Time</td>
-                <td>Puntos de Interest</td>
+                <td>Actions</td>
             </tr>
             <tr ng-repeat="ruta in rutas">
                 <td>{{ruta.type }}</td>
                 <td>{{ ruta.name }}</td>
                 <td>{{ ruta.time }}</td>
-                <td>{{ ruta.interest[0]}}</td>
-                <td><a ng-click="addAddress2(ruta.interest)">Mostrar</a></td>
+                <td><a ng-click="drawRoutes(ruta.interest)">Mostrar</a></td>
             </tr>
+
         </table>
+        <button type="submit" class="btn btn-success btn-lg" ng-click="Mostrarportipo(newRuta.type)">Buscar por ciudad</button>
+
+
     </div>
-
-
     <div id="map_container">
     </div>
+
 </div>
 </body>
 </html>

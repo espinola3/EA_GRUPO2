@@ -1,34 +1,35 @@
 <body background="../images/fondo.png" ng-controller="MainController">
 <div class="container">
-    <select id="mode">
-        <option value="WALKING">Walking</option>
-    </select>
     <div class="jumbotron text-center" ng-prueba>
         <h1>Busqueda Ciudad </h1>
     </div>
     <input type="text" class="form-control input-lg text-center" placeholder="Buscar" ng-model="newRuta.city" >
     <br>
-    <button type="submit" class="btn btn-success btn-lg" ng-click="Mostrarporciudad(newRuta.city)">Buscar por ciudad</button>
-    <div class="col-sm-6 col-sm-offset-1">
-        <table class="table table-striped">
+    <div class="col-sm-6">
+        <table class="table table-striped" id="route-list">
             <tr class="info">
                 <td>Type</td>
                 <td>Name</td>
                 <td>Time</td>
-                <td>Puntos de Interest</td>
+                <td>Actions</td>
             </tr>
             <tr ng-repeat="ruta in rutas">
                 <td>{{ruta.type }}</td>
                 <td>{{ ruta.name }}</td>
                 <td>{{ ruta.time }}</td>
-                <td>{{ ruta.interest}}</td>
                 <td><a ng-click="drawRoutes(ruta.interest)">Mostrar</a></td>
             </tr>
+
         </table>
-        <div id="map_container">
-        </div>
+        <button type="submit" class="btn btn-success btn-lg" ng-click="Mostrarporciudad(newRuta.city)">Buscar por ciudad</button>
+
+
+    </div>
+    <div id="map_container">
     </div>
 
-
 </div>
+
 </body>
+
+

@@ -6,6 +6,19 @@ angular.module('ControllersModule')
             $scope.address = '';
 
 
+            marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+            }); //end marker
+
+//Add listener
+            google.maps.event.addListener(marker, "click", function (event) {
+                var latitude = marker.latLng.lat();
+                var longitude = latLng.lng();
+                alert(this.position);
+            });
+
+
             $scope.gameMap = function () {
 
 
