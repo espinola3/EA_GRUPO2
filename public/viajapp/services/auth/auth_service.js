@@ -154,6 +154,8 @@ angular.module('ServicesModule').factory('AuthService',
 
             }
 
+            
+
 
 // route middleware to make sure a user is logged in
             function isLoggedInFace (req, res, next) {

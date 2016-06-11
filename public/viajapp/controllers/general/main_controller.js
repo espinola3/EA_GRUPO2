@@ -9,6 +9,8 @@ angular.module('ControllersModule')
                 $scope.personas     = {};
 
                 $scope.persona   = {};
+                $scope.putPersona   = {};
+
 
                 $scope.newRuta = {};
                 $scope.rutas   = {};
@@ -55,8 +57,10 @@ angular.module('ControllersModule')
 
 
                 // Función para editar los datos de una persona
-                $scope.modificarPersona = function (newPersona) {
-                    $http.put('/user/update', $scope.newPersona)
+                $scope.modificarPersona = function (username) {
+                    + username, $scope.registerPuntos
+
+                    $http.put('/user/update'+ username, $scope.registerForm)
                         .success(function (data) {
                             $scope.newPersona = {}; // Borramos los datos del formulario
                             $scope.personas   = data;
@@ -176,6 +180,17 @@ angular.module('ControllersModule')
                 };
 
                 $scope.Mostrarporciudad = function (ciudad) {
+                    $http.get('/routesbycity/' + ciudad).success(function (data) {
+                            $scope.rutas = data;
+                            console.log(data);
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+
+                };
+                
+                $scope.datosPerfil = function (persona) {
                     $http.get('/routesbycity/' + ciudad).success(function (data) {
                             $scope.rutas = data;
                             console.log(data);

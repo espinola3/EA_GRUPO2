@@ -16,27 +16,23 @@
 
                 <hr>
 
-            <br><br>
-
             <div >
 
 
-
-
-                <form action="demo_form.asp">
+               <form class=contacto >
                     <b><p align="left">Genero:   <select name="gender">
                         <option value="1">Hombre</option>
                         <option value="2">Mujer</option>
                         <option value="3">Otro</option>
                           </select></p><br></b>
-                    <b><p align="left">Correo: <input type="text" size="30" name="email" value={{persona.email}}> <br><br> </p></b>
-                    <b><p align="left">Ciudad:    <input type="text" name="city" value={{persona.city}}><br><br></p></b>
-                    <b><p align="left">Dirección:     <input type="text" name="address" value={{persona.address}}><br><br></p></b>
-                    <b><p align="left">Puntos: {{persona.numrutas}}</p><br></b>
-                    <b><p align="left">Sobre mi:</p></b>
-                    <textarea  name="about" rows="10" cols="80" value={{persona.about}}></textarea> <br><br><br>
+                    <b><p align="left"><label>Correo:</label> <input type="text" size="30" name="email" value={{persona.email}} >  <br><br> </p></b>
+                    <b><p align="left"><label>Ciudad:</label> <input type="text" name="city" value={{persona.city}} ng-model="registerForm.city"><br><br></p></b>
+                    <b><p align="left"><label>Dirección:</label> <input type="text" name="address" value={{persona.address}}><br><br></p></b>
+                    <b><p align="left"><label>Puntos:</label> {{persona.numrutas}}</p><br></b>
+                    <b><p align="left"><label>Sobre mi:</label> </p></b>
+                    <textarea  name="about" rows="5" cols="10" value={{persona.about}}></textarea> <br><br><br>
 
-                    <button type="submit" class="btn btn-success btn-lg" ng-click="Mostrarporciudad(newRuta.city)">Guardar</button>
+                    <button type="submit" class="btn btn-success btn-lg" ng-click="modificarPersona(getUserInfo())">Guardar</button>
 
                 </form>
 
@@ -44,6 +40,8 @@
 
 
             </div>
+
+
 
 
         </div>

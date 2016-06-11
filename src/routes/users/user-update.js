@@ -10,14 +10,17 @@ router.put('/user/update', function(req, res, next) {
     var user = new User(
         {
 
-            name: req.body.name,
-            pass: req.body.pass,
+            username: req.body.username,
+            password: req.body.pass,
             email: req.body.email,
-            city: req.body.city
+            city: req.body.city,
+            address:req.body.address,
+            about:req.body.about,
+            gender: req.body.gender
         }
     );
 
-    User.findOneAndUpdate({name: user.name},{pass: user.pass, email: user.email, city: user.city} ,function (err, user) {
+    User.findOneAndUpdate({username: user.name},{email: user.email, city: user.city, address:user.address,about:user.about} ,function (err, user) {
         if (err) return console.error(err);
     });
 
