@@ -53,9 +53,10 @@
             <style>
                 a   {color:white;}
             </style>
-        <summary>¿Quieres Crear una Ruta?</summary>
+        <summary><font face="Arial" color="orange" size=5><b>¿Quieres Crear una Ruta? </b></font></summary>
         <p>¿Has hecho una ruta en algun viaje y quieres compartirla con más gente para que disfrute de las vistas?</p>
-         <a href="#/nuevaruta" >Crear Rutas</a>
+         <a href="#/nuevaruta" ng-if="!isLoggedIn()"  >Crear Rutas</a>
+
     </details>
    </article>
     </div> </center>
@@ -69,11 +70,11 @@
                 <style>
                     a   {color:white;}
                 </style>
-                <summary>¿Buscas Rutas?</summary>
+                <summary><font face="Arial" color="orange" size=5><b>¿Buscas Rutas?</b></font></summary>
                 <p> ¿Tienes pensado hacer un viaje y no sabes que visitar? Aquí puedes buscar las mejores rutas para ese viaje  </p>
-                <a href="#/ciudad">Busqueda Ciudad</a>
+                <a href="#/ciudad" ng-if="!isLoggedIn()">Busqueda Ciudad</a>
 
-                <a href="#/mapa">Busqueda Mapa</a>
+                <a href="#/mapa" ng-if="!isLoggedIn()">Busqueda Mapa</a>
             </details>
         </article>
     </div> </center>
@@ -85,9 +86,12 @@
                 <style>
                     a   {color:white;}
                 </style>
-                <summary>¿Quieres ver Ranking ?</summary>
+                <summary><font face="Arial" color="orange" size=5><b>¿Quieres ver Ranking ?</b></font></summary>
                 <p> Aquí podrás ver quién es el usuario que más rutas a creado. ¡Animo cuantas más rutas compartas más puntos tendrás!  </p>
-                <a href="#/top10">Top 10 </a>
+               <div class="alert alert-warning alert-dismissable">
+                <a href="#/top10" ng-if="!isLoggedIn()" data-dismiss="alert">Top 10 </a>
+                   <strong ng-if="!isLoggedIn()">¡Alerta!</strong> Tienes que estar registrado para ver los contenidos
+</div>
             </details>
         </article>
     </div> </center>
