@@ -17,9 +17,19 @@ router.post('/route', function(req, res, next) {
         }
     );
 
-    route.save(function (err, route) {
-        if (err) return console.error(err);
+    Route.find({name: route.name}).exec().then(function (routes) {
+        console.log("nombre ruta"+route.name);
+        if (routes == false)
+            route.save(function (err, route) {
+                if (err) return console.error(err);
+            });
+        else{
+            console.log("Ya existe el nombre de esta ruta");
+            res.status(409).res('Ya existe');
+        }
     });
+
+
 
     Route.find({}).exec().then(function (routes) {
        res.json(routes).end();

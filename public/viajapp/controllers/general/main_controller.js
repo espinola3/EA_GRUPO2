@@ -222,6 +222,7 @@ angular.module('ControllersModule')
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);
+                            alert("Lo sientimos! El nombre de esta ruta ya esta cogido! Elige otro...");
                         });
                 };
 
