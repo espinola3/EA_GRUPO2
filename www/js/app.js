@@ -17,7 +17,7 @@ app.factory('MyService', function() {
 					 'interest' : '',
 					 'truth' : false
 				 };
-				 
+
 				 return{
 					 name: data.name,
 					 city: data.city,
@@ -25,18 +25,18 @@ app.factory('MyService', function() {
 					 interest: data.interest,
 					 truth: data.truth
 				 };
-				
+
 				 /*
 				  getProperty = function() {
                      return{
 						 data;
 					 }
                   }
-				  
+
 				  setProperty = function(value){
                   data = value;
                   }
-				
+
                 //};
     */
 	});
@@ -55,20 +55,20 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 	$scope.testy = 5;
 	/*if ($rootsScope= false)
 	{
-	$rootScope.user = '';	
+	$rootScope.user = '';
 	$rootScope.log = false;
 	}*/
 	//$scope.logged = sessionStorage.log;
 	$scope.loginForm = {};
     $scope.passerror = "";
     $scope.selected = false;
-	
-	dir = "192.168.1.12:5885";
-		
-	
+
+	dir = "192.168.0.165:5885";
+
+
 //-----------------------------------------Usuarios-----------------------------------------
     // Obtenemos todos los datos de la base de datos
-	
+
     $http.get('http://'+ dir +'/users').success(function(data) {
         console.log(data);
             $scope.personas = data;
@@ -76,22 +76,22 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
         .error(function(data) {
             console.log('Error: ' + data);
         });
-		
+
     $scope.isLoggedIn = function() {
-		
+
                 //alert(sessionStorage.log + '  ' + $scope.logged);
                 $rootScope.log=true;
 				//MyService.data.address = "Centre, Gava";
-            };	
-			
+            };
+
     $scope.Log = function() {
-	
+
 				$rootScope.log=false;
 
-            };	
-	
+            };
+
 	$scope.login = function() {
-	   
+
                 $http.post('http://'+ dir +'/user/login',
                     {username: $scope.loginForm.username, password: $scope.loginForm.password})
                     .success(function (data, status) {
@@ -106,7 +106,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                     })
                     .error(function (data) {
                         $rootScope.log = false;
-                    });                
+                    });
 
             };
 
@@ -114,22 +114,22 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
     scope: $scope,
     }).then(function(popover) {
     $scope.popover = popover;
-    });	
+    });
 
     $ionicPopover.fromTemplateUrl("templates/popover1.html", {
     scope: $scope,
     }).then(function(popover1) {
     $scope.popover1 = popover1;
-    });		
-	
+    });
+
 	$scope.openPopover = function($event) {
       $scope.popover.show($event);
-    }; 
-   
+    };
+
     $scope.openPopover1 = function($event) {
       $scope.popover1.show($event);
     };
-	
+
     // Función para registrar a una persona
     $scope.registrarPersona = function() {
         if ($scope.passerror == "La contraseña y la comprobación coinciden") {
@@ -145,10 +145,10 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                     console.log('Error: ' + data);
                 });
         }
-        else 
+        else
             alert ("Cuidado! Contraseña y comprobación no coinciden!")
     };
-	
+
 	$scope.Register = function() {
         if ($scope.passerror == "La contraseña y la comprobación coinciden") {
             $http.post('http://'+ dir + '/user/register', {username: $scope.newPersona.username, password: $scope.newPersona.password, city: $scope.newPersona.city, email: $scope.newPersona.email ,pic: $scope.newPersona.pic})
@@ -164,18 +164,18 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                     console.log('Error: ' + data);
                 });
         }
-        else 
+        else
             alert ("Cuidado! Contraseña y comprobación no coinciden!")
     };
-	
+
 	/*$scope.getUserInfo = function() {
-            
-			
+
+
             if ($rootScope.log=true)
 			{
 				return $rootScope.user;
-			}				
-			
+			}
+
     };*/
 
 
@@ -208,7 +208,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                 console.log('Error: ' + data);
             });}
     };
-	
+
 	$scope.showDetail  = function ()
                 {
 
@@ -220,11 +220,11 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                         });
 
                 };
-				
-	
+
+
 	$scope.sumarPuntos = function (username) {
                     $http.get('http://'+ dir +'/users/userdetail/' + username).success(function (data) {
-                        
+
                             puntos = data[0].numrutas;
                             puntos = puntos + 1;
                             $scope.registerPuntos.username = username;
@@ -245,17 +245,17 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                         .error(function (data) {
                             console.log('Error: ' + data);
                         });
-                    
+
 
                 };
 
-	
-        
+
+
         $scope.verificar = function(pass, pass2)
         {
             if (pass != pass2)
                 $scope.passerror = "La contraseña y la comprobación no coinciden"
-                
+
             else {
                 if ((pass == false) && (pass2 == false))
                 {
@@ -282,7 +282,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
         .error(function (data) {
             console.log('Error: ' + data);
         });
-		
+
 */
 
         $scope.Mostrarportipo = function (tipo) {
@@ -294,7 +294,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
             });
 
     };
-        
+
     $scope.Mostrarporciudad = function (ciudad) {
             $http.get('http://'+ dir +'/routesbycity/'+ ciudad).success(function (data) {
                     $scope.rutas = data;
@@ -354,15 +354,15 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 
 // Función para inserta rutas en typos
     /*$scope.InsertarRuta = function () {
-        
+
         $http.post('/route', $scope.newRuta)
             .success(function (data) {
                 $scope.rutas = data;
                 })
                 .error(function (data) {
                     console.log('Error: ' + data);
-                });  
-        
+                });
+
         $http.put('/typeroute/update', $scope.newRuta)
             .success(function (data) {
                 console.log($scope.newRuta.name);
@@ -394,7 +394,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                 });
         }
     };
-	
+
 	$scope.Send = function(){
 		MyService.truth = true;
 		$location.url('/map');
@@ -409,22 +409,22 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
         };
 
     }]);
-	
-	
+
+
 	app.controller('MapCtrl', function($scope, MyService) {
-		
+
         //alert(MyService.name);
 		var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-		
+
         var placenum = 0;
-				
-		
+
+
         var mapOptions = {
             center: myLatlng,
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
-		
+
 		var mapOptions_container = {
             center: {lat: 41.3990883450641, lng: 2.1805070206817323},
             zoom: 16,
@@ -432,7 +432,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 				scrollwheel: false
 			}
         };
-		
+
 		var mapOptions_container1 = {
             center: {lat: 41.3990883450641, lng: 2.1805070206817323},
             zoom: 16,
@@ -440,32 +440,32 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 				scrollwheel: false
 			}
         };
- 
+
         //var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		var intentos = 0;
 		var mapa = document.getElementById("map");
         if (mapa)
         var map = new google.maps.Map(mapa, mapOptions);
 	    var map_container = document.getElementById("map_container");
-        if (map_container)	
+        if (map_container)
         var map = new google.maps.Map(map_container, mapOptions_container);
 	    var map_container1 = document.getElementById("map_container1");
-        if (map_container1)	
+        if (map_container1)
         var map = new google.maps.Map(map_container1, mapOptions_container1);
-		
+
 		$scope.map = map;
-        
+
 		$scope.drawGames = function (map, triangle, uno, dos, e){
 			var resultColor =
                     google.maps.geometry.poly.containsLocation(e.latLng, triangle) ?
                         uno :
                         dos;
-						
+
 			if (resultColor == uno)
 			{
-            alert("lo has encontrado!!");			
+            alert("lo has encontrado!!");
 			}
-			
+
             marky = new google.maps.Marker({
                 position: e.latLng,
                 setMap     : map,
@@ -478,9 +478,9 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                     scale       : 10
                 }
             });
-        
+
         };
-		
+
 		$scope.gameMap = function() {
 			    var PlazaCatalunya = [
                     {lat: 41.38741576570434, lng: 2.168784872213796},
@@ -512,9 +512,9 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                 $scope.drawGames(map_container,Aquarium2,'red', '#ADAFAF', e);
 				});
 		};
-		
+
 		$scope.gameMap1 = function() {
-			
+
 			    var SagradaFamilia = [
                     {lat: 41.40358114163176, lng: 2.1732114121612245},
                     {lat: 41.404385874170146, lng: 2.17432721111142},
@@ -534,7 +534,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                     {lat: 41.41440630768962, lng: 2.1551514034577},
                     {lat: 41.41187175738832, lng: 2.151932752639829}
                 ];
-			
+
 		        var sagradaFamili = new google.maps.Polygon({paths: SagradaFamilia});
                 var CasaBatllo  = new google.maps.Polygon({paths: CasaBatllo});
                 var ParkGuell = new google.maps.Polygon({paths: ParkGuell});
@@ -545,7 +545,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                 $scope.drawGames(map_container1,ParkGuell,'red', '#ADAFAF', e);
 				});
 		};
-		
+
 		$scope.Locate = function () {
         navigator.geolocation.getCurrentPosition(function(pos) {
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
@@ -556,9 +556,9 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
             });
         });
 		};
-		
+
 		$scope.address = {};
-		
+
 		$scope.addAddress = function () {
                 if ($scope.address.add !== '') {
                     var geocoder = new google.maps.Geocoder();
@@ -580,9 +580,9 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                     });
                 }
             };
- 
+
          $scope.refresh = function () {
-		      
+
 			  /*$scope.name = MyService.name;
 		      $scope.city = MyService.city;
 		      $scope.time = MyService.time;
@@ -591,13 +591,13 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 			*/
 			map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		 };
-		
+
 		if (!map_container && !map_container1)
 		{
 			$scope.name = MyService.name;
 		    $scope.city = MyService.city;
 		    $scope.time = MyService.time;
-		    $scope.interest = MyService.interest;	
+		    $scope.interest = MyService.interest;
 			//var thearray = ["Centre Gava", "Diagonal Gava"];
 			//var thearray = MyService.interest;
 			//$scope.addAddress();
@@ -606,18 +606,18 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
              $scope.address.add = interests[i];
 			 $scope.addAddress();
             }
-		
+
 		}
-		
+
         //$scope.map = map;
-   
- 
+
+
 });
 
 app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-  
+
   $ionicConfigProvider.views.maxCache(0);
-  
+
   $stateProvider
   .state('home', {
     url: '/home',
@@ -700,10 +700,10 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 	controller: 'MainController',
 	restricted     : true
   })
- 
+
   //$urlRouterProvider.otherwise("register");
 });
-  
+
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
