@@ -60,7 +60,7 @@ angular.module('ControllersModule')
                 $scope.modificarPersona = function (username) {
                     + username, $scope.putPersona
 
-                    $http.put('/user/update'+ username, $scope.putPersona)
+                    $http.put('/user/update/'+ username, $scope.putPersona)
                         .success(function (data) {
                             $scope.newPersona = {}; // Borramos los datos del formulario
                             $scope.personas   = data;

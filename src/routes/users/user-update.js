@@ -6,7 +6,7 @@ var router  = express.Router();
 
 var User = require('./../../models/user');
 
-router.put('/user/update', function(req, res, next) {
+router.put('/user/update/:username', function(req, res, next) {
     var user = new User(
         {
 
