@@ -126,8 +126,7 @@ app.use(function (err, req, res, next) {
     });
 });
 
-
-//app.listen(5885, '127.0.0.0');
+app.listen(5885);
 
 
 module.exports = app;
@@ -138,7 +137,7 @@ module.exports = app;
 // will print stacktrace
 
 
-app.listen(5885,'147.83.7.156');
+//app.listen(5885,'147.83.7.156');
 
 
 

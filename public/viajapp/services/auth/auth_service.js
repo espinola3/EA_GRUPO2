@@ -45,7 +45,7 @@ angular.module('ServicesModule').factory('AuthService',
 
                  return $http.get('user/auth/facebook/callback').success(function (data) {
 
-                        console.log('information data', data);
+                        
                         $rootScope.authenticated = true;
                         $location.path('/');
                     })
@@ -84,7 +84,7 @@ angular.module('ServicesModule').factory('AuthService',
                     {username: username, password: password})
                     .success(function (data, status) {
                         if(status === 200 && data.status){
-                            console.log(data.user.role);
+                            
                             user = true;
                             $cookies.put('logged', true);
                             $cookies.putObject('user', {username:username});

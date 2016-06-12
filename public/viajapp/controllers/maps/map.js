@@ -24,7 +24,6 @@ angular.module('ControllersModule')
 
                     var currentCoords = document.getElementById('interests').value;
                     var separator = currentCoords == '' ? '' : ';' ;
-                    console.log($scope.newRuta.interest);
                     document.getElementById('interests').value = currentCoords + separator + googleMapService.clickLat +',' + googleMapService.clickLong;
                     $scope.newRuta.interest = document.getElementById('interests').value;
                 });
@@ -113,8 +112,8 @@ angular.module('ControllersModule')
                 var ParkGuell1 = new google.maps.Polygon({paths: ParkGuell});
 
                 GoogleMapsService.drawGames(map,sagradaFamili,'red', '#09F6DD');
-                GoogleMapsService.drawGames(map,CasaBatllo, 'red', '#D6D7D7');
-                GoogleMapsService.drawGames(map,ParkGuell,'red', '#ADAFAF');
+                GoogleMapsService.drawGames(map,CasaBatllo1, 'red', '#D6D7D7');
+                GoogleMapsService.drawGames(map,ParkGuell1,'red', '#ADAFAF');
 
             };
 
@@ -125,7 +124,7 @@ angular.module('ControllersModule')
                     var marker                      = new google.maps.Marker(markerData);
                     marker.setMap($scope.map);
                     //$scope.map.markers.push(marker);
-                    console.log("map", $scope.map);
+                    
                     refresh(markerData);
                 });
             };
@@ -138,7 +137,7 @@ angular.module('ControllersModule')
                         var marker                      = new google.maps.Marker(markerData);
                         marker.setMap($scope.map);
                         //$scope.map.markers.push(marker);  
-                        console.log("map", $scope.map);
+                        
                         refresh(markerData);
                     });
                 }
@@ -148,8 +147,7 @@ angular.module('ControllersModule')
                 var address = points[0].split(';');
                 for (i = 0; i < address.length; i++) {
                     address[i];
-                    console.log('ESTO ES ESO', address[i]);
-                    console.log('ESTO ES ESO', address.length);
+                   
                     if (address !== '') {
                         GoogleMapsService.createByAddress(address[i], function (markerData) {
                             markerData.options.labelContent = 'Esta es su ubicacion';

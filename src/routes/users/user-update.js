@@ -15,11 +15,12 @@ router.put('/user/update/:username', function(req, res, next) {
             city: req.body.city,
             address:req.body.address,
             about:req.body.about,
-            gender: req.body.gender
+            gender: req.body.gender,
+            pic: req.body.pic
         }
     );
 
-    User.findOneAndUpdate({username: user.username},{$set:{email: user.email, city: user.city, address:user.address,about:user.about, gender: user.gender},upsert: true}
+    User.findOneAndUpdate({username: user.username},{$set:{email: user.email, city: user.city, address:user.address,about:user.about, pic: user.pic,gender: user.gender},upsert: true}
         ,function (err, user) {
         if (err) return console.error(err);
         else {

@@ -27,7 +27,6 @@ angular.module('ControllersModule')
 //-----------------------------------------Usuarios-----------------------------------------
                 // Obtenemos todos los datos de la base de datos
                 $http.get('/users').success(function (data) {
-                        console.log(data);
                         $scope.personas = data;
                     })
                     .error(function (data) {
@@ -63,11 +62,11 @@ angular.module('ControllersModule')
                     $scope.putPersona.gender = document.getElementById('gender').value;
                     $scope.putPersona.email = document.getElementById('email').value;
                     $scope.putPersona.about = document.getElementById('about').value;
+                    $scope.putPersona.pic = document.getElementById('foto').value;
                     $scope.putPersona.city = document.getElementById('city').value;
 
                     $http.put('/user/update/'+ username, $scope.putPersona)
                         .success(function (data) {
-                            console.log('', $scope.putPersona);
                             $scope.personas   = data;
 
                         })
@@ -93,7 +92,6 @@ angular.module('ControllersModule')
 
                     $http.get('/users/userdetail/' + name).success(function (data) {
                         if (data[0].role == 'admin') {
-                            console.log("DETALLES2", data[0].role);
                             return true;
                         }
                         else
@@ -109,7 +107,7 @@ angular.module('ControllersModule')
                  // Función que borra un objeto persona conocido su id
                 $scope.borrarPersona = function (name) {
                     if (confirm("Do you want to delete the user? ")) {
-                        console.log("borrar persona " + name);
+                        
                         $http.delete('/user/delete/' + name)
                             .success(function (data) {
                                 $scope.newPersona = {};
@@ -130,11 +128,11 @@ angular.module('ControllersModule')
                             $scope.registerPuntos.username = username;
                             $scope.registerPuntos.numrutas = puntos;
 
-                        console.log('detalles',  $scope.registerPuntos);
+                        
 
                             $http.put('/user/updatepuntos/'+ username, $scope.registerPuntos)
                                 .success(function (data) {
-                                    console.log('DATA', data);
+                                    
                                     $scope.selected   = false
                                 })
                                 .error(function (data) {
@@ -187,7 +185,7 @@ angular.module('ControllersModule')
                 $scope.Mostrarporciudad = function (ciudad) {
                     $http.get('/routesbycity/' + ciudad).success(function (data) {
                             $scope.rutas = data;
-                            console.log(data);
+                           
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);
@@ -198,7 +196,7 @@ angular.module('ControllersModule')
                 $scope.datosPerfil = function (persona) {
                     $http.get('/routesbycity/' + ciudad).success(function (data) {
                             $scope.rutas = data;
-                            console.log(data);
+                            
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);
@@ -303,7 +301,7 @@ angular.module('ControllersModule')
                 };
 
                 $scope.salta = function () {
-                    console.log("SALTA");
+                    
                     $location.url("/register");
                 }
                 
