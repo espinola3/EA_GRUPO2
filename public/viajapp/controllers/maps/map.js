@@ -179,5 +179,6 @@ angular.module('ControllersModule')
 
             }
 
+
         }]);
 
