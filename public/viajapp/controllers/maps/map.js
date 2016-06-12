@@ -109,8 +109,8 @@ angular.module('ControllersModule')
 
 
                 var sagradaFamili = new google.maps.Polygon({paths: SagradaFamilia});
-                var CasaBatllo  = new google.maps.Polygon({paths: CasaBatllo});
-                var ParkGuell = new google.maps.Polygon({paths: ParkGuell});
+                var CasaBatllo1  = new google.maps.Polygon({paths: CasaBatllo});
+                var ParkGuell1 = new google.maps.Polygon({paths: ParkGuell});
 
                 GoogleMapsService.drawGames(map,sagradaFamili,'red', '#09F6DD');
                 GoogleMapsService.drawGames(map,CasaBatllo, 'red', '#D6D7D7');
@@ -183,6 +183,7 @@ angular.module('ControllersModule')
                 GoogleMapsService.drawRoutes($scope.map, parsedPoints, $scope.markers);
 
             }
+
 
         }]);
 
