@@ -4,7 +4,7 @@
         background: #cfe7fa;
     }
 </style>
-<div id="map_container" data-ng-init="lineas()">
+<div id="map_container">
 </div>
 <div class="controls">
     <h3>Localización Actual</h3>
@@ -17,5 +17,11 @@
         <button ng-click="addAddress()">Buscar</button>
     </p>
 
-    <td><button type="submit" class="btn btn-info"  ng-repeat="ruta in rutas ng-click="drawRoutes(ruta.interest)">Mostrar todas las rutas</></td>
+</div>
+
+<div class="container" ng-controller="MainController" data-ng-init="MostrarRutas()">
+    <table class="table table-striped">
+        <tr ng-repeat="ruta in rutas" data-ng-init="drawRoutes(ruta.interest)"> </tr>
+    </table>
+
 </div>

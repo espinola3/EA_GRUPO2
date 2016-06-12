@@ -16,9 +16,6 @@ angular.module('ControllersModule')
                         return true;
                     }
                 }
-                $scope.toggleCategory = function(subjects) {
-                    subjects.expanded = !subjects.expanded;
-                };
 
 
                 $scope.register = function () {

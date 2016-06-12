@@ -43,8 +43,8 @@ MainApp.config(['$routeProvider', function ($routeProvider) {
             controller : 'MapCtrl',
             restricted     : true
         })
-        .when('/perfil1', {
-            templateUrl: 'views/perfil1.html',
+        .when('/perfil', {
+            templateUrl: 'views/perfil.html',
             restricted     : true
         })
         .when('/nuevaruta', {

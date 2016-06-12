@@ -58,13 +58,18 @@ angular.module('ControllersModule')
 
                 // Función para editar los datos de una persona
                 $scope.modificarPersona = function (username) {
-                    + username, $scope.putPersona
+                    $scope.putPersona.username = username;
+                    $scope.putPersona.address = document.getElementById('address').value;
+                    $scope.putPersona.gender = document.getElementById('gender').value;
+                    $scope.putPersona.email = document.getElementById('email').value;
+                    $scope.putPersona.about = document.getElementById('about').value;
+                    $scope.putPersona.city = document.getElementById('city').value;
 
                     $http.put('/user/update/'+ username, $scope.putPersona)
                         .success(function (data) {
-                            $scope.newPersona = {}; // Borramos los datos del formulario
+                            console.log('', $scope.putPersona);
                             $scope.personas   = data;
-                            $scope.selected   = false;
+
                         })
                         .error(function (data) {
                             console.log('Error: ' + data);

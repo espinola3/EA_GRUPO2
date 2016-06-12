@@ -11,7 +11,6 @@ router.put('/user/update/:username', function(req, res, next) {
         {
 
             username: req.body.username,
-            password: req.body.pass,
             email: req.body.email,
             city: req.body.city,
             address:req.body.address,
@@ -20,16 +19,20 @@ router.put('/user/update/:username', function(req, res, next) {
         }
     );
 
-    User.findOneAndUpdate({username: user.name},{email: user.email, city: user.city, address:user.address,about:user.about} ,function (err, user) {
+    User.findOneAndUpdate({username: user.username},{$set:{email: user.email, city: user.city, address:user.address,about:user.about, gender: user.gender},upsert: true}
+        ,function (err, user) {
         if (err) return console.error(err);
+        else {
+            User.find({}).exec().then(function (users) {
+                res.json(users).end();
+            });
+
+        }
     });
 
     //res.json(user.toObject());
 
-    User.find({}).exec().then(function (users) {
-        
-        res.json(users).end();
-    });
+
 });
 
 router.put('/user/updatepuntos/:username', function(req, res, next) {

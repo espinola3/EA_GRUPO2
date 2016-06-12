@@ -1,0 +1,41 @@
+<body  ng-controller="MainController">
+<style type="text/css">
+    body {
+        background: #cfe7fa;
+    }
+</style>
+<div class="container">
+    <div class="box box-primary" ng-controller="userInfo" data-ng-init="showDetail(getUserInfo())">
+        <div class="box-body">
+            <div ng-repeat="persona in persona">
+                <div class=""  ><br><br><br>
+                    <H1> <p align="center"><strong><i class="fa fa-file-text-o margin-r-5"  color="red"></i>  SOBRE MI  </strong><img align="right" src= {{persona.pic}}  width="75" height="75"  /></p></H1>
+                </div>
+                <br>
+                <hr>
+                <div >
+                    <form class=contacto >
+                        <b><p align="left">Genero:
+                            <select type= "text" id="gender">
+                                <option value="{{persona.gender}}" selected>{{persona.gender}}</option>
+                                <option value="Hombre">Hombre</option>
+                                <option value="Mujer">Mujer</option>
+                                <option value="Otro">Otro</option>
+                            </select></p><br></b>
+
+                        <b><p align="left"><label>Correo:</label> <input type="text" size="30" name="email" id="email"  value={{persona.email}}>  <br><br></b>
+                        <b><p align="left"><label>Ciudad:</label> <input type="text" name="city" id="city" value={{persona.city}} ><br><br></b>
+                        <b><p align="left"><label>Dirección:</label> <input type="text" name="address"  id="address" value={{persona.address}}><br><br></b>
+                        <b><p align="left"><label>Puntos:</label> {{persona.numrutas}} <br></b>
+                        <b><p align="left"><label>Sobre mi:</label></b>
+                        <textarea  type= text name="about" rows="5" cols="10" name="about" id="about" value={{persona.about}}>{{persona.about}}</textarea> <br><br><br>
+
+                        <button type="submit" class="btn btn-success btn-lg" ng-click="modificarPersona(getUserInfo())">Guardar</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

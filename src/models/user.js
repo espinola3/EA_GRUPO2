@@ -12,6 +12,9 @@ var User = new Schema({
     city: {type: String},
     pic: {type: String, default:'/images/profile.jpg'},
     role: {type: String, default: 'user'},
+    address: {type: String},
+    gender: {type: String},
+    about: {type: String},
     numrutas :{type: Number, default:0}
 });
 
