@@ -20,7 +20,7 @@ router.put('/user/update', function(req, res, next) {
         }
     );
 
-    User.findOneAndUpdate({username: user.name},{email: user.email, city: user.city, address:user.address,about:user.about} ,function (err, user) {
+    User.update({username: user.name},{email: user.email, city: user.city, address:user.address,about:user.about} ,function (err, user) {
         if (err) return console.error(err);
     });
 
