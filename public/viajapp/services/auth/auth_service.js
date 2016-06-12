@@ -141,12 +141,15 @@ angular.module('ServicesModule').factory('AuthService',
                         if(status === 200 && data.status){
                             deferred.resolve();
                         } else {
-                            deferred.reject();
+                            if(status == 401){
+                                alert("Este usuario ya existe...");
+                            deferred.reject();}
                         }
                     })
                     // handle error
                     .error(function (data) {
                         deferred.reject();
+                        alert("Lo sientimos! Este usuario ya existe... Prueba con otro!);");
                     });
 
                 // return promise object
