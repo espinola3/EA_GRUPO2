@@ -11,21 +11,24 @@
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button>
         <ion-nav-buttons side="left">
-          <a ng-show="log" class="button" ui-sref="rutas">
-            Listar
+		  <a ng-show="log" class="button" ng-click="openPopover($event)">
+            Rutas
           </a>
-		  <a ng-show="log" class="button" ui-sref="nuevaruta">
-            Crear
+		  <a ng-show="log" class="button" ui-sref="perfil">
+            Perfil
           </a>
-		  <a ng-show="log" class="button" ui-sref="ciudad">
-            Ciudad
+		  <a ng-show="log" class="button" ui-sref="top10">
+            Top10
           </a>
 		  <a ng-show="log" class="button" ui-sref="map">
             Mapa
           </a>
+		  <a ng-show="log" class="button" ng-click="openPopover1($event)">
+            Juego
+          </a>
         </ion-nav-buttons>        
         <ion-nav-buttons side="right">
-          <a class="button" ui-sref="home">
+		  <a class="button" ui-sref="home">
             Home
           </a>
 		  <a class="button" ui-sref="about">
@@ -75,20 +78,20 @@
             <form name="myForm" >
                 <div class="form-group">
 
-                    <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newPersona.name" >
+                    <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newPersona.username" >
                     <br>
                     <input type="email" class="form-control input-lg text-center" id="inputEmail" placeholder="Email" ng-model="newPersona.email" >
                     <br>
-                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Pass"  name = "pass1" id = "pass1" ng-keyup="verificar(newPersona.pass, newPersona.pass2);" ng-model="newPersona.pass" >
+                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Password"  name = "password1" id = "password1" ng-keyup="verificar(newPersona.password, newPersona.password2);" ng-model="newPersona.password" >
                     <br>
-                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Repeat Pass" name = "pass2" id = "pass2" ng-keyup="verificar(newPersona.pass, newPersona.pass2);" ng-model="newPersona.pass2">
+                    <input type="password" class="form-control input-lg text-center" value="" placeholder="Repeat Password" name = "password2" id = "password2" ng-keyup="verificar(newPersona.password, newPersona.password2);" ng-model="newPersona.password2">
                     <span> {{passerror}}<!-- mensaje de verificación--> </span><br />
                     <br>
                     <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newPersona.city" >
                 </div>
 				<p ng-show="log">Hello</p>
                 <!-- Acciones que podemos realizar en el formulario -->
-                <button type="submit" class="btn btn-success btn-lg" ng-click="registrarPersona()" ng-disabled="!newPersona.pass|| !newPersona.city || !newPersona.name || selected">Registrar</button>
+                <button type="submit" class="btn btn-success btn-lg" ng-click="Register()" ng-disabled="!newPersona.password|| !newPersona.city || !newPersona.username || selected">Registrar</button>
                 <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled=" !newPersona.pass|| !newPersona.email|| !newPersona.city || !newPersona.name || selected">Modificar</button>
                 <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona.name)" ng-disabled="!newPersona.name ||selected">Borrar</button>
 				<button type="submit" class="btn btn-success btn-lg" ng-click="Log()">Log</button>

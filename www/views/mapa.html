@@ -46,7 +46,7 @@
         </div>
     </script>
 </head>
-<body ng-controller="MapCtrl">
+<body>
 
 <ion-view  hide-back-button="true">
 <ion-content>
@@ -63,6 +63,11 @@
 <input type="text" placeholder="Direccion, coordenadas" ng-model="address.add"/>
         <button ng-click="addAddress()">Buscar</button>
 <button type="submit" class="btn btn-warning btn-lg" ng-click="refresh()">Refrescar</button>
+
+<label>{{name}}</label>
+<label>{{city}}</label>
+<label>{{time}}</label>
+<label>{{interest}}</label>
 </ion-content>
 </ion-view>
 <!--

@@ -9,7 +9,8 @@
     <!-- Cargamos bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+	<link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+
     <!-- ionic/angularjs js -->
     <script src="../lib/ionic/js/ionic.bundle.js"></script>
 
@@ -29,27 +30,49 @@
         </div>
     </script>
 
+
 </head>
 
 <ion-pane>
+
 <ion-view  hide-back-button="true">
+
 	<ion-content>
-
-
+	
 <div class="container">
 
-    <div class="jumbotron text-center" ng-prueba>
-        <h1>Bienvenid@ {{ user }}</h1>
-		<img src="./images/Viajapp_logo.png">
-    </div>
-	
-	<iframe width="420" height="315" src="https://www.youtube.com/embed/qPFggll1U-4" frameborder="0" allowfullscreen></iframe>
-	
-	
+    <div class="box box-primary" data-ng-init="showDetail()">
+        <div class="box-body">
+            <strong><i class="fa fa-file-text-o margin-r-5"></i> Sobre {{user}}</strong>
+            <hr>
+            <div ng-repeat="persona in persona" >
 
+                <style type="text/css">
+                    img {
+                        margin-top: -195px;
+                        margin-left: -290px;
+                        left: 50%;
+                        top: 50%;
+                        position: absolute;
+                    }
+                </style>
+
+
+
+                <p><b> Correo</b>: {{persona.email}}</p>
+            <p><b>City</b>: {{persona.city}}</p>
+                <b>Puntos</b>: {{persona.numrutas}}</p>
+            <hr>
+                <img src= {{persona.pic}} marg  in="580" sizes="min-width: 36em"   />
+
+            </div>
+
+
+        </div>
+    </div>
 </div>
+
 </ion-content>
 </ion-view>
 </body>
-</ion-pane>
-</html>
+</ion-pane>>

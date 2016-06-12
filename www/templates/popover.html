@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html ng-app="starter">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Viajapp</title>
+    <!-- Cargamos bootstrap -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="../lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="../cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="../js/app.js"></script>
+
+    
+
+
+</head>
+<!--data-ng-init="gameMap()"-->
+
+<!--data-ng-init="gameMap()"-->
+<ion-popover-view>
+<ion-pane>
+<ion-view hide-back-button="true">
+        <ion-content>
+          <div class="list">
+			<a class="item" ui-sref="rutas">
+            Listar
+            </a>
+		    <a class="item" ui-sref="nuevaruta">
+            Crear
+            </a>
+		    <a class="item" ui-sref="ciudad">
+            Ciudad
+            </a>
+            </div>
+        </ion-content>
+		</ion-view>
+		</ion-pane>
+      </ion-popover-view>
+	  >

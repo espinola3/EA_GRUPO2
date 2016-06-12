@@ -9,7 +9,8 @@
     <!-- Cargamos bootstrap -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+	<link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+
     <!-- ionic/angularjs js -->
     <script src="../lib/ionic/js/ionic.bundle.js"></script>
 
@@ -29,27 +30,35 @@
         </div>
     </script>
 
+
 </head>
 
 <ion-pane>
+
 <ion-view  hide-back-button="true">
+
 	<ion-content>
-
-
+	
 <div class="container">
 
     <div class="jumbotron text-center" ng-prueba>
-        <h1>Bienvenid@ {{ user }}</h1>
-		<img src="./images/Viajapp_logo.png">
+        <h1> TOP 10 </h1>
     </div>
-	
-	<iframe width="420" height="315" src="https://www.youtube.com/embed/qPFggll1U-4" frameborder="0" allowfullscreen></iframe>
-	
-	
-
+    <h1> Lista de los 10 Usuarios que más rutas han creado </h1>
+    <div class="col-sm-6 col-sm-offset-1">
+        <table class="table table-striped">
+            <tr class="info">
+                <td>Name</td>
+                <td>Puntos</td>
+            </tr>
+            <tr ng-repeat="persona in personas | orderBy:'-numrutas'">
+                <td>{{persona.username}}</td>
+                <td>{{persona.numrutas}}</td>
+            </tr>
+        </table>
+    </div>
 </div>
 </ion-content>
 </ion-view>
 </body>
-</ion-pane>
-</html>
+</ion-pane>>

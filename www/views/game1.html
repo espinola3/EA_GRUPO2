@@ -1,0 +1,147 @@
+<!doctype html>
+
+<html ng-app="starter">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Viajapp</title>
+    <!-- Cargamos bootstrap -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="../lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="../cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="../js/app.js"></script>
+
+    <script type="text/ng-template" id="ng-confirm-template">
+        <div class="modal-body">
+            <p>{{message}}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-link pull-left" ng-click="no()">No</button>
+            <button class="btn btn-primary pull-right" ng-click="yes()">Yes</button>
+        </div>
+    </script>
+
+
+</head>
+<!--data-ng-init="gameMap()"-->
+<ion-pane>
+
+<ion-view  hide-back-button="true">
+
+	<ion-content>
+	
+
+<style type="text/css">
+    body {
+        background: #cfe7fa;
+    }
+</style>
+<div class="container" data-ng-init="gameMap1()">
+
+    <div class="jumbotron text-center" ng-prueba>
+        <h1>Think and Click Game Level 2</h1>
+    </div>
+    <div>
+        <details>
+            <summary>Primer Punto</summary>
+            <center>
+                <details>
+                    <summary>Primer pista</summary>
+                    <p>Es muy visitada por los turistas pero ni siquiera está acabada.</p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Segunda pista</summary>
+                    <p>Un gran arquitect que murió en un accidente de tranvia</p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Tercera pista</summary>
+                    <p>Es muy fotografiada</p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Ultima pista?</summary>
+                    <a href="https://goo.gl/maps/Pe7u4zUDrkT2" target="_blank">De verdad?...</a>
+
+                </details>
+            </center>
+        </details>
+        <details>
+            <summary>Segundo Punto</summary>
+
+            <center>
+                <details>
+                    <summary>Primer pista</summary>
+                    <p>Es la casa más noble y famosa de Barcelona</p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Segunda pista</summary>
+                    <p>Tiene una forma ondulada </p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Tercera pista</summary>
+                    <p>Su fachada tiene mosaicos</p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Ultima pista?</summary>
+                    <a href="https://goo.gl/maps/EPQZ52aQQKy" target="_blank">De verdad?...</a>
+                </details>
+            </center>
+        </details>
+
+        <details>
+            <summary>Tercer Punto</summary>
+
+            <center>
+                <details>
+                    <summary>Primer pista</summary>
+                    <p>Es un parque de un aquitecto que hizo muchas construciones en Barcelona</p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Segunda pista</summary>
+                    <p>Hay unas vistas espectaculares de toda la ciudad</p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Tercera pista</summary>
+                    <p>Hay una escalera donde hay un animal con mucha mandra</p>
+                </details>
+            </center>
+            <center>
+                <details>
+                    <summary>Ultima pista?</summary>
+
+                    <a href="https://goo.gl/maps/anKX4iqoZ3k" target="_blank">De verdad?...</a>
+                </details>
+            </center>
+        </details>
+    </div>
+    <div id="map_container1">
+    </div>
+</div>
+</ion-content>
+</ion-view>
+</body>
+</ion-pane>>

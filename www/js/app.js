@@ -7,20 +7,57 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic','ngRoute'])
 
-app.controller('MainController', ['$scope','$http', '$location', '$rootScope', function($scope, $http, $location, $rootScope) {
+
+app.factory('MyService', function() {
+         //return {
+                 var data = {
+					 'name' : '',
+					 'city' : '',
+					 'time' : '',
+					 'interest' : '',
+					 'truth' : false
+				 };
+				 
+				 return{
+					 name: data.name,
+					 city: data.city,
+					 time: data.time,
+					 interest: data.interest,
+					 truth: data.truth
+				 };
+				
+				 /*
+				  getProperty = function() {
+                     return{
+						 data;
+					 }
+                  }
+				  
+				  setProperty = function(value){
+                  data = value;
+                  }
+				
+                //};
+    */
+	});
+
+
+app.controller('MainController', ['$scope','$http', '$location', '$rootScope', 'MyService', '$ionicPopover', function($scope, $http, $location, $rootScope, MyService, $ionicPopover) {
     $scope.newPersona = {};
     $scope.personas = {};
 
     $scope.newRuta  = {};
     $scope.rutas    = {};
+	$scope.registerPuntos = {};
 
     $scope.newTypeRuta  = {};
     $scope.typerutas    = {};
 	$scope.testy = 5;
-	if ($rootsScope= false)
+	/*if ($rootsScope= false)
 	{
+	$rootScope.user = '';	
 	$rootScope.log = false;
-	}
+	}*/
 	//$scope.logged = sessionStorage.log;
 	$scope.loginForm = {};
     $scope.passerror = "";
@@ -31,7 +68,6 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
 	
 //-----------------------------------------Usuarios-----------------------------------------
     // Obtenemos todos los datos de la base de datos
-	
 	
     $http.get('http://'+ dir +'/users').success(function(data) {
         console.log(data);
@@ -45,7 +81,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
 		
                 //alert(sessionStorage.log + '  ' + $scope.logged);
                 $rootScope.log=true;
-				
+				//MyService.data.address = "Centre, Gava";
             };	
 			
     $scope.Log = function() {
@@ -62,6 +98,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
                         if(status === 200 && data.status){
                             //usuario={username:username};
 							$rootScope.log = true;
+							$rootScope.user = $scope.loginForm.username;
 							$location.url('/register');
                         } else {
                             $rootScope.log = false;
@@ -73,6 +110,25 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
 
             };
 
+	$ionicPopover.fromTemplateUrl("templates/popover.html", {
+    scope: $scope,
+    }).then(function(popover) {
+    $scope.popover = popover;
+    });	
+
+    $ionicPopover.fromTemplateUrl("templates/popover1.html", {
+    scope: $scope,
+    }).then(function(popover1) {
+    $scope.popover1 = popover1;
+    });		
+	
+	$scope.openPopover = function($event) {
+      $scope.popover.show($event);
+    }; 
+   
+    $scope.openPopover1 = function($event) {
+      $scope.popover1.show($event);
+    };
 	
     // Función para registrar a una persona
     $scope.registrarPersona = function() {
@@ -92,6 +148,35 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
         else 
             alert ("Cuidado! Contraseña y comprobación no coinciden!")
     };
+	
+	$scope.Register = function() {
+        if ($scope.passerror == "La contraseña y la comprobación coinciden") {
+            $http.post('http://'+ dir + '/user/register', {username: $scope.newPersona.username, password: $scope.newPersona.password, city: $scope.newPersona.city, email: $scope.newPersona.email ,pic: $scope.newPersona.pic})
+                .success(function (data, status) {
+                    if (data != false) {
+                        $scope.newPersona = {}; // Borramos los datos del formulario
+                        $scope.personas = data;
+                        $scope.passerror = "";
+						$location.url('/login');
+                    }
+                })
+                .error(function (data) {
+                    console.log('Error: ' + data);
+                });
+        }
+        else 
+            alert ("Cuidado! Contraseña y comprobación no coinciden!")
+    };
+	
+	/*$scope.getUserInfo = function() {
+            
+			
+            if ($rootScope.log=true)
+			{
+				return $rootScope.user;
+			}				
+			
+    };*/
 
 
     // Función para editar los datos de una persona
@@ -123,6 +208,48 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
                 console.log('Error: ' + data);
             });}
     };
+	
+	$scope.showDetail  = function ()
+                {
+
+                    $http.get('http://'+ dir +'/users/userdetail/' + $rootScope.user).success(function (data) {
+                            $scope.persona = data;
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+
+                };
+				
+	
+	$scope.sumarPuntos = function (username) {
+                    $http.get('http://'+ dir +'/users/userdetail/' + username).success(function (data) {
+                        
+                            puntos = data[0].numrutas;
+                            puntos = puntos + 1;
+                            $scope.registerPuntos.username = username;
+                            $scope.registerPuntos.numrutas = puntos;
+
+                        console.log('detalles',  $scope.registerPuntos);
+
+                            $http.put('http://'+ dir +'/user/updatepuntos/'+ username, $scope.registerPuntos)
+                                .success(function (data) {
+                                    console.log('DATA', data);
+                                    $scope.selected   = false
+                                })
+                                .error(function (data) {
+                                    console.log('Error: ' + data);
+                                });
+
+                        })
+                        .error(function (data) {
+                            console.log('Error: ' + data);
+                        });
+                    
+
+                };
+
+	
         
         $scope.verificar = function(pass, pass2)
         {
@@ -195,13 +322,14 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
         $http.post('http://'+ dir +'/route', $scope.newRuta)
             .success(function (data) {
                 $scope.rutas   = data;
+				$scope.sumarPuntos($rootScope.user);
             })
             .error(function (data) {
                 console.log('Error: ' + data);
             });
 		$http.post('http://'+ dir +'/typeroute', $scope.newRuta)
             .success(function (data) {
-                $scope.newRuta = {}; // Borramos los datos del formulario
+                //$scope.newRuta = {}; // Borramos los datos del formulario
                 $scope.typerutas   = data;
             })
             .error(function (data) {
@@ -266,28 +394,158 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
                 });
         }
     };
+	
+	$scope.Send = function(){
+		MyService.truth = true;
+		$location.url('/map');
+	};
         $scope.toggleCategory = function(subjects) {
             subjects.expanded = !subjects.expanded;
+			$scope.yeah=subjects.name;
+			MyService.name = subjects.name;
+		    MyService.city = subjects.city;
+		    MyService.time = subjects.time;
+		    MyService.interest = subjects.interest;
         };
 
     }]);
 	
-	app.controller('MapCtrl', function($scope, $ionicLoading) {
+	
+	app.controller('MapCtrl', function($scope, MyService) {
 		
-        var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+        //alert(MyService.name);
+		var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+		
         var placenum = 0;
+				
 		
         var mapOptions = {
             center: myLatlng,
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
+		
+		var mapOptions_container = {
+            center: {lat: 41.3990883450641, lng: 2.1805070206817323},
+            zoom: 16,
+			options:{
+				scrollwheel: false
+			}
+        };
+		
+		var mapOptions_container1 = {
+            center: {lat: 41.3990883450641, lng: 2.1805070206817323},
+            zoom: 16,
+			options:{
+				scrollwheel: false
+			}
+        };
  
-        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        //var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		var intentos = 0;
+		var mapa = document.getElementById("map");
+        if (mapa)
+        var map = new google.maps.Map(mapa, mapOptions);
+	    var map_container = document.getElementById("map_container");
+        if (map_container)	
+        var map = new google.maps.Map(map_container, mapOptions_container);
+	    var map_container1 = document.getElementById("map_container1");
+        if (map_container1)	
+        var map = new google.maps.Map(map_container1, mapOptions_container1);
 		
-		
-		$scope.map = "map";
+		$scope.map = map;
         
+		$scope.drawGames = function (map, triangle, uno, dos, e){
+			var resultColor =
+                    google.maps.geometry.poly.containsLocation(e.latLng, triangle) ?
+                        uno :
+                        dos;
+						
+			if (resultColor == uno)
+			{
+            alert("lo has encontrado!!");			
+			}
+			
+            marky = new google.maps.Marker({
+                position: e.latLng,
+                setMap     : map,
+                icon    : {
+                    path        : google.maps.SymbolPath.CIRCLE,
+                    fillColor   : resultColor,
+                    fillOpacity : 0.50,
+                    strokeColor : 'black',
+                    strokeWeight: .75,
+                    scale       : 10
+                }
+            });
+        
+        };
+		
+		$scope.gameMap = function() {
+			    var PlazaCatalunya = [
+                    {lat: 41.38741576570434, lng: 2.168784872213796},
+                    {lat: 41.38787457856547, lng: 2.170029417196706},
+                    {lat: 41.38698109790202, lng: 2.171155944982961},
+                    {lat: 41.38587831655046, lng: 2.170083061377004}
+                ];
+                var ParcCiutadella = [
+                    {lat: 41.388160541475585, lng: 2.182609872549408},
+                    {lat: 41.3913157844871, lng: 2.186858491628998},
+                    {lat: 41.38722681775338, lng: 2.1924374863799745},
+                    {lat: 41.3844577651107, lng: 2.1872447297271425}
+                ];
+
+                var Aquarium = [
+                    {lat: 41.37586007122854, lng: 2.1772025391753846},
+                    {lat: 41.38075477788284, lng: 2.1828244492705995},
+                    {lat: 41.37866169182913, lng: 2.1890471741851503},
+                    {lat: 41.370353085935676, lng: 2.1858714387115175}
+                ];
+
+		        var PlazaCatalunya = new google.maps.Polygon({paths: PlazaCatalunya});
+                var CiutadellaPark = new google.maps.Polygon({paths: ParcCiutadella});
+                var Aquarium2 = new google.maps.Polygon({paths: Aquarium});
+
+				google.maps.event.addListener(map, 'click', function (e) {
+                $scope.drawGames(map_container,PlazaCatalunya,'red', '#09F6DD', e);
+                $scope.drawGames(map_container,CiutadellaPark, 'red', '#D6D7D7', e);
+                $scope.drawGames(map_container,Aquarium2,'red', '#ADAFAF', e);
+				});
+		};
+		
+		$scope.gameMap1 = function() {
+			
+			    var SagradaFamilia = [
+                    {lat: 41.40358114163176, lng: 2.1732114121612245},
+                    {lat: 41.404385874170146, lng: 2.17432721111142},
+                    {lat: 41.40361333112483, lng: 2.1753571793731385},
+                    {lat: 41.40267982935745, lng: 2.174198465078705}
+                ];
+                var CasaBatllo = [
+                    {lat: 41.391149832063824, lng: 2.163654941525235},
+                    {lat: 41.391978864975336, lng: 2.1647921981475493},
+                    {lat: 41.39120617444147, lng: 2.165650505032315},
+                    {lat: 41.39047371972714, lng: 2.1646098079345366}
+                ];
+
+                var ParkGuell = [
+                    {lat: 41.41484883807698, lng: 2.1505272751160254},
+                    {lat: 41.41619250278038, lng: 2.1533167724915137},
+                    {lat: 41.41440630768962, lng: 2.1551514034577},
+                    {lat: 41.41187175738832, lng: 2.151932752639829}
+                ];
+			
+		        var sagradaFamili = new google.maps.Polygon({paths: SagradaFamilia});
+                var CasaBatllo  = new google.maps.Polygon({paths: CasaBatllo});
+                var ParkGuell = new google.maps.Polygon({paths: ParkGuell});
+
+				google.maps.event.addListener(map, 'click', function (e) {
+                $scope.drawGames(map_container1,sagradaFamili,'red', '#09F6DD', e);
+                $scope.drawGames(map_container1,CasaBatllo, 'red', '#D6D7D7', e);
+                $scope.drawGames(map_container1,ParkGuell,'red', '#ADAFAF', e);
+				});
+		};
+		
 		$scope.Locate = function () {
         navigator.geolocation.getCurrentPosition(function(pos) {
             map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
@@ -324,16 +582,42 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', f
             };
  
          $scope.refresh = function () {
-            map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		      
+			  /*$scope.name = MyService.name;
+		      $scope.city = MyService.city;
+		      $scope.time = MyService.time;
+		      $scope.interest = MyService.interest;
+			  alert($scope.name + ',' + $scope.city + ',' + $scope.time + ',' + $scope.interest + ',' + MyService.truth);
+			*/
+			map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		 };
 		
+		if (!map_container && !map_container1)
+		{
+			$scope.name = MyService.name;
+		    $scope.city = MyService.city;
+		    $scope.time = MyService.time;
+		    $scope.interest = MyService.interest;	
+			//var thearray = ["Centre Gava", "Diagonal Gava"];
+			//var thearray = MyService.interest;
+			//$scope.addAddress();
+			var interests = MyService.interest.split(",");
+			for (var i = 0, len = interests.length; i < len; i++) {
+             $scope.address.add = interests[i];
+			 $scope.addAddress();
+            }
+		
+		}
 		
         //$scope.map = map;
    
  
 });
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  
+  $ionicConfigProvider.views.maxCache(0);
+  
   $stateProvider
   .state('home', {
     url: '/home',
@@ -359,6 +643,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	controller: 'MainController',
 	restricted     : false
   })
+  .state('perfil', {
+    url: '/perfil',
+    templateUrl: 'views/perfil.html',
+	controller: 'MainController',
+	restricted     : true
+  })
+  .state('top10', {
+    url: '/top10',
+    templateUrl: 'views/top10.html',
+	controller: 'MainController',
+	restricted     : true
+  })
   .state('rutas', {
     url: '/rutas',
     templateUrl: 'views/rutas.html',
@@ -372,8 +668,23 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	restricted     : true
   })
   .state('map', {
-    url: '/mapa',
+    url: '/map',
+	cache: false,
     templateUrl: 'views/mapa.html',
+	controller: 'MapCtrl',
+	restricted     : true
+  })
+  .state('game', {
+    url: '/game',
+	cache: false,
+    templateUrl: 'views/game.html',
+	controller: 'MapCtrl',
+	restricted     : true
+  })
+  .state('game1', {
+    url: '/game1',
+	cache: false,
+    templateUrl: 'views/game1.html',
 	controller: 'MapCtrl',
 	restricted     : true
   })

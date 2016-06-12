@@ -49,9 +49,27 @@ background:url("../images/fondo.png");
     background-color: #FFF;
 }
 
+#oi {
+    height: 94px;
+}
+
+#ai {
+    height: 140px;
+}
+
 #map {
   width: 50%;
   height: 50%;
+}
+
+#map_container {
+  width: 500px;
+  height: 500px;
+}
+
+#map_container1 {
+  width: 500px;
+  height: 500px;
 }
 
 .scroll {
