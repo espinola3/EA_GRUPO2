@@ -17,13 +17,18 @@ angular.module('ControllersModule')
                         animation: google.maps.Animation.BOUNCE,
                         map: $scope.map
 
-                    });
 
+                    });
+                    googleMapService.clickLat = marker.getPosition().lat();
+                    googleMapService.clickLong = marker.getPosition().lng();
+
+                    var currentCoords = document.getElementById('interests').value;
+                    var separator = currentCoords == '' ? '' : ';' ;
+                    console.log($scope.newRuta.interest);
+                    document.getElementById('interests').value = currentCoords + separator + googleMapService.clickLat +',' + googleMapService.clickLong;
+                    $scope.newRuta.interest = document.getElementById('interests').value;
                 });
 
-                googleMapService.clickLat = marker.getPosition().lat();
-                googleMapService.clickLong = marker.getPosition().lng();
-                $rootScope.$broadcast("clicked");
 
             };
 

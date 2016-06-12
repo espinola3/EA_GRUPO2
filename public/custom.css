@@ -97,3 +97,9 @@
     background: -moz-linear-gradient(top, #cfe6ef 0%, #edfcff 100%);
     background: -webkit-linear-gradient(top, #cfe6ef 0%,#edfcff 100%);
 }
+
+.container {
+    background: #fff;
+    padding: 25px 25px;
+
+}

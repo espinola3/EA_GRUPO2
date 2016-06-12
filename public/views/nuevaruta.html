@@ -29,13 +29,14 @@
                 <br>
                 <input type="text" class="form-control input-lg text-center" placeholder="Time" ng-model="newRuta.time">
                 <br>
-                <input type="text" class="form-control input-lg text-center" placeholder="Interests"
-                       ng-model="newRuta.interest">
+
+                <textarea type="text" id="interests" readonly class="form-control" placeholder="Interests" ng-model="newRuta.interest">
+            </textarea>
             </div>
 
             <!-- Acciones que podemos realizar en el formulario -->
             <button type="submit" class="btn btn-success btn-lg" ng-click="registrarRuta(getUserInfo())"
-                    ng-disabled="myForm.$invalid || !newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time || !newRuta.interest || selected">
+                    ng-disabled="myForm.$invalid || !newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time  || !newRuta.interest||selected">
                 Registrar
             </button>
             <!--   <button type="submit" class="btn btn-warning btn-lg" ng-click="InsertarRuta()" ng-disabled="!newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time  || !newRuta.interest  || selected">Modificar</button>-->

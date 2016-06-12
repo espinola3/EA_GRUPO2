@@ -59,6 +59,10 @@ ul, ol {
     padding: 10px 15px !important;
 }
 
+.navbar {
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
+}
+
 .navbar-header img {
     max-width: 40px;
     max-height: 40px;
