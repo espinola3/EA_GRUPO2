@@ -16,7 +16,6 @@
         <input type="text" placeholder="Direccion, coordenadas" ng-model="address" style="width: 210px"/>
         <button ng-click="addAddress()">Buscar</button>
     </p>
-    <div ng-repeat="ruta in rutas>
-    <td><button type="submit" class="btn btn-info"  ng-click="drawRoutes(ruta.interest)">Mostrar todas las rutas</button></td>
-    </div>
+
+    <td><button type="submit" class="btn btn-info"  ng-repeat="ruta in rutas ng-click="drawRoutes(ruta.interest)">Mostrar todas las rutas</></td>
 </div>
