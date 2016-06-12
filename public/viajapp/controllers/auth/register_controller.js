@@ -6,17 +6,18 @@ angular.module('ControllersModule')
             function ($scope, $location, AuthService) {
                 console.log("REGISTER CONTROLLER - entra");
 
-                $scope.verificar = function (pass, pass2) {
-                    if (pass != pass2)
-                        $scope.passerror = "La contraseña y la comprobación no coinciden"
+                $scope.verificar = function verificar(v){
+                    var p1 = document.getElementById('pass1');
+                    if( p1.value != v){
+                        document.getElementById('mensaje').innerHTML = "No coinciden las contraseñas";
 
-                    else {
-                        if ((pass == false) && (pass2 == false)) {
-                            $scope.passerror = ""
-                        }
-                        else
-                            $scope.passerror = "La contraseña y la comprobación coinciden"
+                    }else{
+                        document.getElementById('mensaje').innerHTML = "Las contraseñas coinciden";
+                        return true;
                     }
+                }
+                $scope.toggleCategory = function(subjects) {
+                    subjects.expanded = !subjects.expanded;
                 };
 
 

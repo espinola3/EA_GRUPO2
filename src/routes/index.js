@@ -14,7 +14,7 @@ router.post('/register', function(req, res) {
     User.register(new User({ username: req.body.username , city : req.body.city , email : req.body.email , pic: req.body.pic}),
         req.body.password, function(err, account) {
             if (err) {
-                return res.status(500).json({
+                return res.status(401).json({
                     err: err
                 });
             }

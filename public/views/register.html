@@ -1,34 +1,3 @@
-<!doctype html>
-
-<html ng-app="MainApp">
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Viajapp</title>
-    <!-- Cargamos bootstrap -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../custom.css">
-
-    <!-- Cargamos angular -->
-    <script src="../bower_components/angular/angular.js"></script>
-    <script src="../bower_components/angular-route/angular-route.js"></script>
-    <script src="../bower_components/angular-animate/angular-animate.js"></script>
-
-    <!-- Cargamos el javascript de angular -->
-
-    <script type="text/ng-template" id="ng-confirm-template">
-        <div class="modal-body">
-            <p>{{message}}</p>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-link pull-left" ng-click="no()">No</button>
-            <button class="btn btn-primary pull-right" ng-click="yes()">Yes</button>
-        </div>
-    </script>
-
-
-</head>
 <body>
 <style type="text/css">
     body {
@@ -62,23 +31,19 @@
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control" name="password"
-                       ng-keyup="verificar(registerForm.password, registerForm.password2);"
+                <input type="password" class="form-control" placeholder="Pass"  name = "pass1" id = "pass1"
                        ng-model="registerForm.password" required>
             </div>
             <div class="form-group">
                 <label>Repeat password</label>
-                <input type="password" class="form-control" name="password2"
-                       ng-keyup="verificar(registerForm.password, registerForm.password2);"
-                       ng-model="registerForm.password2" required>
+                <input type="password" class="form-control" name = "pass2" id = "pass2"
+                       ng-model="registerForm.password2" ng-keyup="verificar(registerForm.password2);"required>
+                <br>
+                <label id="mensaje"></label>
             </div>
             <div>
                 <button type="submit" class="btn btn-success" ng-disabled="disabled">Register</button>
-                <!-- Acciones que podemos realizar en el formulario -->
-                <!--<button type="submit" class="btn btn-success btn-lg" ng-click="registrarPersona()" ng-disabled="!registerForm.pass|| !registerForm.city || !registerForm.name || selected">Registrar</button>
-                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(registerForm)" ng-disabled=" !registerForm.pass|| !registerForm.email|| !registerForm.city || !registerForm.name || selected">Modificar</button>
-                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(registerForm.name)" ng-disabled="!registerForm.name ||selected">Borrar</button>-->
-            </div>
+                </div>
         </form>
     </div>
 
@@ -88,5 +53,4 @@
 </div>
 </div>
 </body>
-</html>
 
