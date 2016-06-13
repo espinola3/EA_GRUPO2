@@ -39,7 +39,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
     $scope.passerror = "";
     $scope.selected = false;
 	
-	dir = "192.168.1.12:5885";
+	dir = "147.83.7.156:5885";
 		
 	
 //-----------------------------------------Usuarios-----------------------------------------
