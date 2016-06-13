@@ -11,8 +11,14 @@
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button>
         <ion-nav-buttons side="left">
-		  <a ng-show="log" class="button" ng-click="openPopover($event)">
-            Rutas
+		  <a ng-show="log" class="button" ui-sref="rutas">
+            Listar
+          </a>
+		  <a ng-show="log" class="button" ui-sref="nuevaruta">
+            Crear
+          </a>
+		  <a ng-show="log" class="button" ui-sref="ciudad">
+            Ciudad
           </a>
 		  <a ng-show="log" class="button" ui-sref="perfil">
             Perfil
@@ -23,25 +29,25 @@
 		  <a ng-show="log" class="button" ui-sref="map">
             Mapa
           </a>
-		  <a ng-show="log" class="button" ng-click="openPopover1($event)">
-            Juego
+		  <a ng-show="log" class="button" ui-sref="game">
+            nivel1
+          </a>
+		  <a ng-show="log" class="button" ui-sref="game1">
+            nivel2
           </a>
         </ion-nav-buttons>        
         <ion-nav-buttons side="right">
 		  <a class="button" ui-sref="home">
             Home
           </a>
-		  <a class="button" ui-sref="about">
-            About
+		  <a ng-show="log" class="button" ng-click="logout()">
+            Logout
           </a>
-		  <a class="button" ui-sref="login">
+		  <a ng-show="!log" class="button" ui-sref="login">
             Login
           </a>
-		  <a class="button" ui-sref="register">
+		  <a ng-show="!log" class="button" ui-sref="register">
             Register
-          </a>
-		  <a class="button" ui-sref="contact">
-            Contact
           </a>
         </ion-nav-buttons>        
       
@@ -60,20 +66,6 @@
 	
 	
 	<div class="container">
-	<div>
-              <table class="table table-striped">
-                   <tr class="info">
-                     <td>Name</td>
-                     <td>Email</td>
-                     <td>City</td>
-                 </tr>
-                 <tr ng-repeat="persona in personas">
-                     <td>{{ persona.name }}</td>
-                     <td>{{ persona.email }}</td>
-                     <td>{{ persona.city }}</td>
-                 </tr>
-             </table>
-         </div>
         <div>
             <form name="myForm" >
                 <div class="form-group">
@@ -89,13 +81,8 @@
                     <br>
                     <input type="text" class="form-control input-lg text-center" placeholder="City" ng-model="newPersona.city" >
                 </div>
-				<p ng-show="log">Hello</p>
                 <!-- Acciones que podemos realizar en el formulario -->
                 <button type="submit" class="btn btn-success btn-lg" ng-click="Register()" ng-disabled="!newPersona.password|| !newPersona.city || !newPersona.username || selected">Registrar</button>
-                <button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled=" !newPersona.pass|| !newPersona.email|| !newPersona.city || !newPersona.name || selected">Modificar</button>
-                <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona.name)" ng-disabled="!newPersona.name ||selected">Borrar</button>
-				<button type="submit" class="btn btn-success btn-lg" ng-click="Log()">Log</button>
-				<button type="submit" class="btn btn-danger btn-lg" ng-click="isLoggedIn()">Comprobar</button>
             </form>
         </div>
     </div>

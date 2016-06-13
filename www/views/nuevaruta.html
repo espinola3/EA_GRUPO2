@@ -62,8 +62,6 @@
 
             <!-- Acciones que podemos realizar en el formulario -->
             <button type="submit" class="btn btn-success btn-lg" ng-click="registrarRuta()" ng-disabled="myForm.$invalid || !newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time || !newRuta.interest || selected">Registrar</button>
-            <button type="submit" class="btn btn-warning btn-lg" ng-click="InsertarRuta()" ng-disabled="!newRuta.name || !newRuta.type|| !newRuta.city|| !newRuta.time  || !newRuta.interest  || selected">Modificar</button>
-           <button type="submit" class="btn btn-danger btn-lg" ng-click="borrarRuta(newRuta.name)" ng-disabled="!newRuta.name ||selected">Borrar</button>
         </form>
     </div>
 

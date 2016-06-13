@@ -1,10 +1,4 @@
-// Ionic Starter App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic','ngRoute'])
 
 
@@ -26,19 +20,6 @@ app.factory('MyService', function() {
 					 truth: data.truth
 				 };
 				
-				 /*
-				  getProperty = function() {
-                     return{
-						 data;
-					 }
-                  }
-				  
-				  setProperty = function(value){
-                  data = value;
-                  }
-				
-                //};
-    */
 	});
 
 
@@ -53,12 +34,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
     $scope.newTypeRuta  = {};
     $scope.typerutas    = {};
 	$scope.testy = 5;
-	/*if ($rootsScope= false)
-	{
-	$rootScope.user = '';	
-	$rootScope.log = false;
-	}*/
-	//$scope.logged = sessionStorage.log;
+	
 	$scope.loginForm = {};
     $scope.passerror = "";
     $scope.selected = false;
@@ -79,9 +55,8 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 		
     $scope.isLoggedIn = function() {
 		
-                //alert(sessionStorage.log + '  ' + $scope.logged);
                 $rootScope.log=true;
-				//MyService.data.address = "Centre, Gava";
+				
             };	
 			
     $scope.Log = function() {
@@ -99,7 +74,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                             //usuario={username:username};
 							$rootScope.log = true;
 							$rootScope.user = $scope.loginForm.username;
-							$location.url('/register');
+							$location.url('/home');
                         } else {
                             $rootScope.log = false;
                         }
@@ -107,6 +82,14 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
                     .error(function (data) {
                         $rootScope.log = false;
                     });                
+
+            };
+			
+			$scope.logout = function() {
+	   
+							$rootScope.log = false;
+							$rootScope.user = "";
+							$location.url('/register');
 
             };
 
@@ -168,46 +151,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
             alert ("Cuidado! Contraseña y comprobación no coinciden!")
     };
 	
-	/*$scope.getUserInfo = function() {
-            
-			
-            if ($rootScope.log=true)
-			{
-				return $rootScope.user;
-			}				
-			
-    };*/
 
-
-    // Función para editar los datos de una persona
-    $scope.modificarPersona = function(newPersona) {
-        $http.put('http://'+ dir +'/user/update', $scope.newPersona)
-            .success(function(data) {
-                $scope.newPersona = {}; // Borramos los datos del formulario
-                $scope.personas = data;
-                $scope.selected = false;
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });
-    };
-
-    // Función que borra un objeto persona conocido su id
-    $scope.borrarPersona = function(name) {
-        if (confirm ("Do you want to delete the user? "))
-
-        {
-        console.log("borrar persona " + name);
-        $http.delete('http://'+ dir +'/user/delete/' + name)
-            .success(function(data) {
-                $scope.newPersona = {};
-                $scope.personas = data;
-                $scope.selected = false;
-            })
-            .error(function(data) {
-                console.log('Error: ' + data);
-            });}
-    };
 	
 	$scope.showDetail  = function ()
                 {
@@ -274,16 +218,7 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
     };
 
 //-----------------------------Rutas-----------------------------------------
-/*
-    // Obtenemos todos los datos de la base de datos de todas las rutas
-    $http.get('http://localhost:3000/routes').success(function (data) {
-            $scope.rutas = data;
-        })
-        .error(function (data) {
-            console.log('Error: ' + data);
-        });
-		
-*/
+
 
         $scope.Mostrarportipo = function (tipo) {
         $http.get('http://' + dir +'/routesbytype/'+ tipo).success(function (data) {
@@ -337,63 +272,6 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
             });
     };
 
-
-
-    // Función para editar los datos de una Ruta
-    $scope.modificarRuta = function (newRuta) {
-        $http.put('http://'+ dir +'/route/update', $scope.newRuta)
-            .success(function (data) {
-                $scope.newRuta  = {}; // Borramos los datos del formulario
-                $scope.rutas    = data;
-                $scope.selected = false;
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
-    };
-
-// Función para inserta rutas en typos
-    /*$scope.InsertarRuta = function () {
-        
-        $http.post('/route', $scope.newRuta)
-            .success(function (data) {
-                $scope.rutas = data;
-                })
-                .error(function (data) {
-                    console.log('Error: ' + data);
-                });  
-        
-        $http.put('/typeroute/update', $scope.newRuta)
-            .success(function (data) {
-                console.log($scope.newRuta.name);
-                $scope.newRuta = {}
-                $scope.newTypeRuta  = {}; // Borramos los datos del formulario
-                $scope.typerutas = data;
-                $scope.selected = false;
-                $scope.newRuta = {};
-                })
-                .error(function (data) {
-                    console.log('Error: ' + data);
-                });
-    };
-*/
-
-    // Función que borra una Ruta conocido su el ID
-    $scope.borrarRuta = function (name, res) {
-        if (confirm ("¿Seguro que quieres eliminar? "))
-
-        {
-              $http.delete('http://'+ dir +'/route/delete/' + name)
-                .success(function (data) {
-                    $scope.newRuta  = {};
-                    $scope.rutas    = data;
-                    $scope.selected = false;
-                })
-                .error(function (data) {
-                    console.log('Error: ' + data);
-                });
-        }
-    };
 	
 	$scope.Send = function(){
 		MyService.truth = true;
@@ -441,7 +319,6 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 			}
         };
  
-        //var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		var intentos = 0;
 		var mapa = document.getElementById("map");
         if (mapa)
@@ -582,13 +459,6 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
             };
  
          $scope.refresh = function () {
-		      
-			  /*$scope.name = MyService.name;
-		      $scope.city = MyService.city;
-		      $scope.time = MyService.time;
-		      $scope.interest = MyService.interest;
-			  alert($scope.name + ',' + $scope.city + ',' + $scope.time + ',' + $scope.interest + ',' + MyService.truth);
-			*/
 			map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		 };
 		
@@ -598,9 +468,6 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 		    $scope.city = MyService.city;
 		    $scope.time = MyService.time;
 		    $scope.interest = MyService.interest;	
-			//var thearray = ["Centre Gava", "Diagonal Gava"];
-			//var thearray = MyService.interest;
-			//$scope.addAddress();
 			var interests = MyService.interest.split(",");
 			for (var i = 0, len = interests.length; i < len; i++) {
              $scope.address.add = interests[i];
@@ -609,7 +476,6 @@ app.controller('MainController', ['$scope','$http', '$location', '$rootScope', '
 		
 		}
 		
-        //$scope.map = map;
    
  
 });
@@ -622,12 +488,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   .state('home', {
     url: '/home',
     templateUrl: 'views/home.html',
-	controller: 'MainController',
-	restricted     : false
-  })
-  .state('about', {
-    url: '/about',
-    templateUrl: 'views/about.html',
 	controller: 'MainController',
 	restricted     : false
   })
@@ -688,12 +548,6 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 	controller: 'MapCtrl',
 	restricted     : true
   })
-  .state('contact', {
-    url: '/contact',
-    templateUrl: 'views/contact.html',
-	controller: 'MainController',
-	restricted     : false
-  })
   .state('ciudad', {
     url: '/ciudad',
     templateUrl: 'views/ciuadad.html',
@@ -701,20 +555,17 @@ app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 	restricted     : true
   })
  
-  //$urlRouterProvider.otherwise("register");
+  
 });
   
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
+      
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
+      
       cordova.plugins.Keyboard.disableScroll(true);
     }
     if(window.StatusBar) {
